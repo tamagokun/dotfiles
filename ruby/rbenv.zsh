@@ -1,3 +1,5 @@
+export PATH="$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
+
 # rehash shims
 rbenv rehash 2>/dev/null
 
