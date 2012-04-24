@@ -1,36 +1,36 @@
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
+[submodule "vim/vim.symlink/bundle/command-t"]
+	path = vim/vim.symlink/bundle/command-t
 	url = git://git.wincent.com/command-t.git
-[submodule "vim/bundle/delimitmate"]
-	path = vim/bundle/delimitmate
+[submodule "vim/vim.symlink/bundle/delimitmate"]
+	path = vim/vim.symlink/bundle/delimitmate
 	url = git://github.com/Raimondi/delimitMate.git
-[submodule "vim/bundle/closetag"]
-	path = vim/bundle/closetag
+[submodule "vim/vim.symlink/bundle/closetag"]
+	path = vim/vim.symlink/bundle/closetag
 	url = git://github.com/docunext/closetag.vim.git
-[submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
+[submodule "vim/vim.symlink/bundle/nerdcommenter"]
+	path = vim/vim.symlink/bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
-[submodule "vim/bundle/fugitive"]
-	path = vim/bundle/fugitive
+[submodule "vim/vim.symlink/bundle/fugitive"]
+	path = vim/vim.symlink/bundle/fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/Better-CSS-Syntax-for-Vim"]
-	path = vim/bundle/Better-CSS-Syntax-for-Vim
+[submodule "vim/vim.symlink/bundle/Better-CSS-Syntax-for-Vim"]
+	path = vim/vim.symlink/bundle/Better-CSS-Syntax-for-Vim
 	url = git://github.com/vim-scripts/Better-CSS-Syntax-for-Vim.git
-[submodule "vim/bundle/css_color"]
-	path = vim/bundle/css_color
+[submodule "vim/vim.symlink/bundle/css_color"]
+	path = vim/vim.symlink/bundle/css_color
 	url = git://github.com/vim-scripts/css_color.vim.git
-[submodule "vim/bundle/vim-javascript"]
-	path = vim/bundle/vim-javascript
+[submodule "vim/vim.symlink/bundle/vim-javascript"]
+	path = vim/vim.symlink/bundle/vim-javascript
 	url = git://github.com/pangloss/vim-javascript.git
-[submodule "vim/bundle/vim-markdown"]
-	path = vim/bundle/vim-markdown
+[submodule "vim/vim.symlink/bundle/vim-markdown"]
+	path = vim/vim.symlink/bundle/vim-markdown
 	url = git://github.com/tpope/vim-markdown.git
-[submodule "vim/bundle/supertab"]
-	path = vim/bundle/supertab
+[submodule "vim/vim.symlink/bundle/supertab"]
+	path = vim/vim.symlink/bundle/supertab
 	url = git://github.com/tsaleh/vim-supertab.git
-[submodule "vim/bundle/snipmate"]
-	path = vim/bundle/snipmate
+[submodule "vim/vim.symlink/bundle/snipmate"]
+	path = vim/vim.symlink/bundle/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
-[submodule "vim/bundle/vim-slim"]
-	path = vim/bundle/vim-slim
+[submodule "vim/vim.symlink/bundle/vim-slim"]
+	path = vim/vim.symlink/bundle/vim-slim
 	url = https://github.com/bbommarito/vim-slim.git
