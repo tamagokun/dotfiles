@@ -1,0 +1,21 @@
+[submodule "vim/vim.symlink/bundle/color_highlight"]
+	path = vim/vim.symlink/bundle/color_highlight
+	url = https://github.com/chrisbra/color_highlight.git
+[submodule "vim/vim.symlink/bundle/vim-snipmate"]
+	path = vim/vim.symlink/bundle/vim-snipmate
+	url = https://github.com/garbas/vim-snipmate.git
+[submodule "vim/vim.symlink/bundle/snipmate-snippets"]
+	path = vim/vim.symlink/bundle/snipmate-snippets
+	url = https://github.com/honza/snipmate-snippets.git
+[submodule "vim/vim.symlink/bundle/delimitMate"]
+	path = vim/vim.symlink/bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
+[submodule "vim/vim.symlink/bundle/vim-colors-solarized"]
+	path = vim/vim.symlink/bundle/vim-colors-solarized
+	url = https://github.com/skwp/vim-colors-solarized.git
+[submodule "vim/vim.symlink/bundle/syntastic"]
+	path = vim/vim.symlink/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "vim/vim.symlink/bundle/vim-haml"]
+	path = vim/vim.symlink/bundle/vim-haml
+	url = https://github.com/tpope/vim-haml.git
