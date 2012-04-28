@@ -7,4 +7,4 @@
 #   $ syncdir me@myhost.com:/my/dir
 #   # => syncs current dir with /my/dir
 #
-rsync -rhPz ./ $1
+rsync -rz --stats ./ $1
