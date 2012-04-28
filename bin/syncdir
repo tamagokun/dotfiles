@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Just a simple rsync shortcut
+#
+# USAGE:
+#
+#   $ syncdir me@myhost.com:/my/dir
+#   # => syncs current dir with /my/dir
+#
+rsync -rhPz ./ $1
