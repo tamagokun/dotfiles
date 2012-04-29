@@ -4,6 +4,7 @@
 *.pyo
 *.bak
 *.so
+git/gitconfig.symlink
 vim/.netrwhist
 vim/sessions
 vim/undodir
