@@ -5,7 +5,7 @@
 *.bak
 *.so
 git/gitconfig.symlink
-vim/.netrwhist
-vim/sessions
-vim/undodir
-vim/.VimballRecord
+.netrwhist
+vim/vim.symlink/sessions
+vim/vim.symlink/undodir
+vim/vim.symlink/.VimballRecord
