@@ -39,9 +39,8 @@ set list listchars=tab:\ \ ,trail:·
 " ----------------------------------------------------------------------------
 "  VIM Settings
 " ----------------------------------------------------------------------------
-set noswapfile
-set nobackup
-set nowb
+set undodir=~/.vim/backups
+set undofile
 
 " ----------------------------------------------------------------------------
 "  Remapping
@@ -52,7 +51,6 @@ let mapleader = ","
 
 " exit to normal mode with 'jj'
 inoremap jj <ESC>
-
 
 " reflow paragraph with Q in normal and visual mode
 nnoremap Q gqap
@@ -109,3 +107,10 @@ function! StripWhitespace ()
 	exec ':%s/ \+$//gc'
 endfunction
 map ,s :call StripWhitespace ()<CR>
+
+" ---------------------------------------------------------------------------
+"  Load plugin settings
+" ---------------------------------------------------------------------------
+for f in split(glob('~/.vim/plugin/settings/*.vim'), '\n')
+  exe 'source' f
+endfor
