@@ -3,7 +3,8 @@ set background=dark
 colorscheme solarized
 
 set anti
-set lines=999 columns=84
+set lines=999 columns=150
+set guifont=Inconsolata:h18,Monaco:h16
 set guioptions=egmrt
 
 " Command + t to :CommandT
