@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ip=`ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2`
+
+echo "$ip" | awk -F. '{
+  if( ($1=="10") && ($2=="1")) {
+	print("nc 10.1.86.43 22");
+  }else{
+	print("ssh -q stage1.mslideas.com nc %h 22");
+  }
+}'

@@ -5,6 +5,11 @@ task :submodules do
 	system("git submodule init && git submodule update")
 end
 
+desc "Install ssh config"
+task :ssh_config do
+	`ln -sf "$PWD/ssh/config" "#{ENV["HOME"]}/.ssh/config"`
+end
+
 desc "Hook our dotfiles into system-standard positions."
 task :install do
   linkables = Dir.glob('*/**{.symlink}')
