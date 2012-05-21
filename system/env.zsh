@@ -1,1 +1,1 @@
-export EDITOR='choc'
+export EDITOR='mvim'
