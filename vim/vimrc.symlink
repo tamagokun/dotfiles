@@ -39,8 +39,10 @@ set list listchars=tab:\ \ ,trail:·
 " ----------------------------------------------------------------------------
 "  VIM Settings
 " ----------------------------------------------------------------------------
-set undodir=$HOME/.vim/backups
-set undofile
+if exists("+undofile")
+  set undodir=~/.vim/backups
+  set undofile
+endif
 
 " ----------------------------------------------------------------------------
 "  Remapping
