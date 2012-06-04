@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Just a shortcut to setup a github upstream remote
+
+git remote add --track  master upstream git://github.com/$1.git
