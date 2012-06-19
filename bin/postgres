@@ -1,2 +1,6 @@
 #!/bin/sh
+#
+# Postgres shortcut when using
+# brew install postgresql
+#
 pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log $1
