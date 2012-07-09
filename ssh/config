@@ -1,2 +1,0 @@
-Host git.msltechdev.com
-  ProxyCommand `magneto-gate-keeper`
