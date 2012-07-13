@@ -43,10 +43,8 @@ set list listchars=tab:\ \ ,trail:·
 " ----------------------------------------------------------------------------
 "  VIM Settings
 " ----------------------------------------------------------------------------
-if exists("+undofile")
-  set undodir=~/.vim/backups
-  set undofile
-endif
+set undodir=~/.vim/backups
+set undofile
 
 " ----------------------------------------------------------------------------
 "  Remapping
@@ -77,6 +75,15 @@ inoremap <Up> <C-o>gk
 " Toggle NERDTree
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
+" Completion with TAB
+imap <Tab> <C-P>
+
+" Fixing search
+nnoremap / /\v
+vnoremap / /\v
+nnoremap <leader><space> :noh<cr>
+
+
 " ----------------------------------------------------------------------------
 "  UI
 " ----------------------------------------------------------------------------
@@ -104,7 +111,9 @@ set mat=5                  " duration to show matching brace (1/10 sec)
 set incsearch              " do incremental searching
 set laststatus=2           " always show the status line
 set ignorecase             " ignore case when searching
-set nohlsearch             " don't highlight searches
+set smartcase
+set gdefault
+set hlsearch               " highlight searches
 set visualbell             " shut the fuck up
 
 
