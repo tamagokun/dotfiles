@@ -45,6 +45,7 @@ set list listchars=tab:\ \ ,trail:·
 " ----------------------------------------------------------------------------
 set undodir=~/.vim/backups
 set undofile
+set clipboard=unnamed
 
 " ----------------------------------------------------------------------------
 "  Remapping
