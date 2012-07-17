@@ -22,7 +22,7 @@ colorscheme solarized
 set autoindent             " automatic indent new lines
 set smartindent            " be smart about it
 inoremap # X<BS>#
-set nowrap                 " do not wrap lines
+set nowrap                 " don't wrap lines
 set linebreak
 set softtabstop=2          " yep, two
 set shiftwidth=2           " ..
@@ -126,6 +126,15 @@ function! StripWhitespace ()
 	exec ':%s/ \+$//gc'
 endfunction
 map ,s :call StripWhitespace ()<CR>
+
+" ---------------------------------------------------------------------------
+"  Auto cmd stuff for file types
+" ---------------------------------------------------------------------------
+
+if has("autocmd")
+	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType mkd,txt setlocal wrap linebreak nolist
+endif
 
 " ---------------------------------------------------------------------------
 "  Load plugin settings
