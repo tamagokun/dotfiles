@@ -15,6 +15,8 @@ let g:solarized_termcolors=256
 set background=light
 colorscheme solarized
 
+filetype plugin on
+
 " ----------------------------------------------------------------------------
 "  Text Formatting
 " ----------------------------------------------------------------------------
@@ -84,10 +86,11 @@ nnoremap <C-l> <C-w>l
 
 " Toggle NERDTree
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
-" Ctrl-P
-map <Leader>, :CtrlP<cr>
-" Tag List
-" map <Leader>t
+" Nerd Commenter
+nmap <leader>/ :call NERDComment(0, "invert")<cr>
+vmap <leader>/ :call NERDComment(0, "invert")<cr>
+map <Leader>cc <plug>NERDComComment<cr>
+map <Leader>cu <plug>NERDComUncommentLine<cr>
 
 " Completion with TAB
 imap <Tab> <C-P>
