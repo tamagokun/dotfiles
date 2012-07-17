@@ -54,6 +54,9 @@ set clipboard=unnamed
 " lead with ,
 let mapleader = ","
 
+" shortcut for :
+nnoremap ; :
+
 " exit to normal mode with 'jj'
 inoremap jj <ESC>
 
@@ -73,8 +76,18 @@ vnoremap <Up> gk
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
 
+" sane window movement
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " Toggle NERDTree
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
+" Ctrl-P
+map <Leader>, :CtrlP<cr>
+" Tag List
+" map <Leader>t
 
 " Completion with TAB
 imap <Tab> <C-P>
