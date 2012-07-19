@@ -1,0 +1,3 @@
+#!/bin/sh
+# Being lazy, I don't want to start VirtualBox all the time.
+VBoxManage startvm BootCamp
