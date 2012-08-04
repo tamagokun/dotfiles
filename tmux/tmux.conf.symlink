@@ -1,6 +1,15 @@
 # Get Mac clipboard to work with tmux
 set -g default-command "reattach-to-user-namespace -l zsh"
 
+# Set Esc-Wait off, so VIM works
+set -sg escape-time 0
+
+# Remap to Ctrl-A
+set -g prefix C-a
+unbind C-b
+bind C-a send-prefix
+
+# Color Options
 set -g status-bg colour234
 set -g window-status-activity-attr bold
 set -g pane-border-fg colour245
@@ -19,9 +28,9 @@ set -g status-right '#[fg=colour245]⮃ %R ⮃ %d %b #(tmux-right-status.sh)'
 set -g window-status-format "#[fg=white,bg=colour234] #I #W "
 set -g window-status-current-format "#[fg=colour234,bg=colour39]⮀#[fg=colour16,bg=colour39,noreverse,bold] #I ⮁ #W #[fg=colour39,bg=colour234,nobold]⮀"
 
+# Options
 set -g default-terminal "screen-256color"
 set -g status-utf8 on
-set -sg escape-time 1
 set -g base-index 1
 
 # Activity
