@@ -1,6 +1,14 @@
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/dotfiles
 
+# set our platform for platform specific stuff
+if $(which brew &>/dev/null)
+then
+  export PLATFORM="mac"
+else
+  export PLATFORM="linux"
+fi
+
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/Sites
 
