@@ -22,7 +22,7 @@ get_condition_symbol() {
 			echo "☼"
 		fi
 		;;
-	"rain and snow" | "chance of rain" | "light rain" | rain | "heavy rain" | "freezing drizzle" | flurries | showers | "scattered showers")
+	"rain and snow" | "chance of rain" | "light rain" | rain | "heavy rain" | "freezing drizzle" | flurries | showers | "scattered showers" | drizzle | "rain showers")
 		#echo "☂"
 		echo "☔"
 		;;
@@ -68,7 +68,11 @@ read_tmp_file() {
 
 degrees=""
 if [ -f "$tmp_file" ]; then
-	last_update=$(stat -f %m ${tmp_file})
+	if [ "$PLATFORM" == "mac" ]; then
+		last_update=$(stat -f "%m" ${tmp_file})
+	else
+		last_update=$(stat -c "%Y" ${tmp_file})
+	fi
 	time_now=$(date +%s)
 	update_period=600
 
@@ -84,12 +88,25 @@ if [ -z "$degrees" ]; then
 	else
 		search_unit="$unit"
 	fi
-	search_location=$(echo "$location" | sed 's/[ ]/%20/g')
+	if [ "$PLATFORM" == "mac" ]; then
+		search_location=$(echo "$location" | sed -e 's/[ ]/%20/g')
+	else
+		search_location=$(echo "$location" | sed -e 's/\s/%20/g')
+	fi
 
-	weather_data=$(curl --max-time 2 -s "http://www.google.com/ig/api?weather=${search_location}")
+	weather_data=$(curl --max-time 4 -s "http://www.google.com/ig/api?weather=${search_location}")
 	if [ "$?" -eq "0" ]; then
+		error=$(echo "$weather_data" | grep "problem_cause\|DOCTYPE");
+		if [ -n "$error" ]; then
+			echo "error"
+			exit 1
+		fi
 		degrees=$(echo "$weather_data" | sed "s|.*<temp_${search_unit} data=\"\([^\"]*\)\"/>.*|\1|")
-		conditions=$(echo "$weather_data" | grep -PZo "<current_conditions>(\\n|.)*</current_conditions>" | grep -PZo "(?<=<condition\sdata=\")([^\"]*)")
+		if [ "$PLATFORM" == "mac" ]; then
+			conditions=$(echo $weather_data | xpath //current_conditions/condition/@data 2> /dev/null | grep -oe '".*"' | sed "s/\"//g")
+		else
+			conditions=$(echo "$weather_data" | grep -PZo "<current_conditions>(\\n|.)*</current_conditions>" | grep -PZo "(?<=<condition\sdata=\")([^\"]*)")
+		fi
 		echo "$degrees" > $tmp_file
 		echo "$conditions" >> $tmp_file
 	elif [ -f "$tmp_file" ]; then
