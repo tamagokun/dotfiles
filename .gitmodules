@@ -61,3 +61,15 @@
 [submodule "vim/vim.symlink/bundle/vim-smartinput"]
 	path = vim/vim.symlink/bundle/vim-smartinput
 	url = git://github.com/kana/vim-smartinput.git
+[submodule "vim/vim.symlink/bundle/vim-slim"]
+	path = vim/vim.symlink/bundle/vim-slim
+	url = git://github.com/bbommarito/vim-slim.git
+[submodule "vim/vim.symlink/bundle/scss-syntax-vim"]
+	path = vim/vim.symlink/bundle/scss-syntax-vim
+	url = git://github.com/cakebaker/scss-syntax.vim.git
+[submodule "vim/vim.symlink/bundle/vim-ruby"]
+	path = vim/vim.symlink/bundle/vim-ruby
+	url = git://github.com/vim-ruby/vim-ruby.git
+[submodule "vim/vim.symlink/bundle/vim-html5"]
+	path = vim/vim.symlink/bundle/vim-html5
+	url = git://github.com/othree/html5.vim.git
