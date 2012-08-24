@@ -8,6 +8,9 @@
     autocrlf = input
     excludesfile = ~/.gitignore
 
+[push]
+    default = matching
+
 [color]
     branch = auto
     diff = auto
