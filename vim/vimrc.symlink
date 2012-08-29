@@ -16,6 +16,7 @@ set background=light
 colorscheme solarized
 
 filetype plugin on
+filetype indent on
 
 " ----------------------------------------------------------------------------
 "  Text Formatting
@@ -45,6 +46,7 @@ set list listchars=tab:\ \ ,trail:·
 " ----------------------------------------------------------------------------
 "  VIM Settings
 " ----------------------------------------------------------------------------
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
 set undodir=~/.vim/backups
 set undofile
 set clipboard=unnamed
@@ -84,6 +86,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" sane window creation
+nnoremap <silent> vv <C-w>v
+nnoremap <silent> ss <C-w>s
+
 " Toggle NERDTree
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 " Nerd Commenter
@@ -98,8 +104,10 @@ imap <Tab> <C-P>
 " Fixing search
 nnoremap / /\v
 vnoremap / /\v
-nnoremap <leader><space> :noh<cr>
+nmap <silent> // :nohlsearch<cr>
 
+" Reload vim
+nmap <silent> <leader>vr :so %<cr>
 
 " ----------------------------------------------------------------------------
 "  UI

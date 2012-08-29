@@ -8,4 +8,5 @@ git/gitconfig.symlink
 .netrwhist
 vim/vim.symlink/sessions
 vim/vim.symlink/undodir
+vim/vim.symlink/backups
 vim/vim.symlink/.VimballRecord
