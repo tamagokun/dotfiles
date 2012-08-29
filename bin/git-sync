@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# git sync [[remote/]branch]
+# Sync local changes with remote. Assumes origin.
+#
+
+branch=${1:-`git symbolic-ref HEAD 2>/dev/null`}
+branch=${branch##refs/heads/}
+
+remote=${branch%%/*}
+[ "$remote" == "$branch" ] && remote="origin"
+branch=${branch##*/}	
+
+git fetch $remote
+git merge $remote/$branch
+git push

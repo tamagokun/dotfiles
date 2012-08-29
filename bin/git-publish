@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# git publish [[remote/]branch]
+# easily have a branch track a remote branch.
+#
+
+branch=${1:-`git symbolic-ref HEAD 2>/dev/null`}
+branch=${branch##refs/heads/}
+
+remote=${branch%%/*}
+[ "$remote" == "$branch" ] && remote="origin"
+branch=${branch##*/}	
+
+[[ -z "$(git show-ref heads/$branch)" ]] && echo "No local branch $branch exists" && exit
+[[ -n "$(git show-ref remotes/$remote/$branch)" ]] && echo "A remote branch $branch on $remote already exists" && exit
+[[ -n "$(git config branch.$branch.merge)" ]] && echo "Local branch $branch is already a tracking branch" && exit
+
+git push $remote $branch:refs/heads/$branch
+git config branch.$branch.remote $remote
+git config branch.$branch.merge refs/heads/$branch

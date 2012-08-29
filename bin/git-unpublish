@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# git unpublish [[remote/]branch]
+# easily remove a remote branch and untrack from local.
+#
+
+branch=${1:-`git symbolic-ref HEAD 2>/dev/null`}
+branch=${branch##refs/heads/}
+
+remote=${branch%%/*}
+[ "$remote" == "$branch" ] && remote="origin"
+branch=${branch##*/}	
+
+git push $remote :refs/heads/$branch
+
+if [ -n "$(git show-ref heads/$branch)" ]; then
+	git config --unset branch.$branch.remote
+	git config --unset branch.$branch.merge
+fi
