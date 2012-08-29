@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Checkout <branch_name>.
+# If the working directory is dirty, changes will be stashed.
+#
+
+stash=false
+
+if [ -n "$(git status --porcelain)" ]; then
+	echo "\033[33mlook at that stash...\033[0m\n"
+	stash=true
+	git stash save --include-untracked --quiet
+fi
+
+git checkout $1
+if $stash; then
+	echo "\033[33myour stash, sir.\033[0m\n"
+	git stash pop
+fi
