@@ -4,7 +4,7 @@ colorscheme Tomorrow-Night
 
 set anti
 set lines=999 columns=150
-set guifont=Inconsolata:h20,Monaco:h17
+set guifont=Menlo:h18,Monaco:h17
 set guioptions=egmrt
 
 " C-TAB and C-SHIFT-TAB cycle tabs forward and backward
