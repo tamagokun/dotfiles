@@ -7,4 +7,4 @@ export PATH="$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.phpenv/bin:$PATH"
 export PATH="/usr/local/php5/bin:$PATH"
 
 #phpenv
-eval "$(phpenv init -)"
+#eval "$(phpenv init -)"
