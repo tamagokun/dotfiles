@@ -1,5 +1,6 @@
 set nocompatible
 set noswapfile
+set encoding=utf-8
 
 if has('win32') || has('win64')
 	set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
@@ -26,7 +27,6 @@ filetype indent on
 "  Text Formatting
 " ----------------------------------------------------------------------------
 "
-scriptencoding utf-8
 set autoindent             " automatic indent new lines
 set smartindent            " be smart about it
 inoremap # X<BS>#
