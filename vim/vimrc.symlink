@@ -46,11 +46,7 @@ set nofoldenable           " dont fold by default
 set foldlevel=1            " this is just what i use
 
 " Display tabs and trailing spaces visually
-if has('win32') || has('win64')
-	set list listchars=tab:\ \ ,trail:.
-else
-	set list listchars=tab:\ \ ,trail:·
-endif
+set list listchars=tab:\ \ ,trail:·
 
 " ----------------------------------------------------------------------------
 "  VIM Settings
