@@ -4,5 +4,7 @@ export MANPATH="/usr/local/man:/usr/local/git/man:$MANPATH"
 #rbenv needs to be first
 export PATH="$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.phpenv/bin:$PATH"
 
+export PATH="/usr/local/php5/bin:$PATH"
+
 #phpenv
 eval "$(phpenv init -)"
