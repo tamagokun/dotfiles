@@ -4,7 +4,7 @@ colorscheme Tomorrow-Night
 
 set anti
 set lines=999 columns=150
-set guifont=Ubuntu\ Mono:h18,Monaco:h17
+set guifont=Ubuntu\ Mono\ for\ Powerline:h18,Monaco:h17
 set guioptions=egmrt
 
 if has('win32') || has('win64')

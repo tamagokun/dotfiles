@@ -76,3 +76,6 @@
 [submodule "vim/vim.symlink/bundle/vim-css-color"]
 	path = vim/vim.symlink/bundle/vim-css-color
 	url = https://github.com/skammer/vim-css-color.git
+[submodule "vim/vim.symlink/bundle/vim-aspnet"]
+	path = vim/vim.symlink/bundle/vim-aspnet
+	url = https://github.com/vim-scripts/aspnet.vim--Abshire.git
