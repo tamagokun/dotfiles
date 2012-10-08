@@ -164,6 +164,8 @@ if has("autocmd")
 	autocmd FileType mkd,txt setlocal wrap linebreak nolist
 endif
 
+au BufRead,BufNewFile *.aspx,*.asmx,*.ascx set filetype=aspnet
+
 " ---------------------------------------------------------------------------
 "  Load plugin settings
 " ---------------------------------------------------------------------------
