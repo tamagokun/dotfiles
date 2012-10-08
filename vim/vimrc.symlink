@@ -51,8 +51,8 @@ set list listchars=tab:\ \ ,trail:·
 " ----------------------------------------------------------------------------
 "  VIM Settings
 " ----------------------------------------------------------------------------
-silent !mkdir ~/.vim/backups > /dev/null 2>&1
-set undodir=~/.vim/backups
+silent !mkdir ~/.backups > /dev/null 2>&1
+set undodir=~/.backups
 set undofile
 set clipboard=unnamed
 
