@@ -79,3 +79,9 @@
 [submodule "vim/vim.symlink/bundle/vim-aspnet"]
 	path = vim/vim.symlink/bundle/vim-aspnet
 	url = https://github.com/vim-scripts/aspnet.vim--Abshire.git
+[submodule "vim/vim.symlink/bundle/vim-phpcomplete"]
+	path = vim/vim.symlink/bundle/vim-phpcomplete
+	url = https://github.com/shawncplus/phpcomplete.vim.git
+[submodule "vim/vim.symlink/bundle/vim-php"]
+	path = vim/vim.symlink/bundle/vim-php
+	url = https://github.com/StanAngeloff/php.vim.git
