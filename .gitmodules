@@ -52,9 +52,6 @@
 [submodule "vim/vim.symlink/bundle/clang_complete"]
 	path = vim/vim.symlink/bundle/clang_complete
 	url = git://github.com/Rip-Rip/clang_complete.git
-[submodule "vim/vim.symlink/bundle/nerdcommenter"]
-	path = vim/vim.symlink/bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter.git
 [submodule "vim/vim.symlink/bundle/vim-slim"]
 	path = vim/vim.symlink/bundle/vim-slim
 	url = git://github.com/bbommarito/vim-slim.git
@@ -85,3 +82,9 @@
 [submodule "vim/vim.symlink/bundle/vim-php"]
 	path = vim/vim.symlink/bundle/vim-php
 	url = https://github.com/StanAngeloff/php.vim.git
+[submodule "vim/vim.symlink/bundle/vim-tcomment"]
+	path = vim/vim.symlink/bundle/vim-tcomment
+	url = https://github.com/tomtom/tcomment_vim
+[submodule "vim/vim.symlink/bundle/vim-flavored-markdown"]
+	path = vim/vim.symlink/bundle/vim-flavored-markdown
+	url = https://github.com/jtratner/vim-flavored-markdown

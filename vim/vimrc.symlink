@@ -98,22 +98,34 @@ nnoremap <silent> ss <C-w>s
 
 " Toggle NERDTree
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
-" Nerd Commenter
-nmap <leader>/ :call NERDComment(0, "invert")<cr>
-vmap <leader>/ :call NERDComment(0, "invert")<cr>
-map <Leader>cc <plug>NERDComComment<cr>
-map <Leader>cu <plug>NERDComUncommentLine<cr>
 
-" Completion with TAB
-imap <Tab> <C-P>
+" Comment/Uncomment
+map <leader>/ :TComment<CR>
+imap <leader>/ <Esc>:TComment<CR>i
 
 " Fixing search
 nnoremap / /\v
 vnoremap / /\v
 nmap <silent> // :nohlsearch<cr>
 
-" Reload vim
-nmap <silent> <leader>vr :so %<cr>
+"(v)im (r)eload
+nmap <silent> ,vr :so %<CR>
+
+" Semicolon at end of line by typing ;;
+inoremap ;; <C-o>A;<esc>
+
+"When typing a string, your quotes auto complete. Move past the quote
+"while still in insert mode by hitting Ctrl-a. Example:
+"
+" type 'foo<c-a>
+"
+" the first quote will autoclose so you'll get 'foo' and hitting <c-a> will
+" put the cursor right after the quote
+imap <C-a> <esc>wa
+
+" w!! to write a file as sudo
+" stolen from Steve Losh
+cmap w!! w !sudo tee % >/dev/null
 
 " ----------------------------------------------------------------------------
 "  UI
@@ -167,9 +179,14 @@ endif
 
 au BufRead,BufNewFile *.aspx,*.asmx,*.ascx set filetype=aspnet
 
+augroup markdown
+	au!
+	au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
+
 " ---------------------------------------------------------------------------
 "  Load plugin settings
 " ---------------------------------------------------------------------------
 for f in split(glob('~/.vim/plugin/settings/*.vim'), '\n')
-  exe 'source' f
+	exe 'source' f
 endfor
