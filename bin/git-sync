@@ -9,7 +9,7 @@ branch=${branch##refs/heads/}
 
 remote=${branch%%/*}
 [ "$remote" == "$branch" ] && remote="origin"
-branch=${branch##*/}	
+branch=${branch##*/}
 
 git fetch $remote
 git merge $remote/$branch

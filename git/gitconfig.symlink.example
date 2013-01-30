@@ -1,33 +1,24 @@
+[hub]
+	protocol = https
 [user]
-    name = Mike Kruk
-    email = you@example.com
-
-[core]
-    quotepath = false
-    editor = vim
-    autocrlf = input
-    excludesfile = ~/.gitignore
-
-[push]
-    default = tracking
-
+	name = AUTHORNAME
+	email = AUTHOREMAIL
+	helper = osxkeychain
 [color]
-    branch = auto
-    diff = auto
-    status = auto
-
-[color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
-
-[color "diff"]
-    meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
-
-[color "status"]
-    added = yellow
-    changed = green
-    untracked = cyan
+	diff = auto
+	status = auto
+	branch = auto
+	ui = true
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+[apply]
+	whitespace = nowarn
+[mergetool]
+	keepBackup = false
+[difftool]
+	prompt = false
+[help]
+	autocorrect = 1
+[push]
+	default = simple

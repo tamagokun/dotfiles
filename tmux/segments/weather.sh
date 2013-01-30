@@ -1,8 +1,12 @@
 #!/bin/bash
 # Prints the current weather in Celsius, Fahrenheits or lord Kelvins. The forecast is cached and updated with a period of $update_period.
 
+# Your location. Find a code that works for you:
+# 1. Go to Yahoo weather http://weather.yahoo.com/
+# 2. Find the weather for you location
+# 3. Copy the last numbers in that URL. e.g. "http://weather.yahoo.com/united-states/california/newport-beach-12796587/" has the numbers "12796587"
 # You location. Find a string that works for you by Googling on "weather in <location-string>"
-location="Rochester, MI"
+location="2482955"
 
 # Can be any of {c,f,k}.
 unit="f"
@@ -12,45 +16,51 @@ tmp_file="/tmp/tmux-powerline_weather.txt"
 get_condition_symbol() {
 	local conditions=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 	case "$conditions" in
-	sunny | "partly sunny" | "mostly sunny")
-		hour=$(date +%H)
-		if [ "$hour" -ge "22" -o "$hour" -le "5" ]; then
+		"sunny" | "hot")
+			hour=$(date +%H)
+			if [ "$hour" -ge "22" -o "$hour" -le "5" ]; then
 			#echo "☽"
 			echo "☾"
-		else
+			else
 			#echo "☀"
 			echo "☼"
-		fi
-		;;
-	"rain and snow" | "chance of rain" | "light rain" | rain | "heavy rain" | "freezing drizzle" | flurries | showers | "scattered showers" | drizzle | "rain showers")
-		#echo "☂"
-		echo "☔"
-		;;
-	snow | "light snow" | "scattered snow showers" | icy | ice/snow | "chance of snow" | "snow showers" | sleet)
-		#echo "☃"
-		echo "❅"
-		;;
-	"partly cloudy" | "mostly cloudy" | cloudy | overcast)
-		echo "☁"
-		;;
-	"chance of storm" | thunderstorm | "chance of tstorm" | storm | "scattered thunderstorms")
-		#echo "⚡"
-		echo "☈"
-		;;
-	dust | fog | smoke | haze | mist)
-		echo "♨"
-		;;
-	windy)
-		echo "⚑"
-		#echo "⚐"
-		;;
-	clear)
-		#echo "☐"
-		echo "✈"	# So clear you can see the aeroplanes! TODO what symbol does best represent a clear sky?
-		;;
-	*)
-		echo "？"
-		;;
+			fi
+			;;
+		"rain" | "mixed rain and snow" | "mixed rain and sleet" | "freezing drizzle" | "drizzle" | "light drizzle" | "freezing rain" | "showers" | "mixed rain and hail" | "scattered showers" | "isolated thundershowers" | "thundershowers" | "light rain with thunder" | "light rain")
+			#echo "☂"
+			echo "☔"
+			;;
+		"snow" | "mixed snow and sleet" | "snow flurries" | "light snow showers" | "blowing snow" | "sleet" | "hail" | "heavy snow" | "scattered snow showers" | "snow showers" | "light snow" | "snow/windy" | "snow grains")
+			#echo "☃"
+			echo "❅"
+			;;
+		"cloudy" | "mostly cloudy" | "partly cloudy" | "partly cloudy/windy")
+			echo "☁"
+			;;
+		"tornado" | "tropical storm" | "hurricane" | "severe thunderstorms" | "thunderstorms" | "isolated thunderstorms" | "scattered thunderstorms")
+			#echo "⚡"
+			echo "☈"
+			;;
+		"dust" | "foggy" | "fog" | "haze" | "smoky" | "blustery" | "mist")
+			#echo "♨"
+			#echo "﹌"
+			echo "〰"
+			;;
+		"windy" | "fair/windy")
+			#echo "⚑"
+			echo "⚐"
+			;;
+		"clear" | "fair" | "cold")
+			hour=$(date +%H)
+			if [ "$hour" -ge "22" -o "$hour" -le "5" ]; then
+			echo "☾"
+			else
+			echo "〇"
+			fi
+			;;
+		*)
+			echo "？"
+			;;
 	esac
 }
 
@@ -66,13 +76,19 @@ read_tmp_file() {
 	conditions="${lines[1]}"
 }
 
-degrees=""
+degree=""
 if [ -f "$tmp_file" ]; then
-	if [ "$PLATFORM" == "mac" ]; then
-		last_update=$(stat -f "%m" ${tmp_file})
-	else
-		last_update=$(stat -c "%Y" ${tmp_file})
-	fi
+	case $(uname -s) in
+		"Linux")
+			last_update=$(stat -c "%Y" ${tmp_file})
+		;;
+		"Darwin")
+			last_update=$(stat -f "%m" ${tmp_file})
+		;;
+		"FreeBSD")
+			last_update=$(stat -f "%m" ${tmp_file})
+		;;
+	esac
 	time_now=$(date +%s)
 	update_period=600
 
@@ -82,7 +98,7 @@ if [ -f "$tmp_file" ]; then
 	fi
 fi
 
-if [ -z "$degrees" ]; then
+if [ -z "$degree" ]; then
 	if [ "$unit" == "k" ]; then
 		search_unit="c"
 	else
@@ -94,31 +110,30 @@ if [ -z "$degrees" ]; then
 		search_location=$(echo "$location" | sed -e 's/\s/%20/g')
 	fi
 
-	weather_data=$(curl --max-time 4 -s "http://www.google.com/ig/api?weather=${search_location}")
+	weather_data=$(curl --max-time 4 -s "http://weather.yahooapis.com/forecastrss?w=${search_location}&u=${search_unit}")
 	if [ "$?" -eq "0" ]; then
 		error=$(echo "$weather_data" | grep "problem_cause\|DOCTYPE");
 		if [ -n "$error" ]; then
 			echo "error"
 			exit 1
 		fi
-		degrees=$(echo "$weather_data" | sed "s|.*<temp_${search_unit} data=\"\([^\"]*\)\"/>.*|\1|")
-		if [ "$PLATFORM" == "mac" ]; then
-			conditions=$(echo $weather_data | xpath //current_conditions/condition/@data 2> /dev/null | grep -oe '".*"' | sed "s/\"//g")
-		else
-			conditions=$(echo "$weather_data" | grep -PZo "<current_conditions>(\\n|.)*</current_conditions>" | grep -PZo "(?<=<condition\sdata=\")([^\"]*)")
-		fi
-		echo "$degrees" > $tmp_file
-		echo "$conditions" >> $tmp_file
+		# <yweather:units temperature="F" distance="mi" pressure="in" speed="mph"/>
+		unit=$(echo "$weather_data" | grep -EZo "<yweather:units [^<>]*/>" | sed 's/.*temperature="\([^"]*\)".*/\1/')
+		condition=$(echo "$weather_data" | grep -EZo "<yweather:condition [^<>]*/>")
+		# <yweather:condition  text="Clear"  code="31"  temp="66"  date="Mon, 01 Oct 2012 8:00 pm CST" />
+		degree=$(echo "$condition" | sed 's/.*temp="\([^"]*\)".*/\1/')
+		condition=$(echo "$condition" | sed 's/.*text="\([^"]*\)".*/\1/')
+		echo "$degree" > $tmp_file
+		echo "$condition" >> $tmp_file
 	elif [ -f "$tmp_file" ]; then
 		read_tmp_file
 	fi
 fi
 
-if [ -n "$degrees" ]; then
+if [ -n "$degree" ]; then
 	if [ "$unit" == "k" ]; then
-		degrees=$(echo "${degrees} + 273.15" | bc)
+		degree=$(echo "${degree} + 273.15" | bc)
 	fi
-	unit_upper=$(echo "$unit" | tr '[cfk]' '[CFK]')
 	condition_symbol=$(get_condition_symbol "$conditions")
-	echo "${condition_symbol} ${degrees}°${unit_upper}"
+	echo "${condition_symbol} ${degrees}°$(echo "$unit" | tr '[:lower]' '[:upper]')"
 fi

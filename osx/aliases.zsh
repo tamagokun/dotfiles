@@ -1,2 +1,0 @@
-alias dynamic_pager_off='sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist'
-alias dynamic_pager_on='sudo launchctl load -wF /System/Library/LaunchDaemons/com.apple.dynamic_pager.plist'
