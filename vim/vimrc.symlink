@@ -12,7 +12,7 @@ endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
-" My Bundles
+" Utilities & Add-Ons
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-fugitive'
@@ -25,25 +25,30 @@ Bundle 'tomtom/tlib_vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'vim-scripts/HTML-AutoCloseTag'
-Bundle 'skammer/vim-css-color'
 Bundle 'tomtom/tcomment_vim'
 " Colors
 Bundle 'skwp/vim-colors-solarized'
-" Syntax/Languages
-Bundle 'vim-scripts/aspnet.vim--Abshire'
+" html/css
+Bundle 'vim-scripts/HTML-AutoCloseTag'
+Bundle 'skammer/vim-css-color'
+Bundle 'Valloric/MatchTagAlways'
+" php
+Bundle 'shawncplus/phpcomplete.vim'
+" ruby
+Bundle 'vim-ruby/vim-ruby'
+
+" Filetypes & Syntax Highlighting
 Bundle 'othree/html5.vim'
+Bundle 'tpope/vim-haml'
+Bundle 'vim-scripts/JSON.vim'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'slim-template/vim-slim'
-Bundle 'tpope/vim-haml'
 Bundle 'vim-scripts/jade.vim'
-Bundle 'vim-scripts/JSON.vim'
+Bundle 'slim-template/vim-slim'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'jtratner/vim-flavored-markdown'
-Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'StanAngeloff/php.vim'
+Bundle 'vim-scripts/aspnet.vim--Abshire'
 
 " ----------------------------------------------------------------------------
 "  Colors

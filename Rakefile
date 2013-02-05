@@ -2,7 +2,7 @@ require 'rake'
 
 desc "Update that vundle"
 task :update do
-	system "vim +BundleInstall! +qall"
+	system "vim +BundleInstall! +BundleClean! +qall"
 end
 
 desc "Hook our dotfiles into system-standard positions."
