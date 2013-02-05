@@ -1,8 +1,8 @@
 require 'rake'
 
-desc "Update any git submodules"
+desc "Update that vundle"
 task :update do
-	system("git submodule init && git submodule update")
+	system "vim +BundleInstall! +qall"
 end
 
 desc "Hook our dotfiles into system-standard positions."

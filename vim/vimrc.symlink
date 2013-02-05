@@ -7,10 +7,43 @@ if has('win32') || has('win64')
 endif
 
 " ----------------------------------------------------------------------------
-"  Pathogen
+"  Vundle
 " ----------------------------------------------------------------------------
-call pathogen#infect()
-call pathogen#helptags()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+" My Bundles
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'tpope/vim-fugitive'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/snipmate-snippets'
+Bundle 'Raimondi/delimitMate'
+Bundle 'scrooloose/syntastic'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'vim-scripts/HTML-AutoCloseTag'
+Bundle 'skammer/vim-css-color'
+Bundle 'tomtom/tcomment_vim'
+" Colors
+Bundle 'skwp/vim-colors-solarized'
+" Syntax/Languages
+Bundle 'vim-scripts/aspnet.vim--Abshire'
+Bundle 'othree/html5.vim'
+Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'slim-template/vim-slim'
+Bundle 'tpope/vim-haml'
+Bundle 'vim-scripts/jade.vim'
+Bundle 'vim-scripts/JSON.vim'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'jtratner/vim-flavored-markdown'
+Bundle 'shawncplus/phpcomplete.vim'
+Bundle 'StanAngeloff/php.vim'
 
 " ----------------------------------------------------------------------------
 "  Colors
