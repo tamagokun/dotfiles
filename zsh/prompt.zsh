@@ -1,78 +1,58 @@
 autoload colors && colors
 
-if (( $+commands[git] ))
-then
-	git=$commands[git]
-else
-	git=/usr/bin/git
-fi
+# Change this to your own username
+DEFAULT_USERNAME='mkruk'
 
-git_branch() {
-	echo $($git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
-}
+# Threshold (sec) for showing cmd exec time
+CMD_MAX_EXEC_TIME=5
 
+# For my own and others sanity
+# git:
+# %b => current branch
+# %a => current action (rebase/merge)
+# prompt:
+# %F => color dict
+# %f => reset color
+# %~ => current path
+# %* => time
+# %n => username
+# %m => shortname host
+# %(?..) => prompt conditional - %(condition.true.false)
+
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git # You can add hg too if needed: `git hg`
+zstyle ':vcs_info:git*' formats ' %b'
+zstyle ':vcs_info:git*' actionformats ' %b|%a'
+
+# Only show username if not default
+[ $USER != $DEFAULT_USERNAME ] && local username='%n@%m '
+
+# Fastest possible way to check if repo is dirty
 git_dirty() {
-	st=$($git status 2>/dev/null | tail -n 1)
-	if [[ $st == "" ]]
-	then
-		echo ""
-	else
-		if [[ "$st" =~ ^nothing ]]
-		then
-			echo "on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
-		else
-			echo "on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
-		fi
-	fi
+	git diff --quiet --ignore-submodules HEAD 2>/dev/null; [ $? -eq 1 ] && echo '*'
 }
 
-git_prompt_info() {
-	ref=$($git symbolic-ref HEAD 2>/dev/null) || return
-# echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
-	echo "${ref#refs/heads/}"
+# Displays the exec time of the last command if set threshold was exceeded
+cmd_exec_time() {
+	local stop=`date +%s`
+	local start=${cmd_timestamp:-$stop}
+	let local elapsed=$stop-$start
+	[ $elapsed -gt $CMD_MAX_EXEC_TIME ] && echo ${elapsed}s
 }
 
-unpushed() {
-	$git cherry -v @{upstream} 2>/dev/null
-}
-
-need_push() {
-	if [[ $(unpushed) == "" ]]
-	then
-		echo " "
-	else
-		echo " with %{$fg_bold[magenta]%}unpushed%{$reset_color%} "
-	fi
-}
-
-rb_prompt(){
-	if (( $+commands[rbenv] ))
-	then
-		echo "%{$fg_bold[yellow]%}$(rbenv version | awk '{print $1}')%{$reset_color%}"
-	else
-		echo ""
-  fi
-}
-
-remote_host(){
-	if [[ -n $SSH_CONNECTION ]]
-	then
-		echo " at %{$fg_bold[magenta]%}%m%{$reset_color%}"
-	else
-		echo ""
-	fi
-}
-
-directory_name(){
-	echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
-}
-
-export PROMPT=$'\n$(rb_prompt)$(remote_host) in $(directory_name) $(git_dirty)$(need_push)\n› '
-set_prompt () {
-	export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
+preexec() {
+	cmd_timestamp=`date +%s`
 }
 
 precmd() {
-	title "zsh" "%m" "%55<...<%~"
-	# set_prompt
+	vcs_info
+	# Add `%*` to display the time
+	print -P '\n%F{blue}%~%F{236}$vcs_info_msg_0_`git_dirty` $username%f %F{yellow}`cmd_exec_time`%f'
+	# Reset value since `preexec` isn't always triggered
+	unset cmd_timestamp
 }
+
+# Prompt turns red if the previous command didn't exit with 0
+PROMPT='%(?.%F{magenta}.%F{red})❯%f '
+# Can be disabled:
+# PROMPT='%F{magenta}❯%f '
