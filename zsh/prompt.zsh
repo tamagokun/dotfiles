@@ -52,7 +52,34 @@ precmd() {
 	unset cmd_timestamp
 }
 
+# vim mode indictator from oh-my-zsh
+MODE_INDICATOR="%B%F{red}<%b%F{red}<<%f"
+function zle-keymap-select zle-line-init zle-line-finish {
+  # The terminal must be in application mode when ZLE is active for $terminfo
+  # values to be valid.
+  if (( ${+terminfo[smkx]} )); then
+    printf '%s' ${terminfo[smkx]}
+  fi
+  if (( ${+terminfo[rmkx]} )); then
+    printf '%s' ${terminfo[rmkx]}
+  fi
+
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-line-init
+zle -N zle-line-finish
+zle -N zle-keymap-select
+
+function vi_prompt_info() {
+	echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+}
+
+local return_code="%(?..%F{red}%? ↵%f)"
+
 # Prompt turns red if the previous command didn't exit with 0
 PROMPT='%(?.%F{magenta}.%F{red})❯%f '
 # Can be disabled:
 # PROMPT='%F{magenta}❯%f '
+RPS1='$(vi_prompt_info) ${return_code}'
