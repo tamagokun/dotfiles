@@ -53,7 +53,7 @@ precmd() {
 }
 
 # vim mode indictator from oh-my-zsh
-MODE_INDICATOR="%B%F{red}<%b%F{red}<<%f"
+MODE_INDICATOR="%B%F{red}%b❮%F{red}❮❮%f"
 function zle-keymap-select zle-line-init zle-line-finish {
   # The terminal must be in application mode when ZLE is active for $terminfo
   # values to be valid.
