@@ -26,6 +26,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'majutsushi/tagbar'
 " Colors
 Bundle 'skwp/vim-colors-solarized'
 " html/css
@@ -45,7 +46,6 @@ Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-scripts/jade.vim'
 Bundle 'slim-template/vim-slim'
-Bundle 'plasticboy/vim-markdown'
 Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'StanAngeloff/php.vim'
 Bundle 'vim-scripts/aspnet.vim--Abshire'
@@ -54,9 +54,8 @@ Bundle 'vim-scripts/aspnet.vim--Abshire'
 "  Colors
 " ----------------------------------------------------------------------------
 syntax enable
-let g:solarized_termcolors=256
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme Tomorrow-Night
 
 filetype plugin on
 filetype indent on
@@ -73,16 +72,13 @@ set linebreak
 set softtabstop=2          " yep, two
 set shiftwidth=2           " ..
 set tabstop=2
-"set expandtab             " expand tabs to spaces
-set noexpandtab            " don't fuck tabs
-"set nosmarttab            " fuck tabs
+" set expandtab             " expand tabs to spaces
+" set noexpandtab           " don't fuck tabs
+" set nosmarttab            " fuck tabs
 set formatoptions+=n       " support for numbered/bullet lists
-"set textwidth=80          " wrap at 80 chars by default
+set textwidth=80           " wrap at 80 chars by default
 set virtualedit=block      " allow virtual edit in visual block ..
-set foldmethod=indent      " fold based on indent
-set foldnestmax=10         " deepest fold is 10 levels
 set nofoldenable           " dont fold by default
-set foldlevel=1            " this is just what i use
 
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·

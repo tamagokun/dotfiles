@@ -10,11 +10,11 @@ let g:ctrlp_clear_cache_on_exit = 1
 " which didn't use ctrlp. so we clear all caches on each new vim invocation
 cal ctrlp#clra()
 
-let g:ctrlp_max_height = 40
+let g:ctrlp_max_height = 10
 
 " show on top
-"let g:ctrlp_match_window_bottom = 0
-"let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_reversed = 0
 
 " jump to buffer in the same tab if already open
 let g:ctrlp_switch_buffer = 1
