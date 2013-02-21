@@ -2,6 +2,9 @@ require 'rake'
 
 desc "Update that vundle"
 task :update do
+	unless Dir.exists? "vim/vim.symlink/bundle/vundle"
+		system "git clone https://github.com/gmarik/vundle.git vim/vim.symlink/bundle/vundle"
+	end
 	system "vim +BundleInstall! +BundleClean! +qall"
 end
 
