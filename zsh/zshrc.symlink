@@ -2,14 +2,6 @@
 export ZSH=$HOME/dotfiles
 export VAULT_PATH=$HOME/Dropbox/.vault
 
-# set our platform for platform specific stuff
-if $(which brew &>/dev/null)
-then
-	export PLATFORM="mac"
-else
-	export PLATFORM="linux"
-fi
-
 # all of our zsh files
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)

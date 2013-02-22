@@ -10,7 +10,6 @@
 	branch = auto
 	ui = true
 [core]
-	editor = vim
 	excludesfile = ~/.gitignore
 [apply]
 	whitespace = nowarn
