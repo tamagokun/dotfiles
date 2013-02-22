@@ -1,4 +1,4 @@
-set ai nocp ru vb wmnu noeb noet nosol
+set ai nocp hid    ru vb wmnu     noeb noet nosol
 
 set noswapfile
 set nobackup
@@ -25,7 +25,6 @@ Bundle 'MarcWeber/ultisnips'
 Bundle 'honza/snipmate-snippets'
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-fugitive'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'kien/ctrlp.vim'
@@ -177,7 +176,6 @@ set noshowcmd              " don't display incomplete commands
 set nolazyredraw           " turn off lazy redraw
 set number                 " line numbers
 set wildmode=list:longest,full
-set ch=2                   " command line height
 set backspace=2            " allow backspacing over everything in insert mode
 set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
 set shortmess=filtIoOA     " shorten messages

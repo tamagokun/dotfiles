@@ -5,7 +5,7 @@ task :update do
 	unless Dir.exists? "vim/vim.symlink/bundle/vundle"
 		system "git clone https://github.com/gmarik/vundle.git vim/vim.symlink/bundle/vundle"
 	end
-	system "vim +BundleInstall! +BundleClean! +qall"
+	system "~/Applications/MacVim.app/Contents/MacOS/Vim +BundleInstall! +BundleClean! +qall"
 end
 
 desc "Hook our dotfiles into system-standard positions."
