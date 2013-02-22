@@ -1,5 +1,6 @@
 let g:ctrlp_map = '<leader>,'
 let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'ra'
 
 nmap <leader>. :CtrlPClearCache<cr>:CtrlP<cr>
 nmap <leader>m :CtrlPBufTag<cr>
@@ -13,8 +14,8 @@ cal ctrlp#clra()
 let g:ctrlp_max_height = 10
 
 " show on top
-let g:ctrlp_match_window_bottom = 0
-let g:ctrlp_match_window_reversed = 0
+" let g:ctrlp_match_window_bottom = 0
+" let g:ctrlp_match_window_reversed = 0
 
 " jump to buffer in the same tab if already open
 let g:ctrlp_switch_buffer = 1
