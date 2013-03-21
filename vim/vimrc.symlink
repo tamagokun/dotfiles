@@ -19,14 +19,10 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 " Utilities & Add-Ons
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'Lokaltog/powerline'
-Bundle 'MarcWeber/ultisnips'
-Bundle 'honza/snipmate-snippets'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/syntastic'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
@@ -36,7 +32,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'skwp/vim-colors-solarized'
 " html/css
 Bundle 'vim-scripts/HTML-AutoCloseTag'
-Bundle 'skammer/vim-css-color'
+Bundle 'ap/vim-css-color'
 Bundle 'Valloric/MatchTagAlways'
 " php
 Bundle 'shawncplus/phpcomplete.vim'
@@ -77,7 +73,6 @@ set softtabstop=2          " yep, two
 set shiftwidth=2           " ..
 set tabstop=2
 set formatoptions+=n       " support for numbered/bullet lists
-set textwidth=80           " wrap at 80 chars by default
 set virtualedit=block      " allow virtual edit in visual block ..
 set nofoldenable           " dont fold by default
 
