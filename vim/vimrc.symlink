@@ -1,16 +1,11 @@
-set ai nocp hid    ru vb wmnu     noeb noet nosol
-
-set noswapfile
-set nobackup
-set nowritebackup
-set encoding=utf-8
+set nocompatible
 
 if has('win32') || has('win64')
 	set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
 
 " Powerline
-set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " ----------------------------------------------------------------------------
 "  Vundle
@@ -28,11 +23,11 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'mileszs/ack.vim'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
 " Colors
 Bundle 'skwp/vim-colors-solarized'
 " html/css
-Bundle 'vim-scripts/HTML-AutoCloseTag'
-" Bundle 'ap/vim-css-color'
 Bundle 'Valloric/MatchTagAlways'
 " php
 Bundle 'shawncplus/phpcomplete.vim'
@@ -50,6 +45,7 @@ Bundle 'slim-template/vim-slim'
 Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'StanAngeloff/php.vim'
 Bundle 'vim-scripts/aspnet.vim--Abshire'
+Bundle 'wavded/vim-stylus'
 
 " ----------------------------------------------------------------------------
 "  Colors
@@ -62,12 +58,30 @@ filetype plugin on
 filetype indent on
 
 " ----------------------------------------------------------------------------
-"  Text Formatting
+"  VIM Settings
 " ----------------------------------------------------------------------------
-"
-set smartindent            " be smart about it
-inoremap # X<BS>#
-set nowrap                 " don't wrap lines
+
+set noswapfile
+set nobackup
+set encoding=utf-8
+set autowrite
+set autoread
+set laststatus=2
+set undodir=~/.backups
+set undofile
+set history=50
+set clipboard=unnamed
+set notimeout
+set ttimeout
+set ttimeoutlen=10
+set ttyfast
+set mouse=a
+set ttymouse=xterm2
+
+set fileformats=unix,dos,mac
+
+set smartindent
+set nowrap
 set linebreak
 set softtabstop=2          " yep, two
 set shiftwidth=2           " ..
@@ -80,18 +94,30 @@ set nofoldenable           " dont fold by default
 set list listchars=tab:\ \ ,trail:·
 
 " ----------------------------------------------------------------------------
-"  VIM Settings
+"  UI
 " ----------------------------------------------------------------------------
-set undodir=~/.backups
-set undofile
-set history=50
-set clipboard=unnamed
-set notimeout
-set ttimeout
-set ttimeoutlen=10
-set ttyfast
-set mouse=a
-set ttymouse=xterm2
+
+set hidden
+set ruler
+set noerrorbells                " No beeps
+set number                      " Show line numbers
+set backspace=indent,eol,start
+set showcmd
+set showmode
+set nolazyredraw           " turn off lazy redraw
+set wildmode=list:longest,full
+
+" ----------------------------------------------------------------------------
+" Visual Cues
+" ----------------------------------------------------------------------------
+
+set showmatch              " brackets/braces that is
+set mat=5                  " duration to show matching brace (1/10 sec)
+set incsearch              " do incremental searching
+set laststatus=2           " always show the status line
+set ignorecase             " ignore case when searching
+set smartcase
+set hlsearch               " highlight searches
 
 " ----------------------------------------------------------------------------
 "  Remapping
@@ -132,12 +158,26 @@ nnoremap <C-l> <C-w>l
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
-" Toggle NERDTree
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+" Tab switching
+noremap <C-Tab> :tabnext<cr>
+noremap <C-S-Tab> :tabprev<cr>
 
-" Comment/Uncomment
-map <leader>/ :TComment<CR>
-imap <leader>/ <Esc>:TComment<CR>i
+" Toggle NERDTree
+map <C-n> <plug>NERDTreeTabsToggle<CR>
+
+" (un)comment lines with ,+/
+map <leader>/ :TComment<cr>
+imap <leader>/ <Esc>:TComment<cr>gv
+
+" goto symbol
+nmap <C-r> :CtrlPBufTag<cr>
+imap <C-r> <esc>:CtrlPBufTag<cr>
+nmap <C-R> :CtrlPBufTagAll<cr>
+imap <C-R> <esc>:CtrlPBufTagAll<cr>
+
+" goto file
+nmap <C-t> :CtrlP<cr>
+imap <C-t> <esc>:CtrlP<cr>
 
 " Fixing search
 nnoremap / /\v
@@ -145,49 +185,49 @@ vnoremap / /\v
 nmap <silent> // :nohlsearch<cr>
 
 "(v)im (r)eload
-nmap <silent> ,vr :so %<CR>
+nmap <silent> <leader>vr :so %<cr>
 
 " Semicolon at end of line by typing ;;
 inoremap ;; <C-o>A;<esc>
-
-"When typing a string, your quotes auto complete. Move past the quote
-"while still in insert mode by hitting Ctrl-a. Example:
-"
-" type 'foo<c-a>
-"
-" the first quote will autoclose so you'll get 'foo' and hitting <c-a> will
-" put the cursor right after the quote
-imap <C-a> <esc>wa
 
 " w!! to write a file as sudo
 " stolen from Steve Losh
 cmap w!! w !sudo tee % >/dev/null
 
-" ----------------------------------------------------------------------------
-"  UI
-" ----------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
+"  Plugin settings
+" ---------------------------------------------------------------------------
 
-set noshowcmd              " don't display incomplete commands
-set nolazyredraw           " turn off lazy redraw
-set number                 " line numbers
-set wildmode=list:longest,full
-set backspace=2            " allow backspacing over everything in insert mode
-set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
-set shortmess=filtIoOA     " shorten messages
-set report=0               " tell us about changes
+let g:ctrlp_map = '<C-p>'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_max_height = 10
+let g:ctrlp_switch_buffer = 'et'
+let g:ctrlp_use_caching = 1
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_mruf_max = 250
 
-" ----------------------------------------------------------------------------
-" Visual Cues
-" ----------------------------------------------------------------------------
+let g:ctrlp_buftag_types = {
+\ 'go'     	   : '--language-force=go --golang-types=ftv',
+\ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
+\ 'markdown'   : '--language-force=markdown --markdown-types=hik',
+\ 'objc'       : '--language-force=objc --objc-types=mpci',
+\ 'rc'         : '--language-force=rust --rust-types=fTm'
+\ }
 
-set showmatch              " brackets/braces that is
-set mat=5                  " duration to show matching brace (1/10 sec)
-set incsearch              " do incremental searching
-set laststatus=2           " always show the status line
-set ignorecase             " ignore case when searching
-set smartcase
-set gdefault
-set hlsearch               " highlight searches
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+" Make nerdtree look nice
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let g:NERDTreeWinSize = 30
+
+" Auto open nerd tree on startup
+let g:nerdtree_tabs_open_on_gui_startup = 1
+" Focus in the main content window
+let g:nerdtree_tabs_focus_on_files = 1
 
 " ---------------------------------------------------------------------------
 "  Auto cmd stuff for file types
@@ -204,10 +244,3 @@ augroup markdown
 	au!
 	au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
-
-" ---------------------------------------------------------------------------
-"  Load plugin settings
-" ---------------------------------------------------------------------------
-for f in split(glob('~/.vim/plugin/settings/*.vim'), '\n')
-	exe 'source' f
-endfor

@@ -11,3 +11,6 @@ fi
 
 # Pipe my public key to my clipboard. Fuck you, pay me.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+# Quick look stuff
+alias ql="qlmanage -p &>/dev/null"

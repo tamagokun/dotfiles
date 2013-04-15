@@ -1,5 +1,5 @@
-# from https://github.com/richoH/dotfiles/blob/master/bin/battery.
 #!/bin/sh
+# from https://github.com/richoH/dotfiles/blob/master/bin/battery.
 
 HEART_FULL=♥
 HEART_EMPTY=♡
