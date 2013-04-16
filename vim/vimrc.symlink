@@ -159,8 +159,8 @@ nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
 " Tab switching
-noremap <C-Tab> :tabnext<cr>
-noremap <C-S-Tab> :tabprev<cr>
+nnoremap <S-l> :tabnext<cr>
+nnoremap <S-h> :tabprev<cr>
 
 " Toggle NERDTree
 map <C-n> <plug>NERDTreeTabsToggle<CR>
@@ -224,7 +224,7 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
 
-" Auto open nerd tree on startup
+" Don't auto open nerd tree on startup
 let g:nerdtree_tabs_open_on_gui_startup = 0
 " Focus in the main content window
 let g:nerdtree_tabs_focus_on_files = 1
