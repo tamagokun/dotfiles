@@ -1,1 +1,1 @@
-export EDITOR='~/Applications/MacVim.app/Contents/MacOS/Vim'
+export EDITOR='vim'
