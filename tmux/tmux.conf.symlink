@@ -33,6 +33,7 @@ set -g window-status-format "#[fg=white,bg=colour234] #I #W "
 set -g window-status-current-format "#[fg=colour234,bg=colour39]#[fg=colour16,bg=colour39,noreverse,bold] #I  #W #[fg=colour39,bg=colour234,nobold]"
 
 # Options
+set -g default-terminal 'screen-256color'
 set -g status-utf8 on
 set -g base-index 1
 # seems to be not supported
