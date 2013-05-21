@@ -13,7 +13,7 @@ task :install do
 	linkables = Dir.glob('*/**{.symlink}')
 
 	skip_all = false
-	overwrite_all = false
+	overwrite_all = STDOUT.tty? ? false : true
 	backup_all = false
 
 	linkables.each do |linkable|
