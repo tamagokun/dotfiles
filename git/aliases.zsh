@@ -1,9 +1,8 @@
 # Use `hub` as our git wrapper:
 #   http://defunkt.github.com/hub/
-hub_path=$(which hub &>/dev/null)
-if (( $+commands[hub] ))
+if $(hub &>/dev/null)
 then
-  alias git=$hub_path
+	alias git=$(which hub)
 fi
 
 alias gst='git status -sb'
