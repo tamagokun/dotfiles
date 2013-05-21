@@ -67,8 +67,12 @@ set encoding=utf-8
 set autowrite
 set autoread
 set laststatus=2
-set undodir=~/.backups
-set undofile
+if exists('+undodir')
+	set undodir=~/.backups
+endif
+if exists('+undofile')
+	set undofile
+endif
 set history=50
 set clipboard=unnamed
 set notimeout
