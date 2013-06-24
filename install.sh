@@ -98,7 +98,11 @@ brew_ensure tmux reattach-to-user-namespace
 brew_ensure macvim vim ctags
 
 # MariaDB
-brew_ensure mariadb
+if [[ -z $(brew list mariadb 2>/dev/null) ]]; then
+	brew install mariadb
+	unset TMPDIR
+	mysql_install_db --user=`whoami` --basedir="$(brew --prefix mariadb)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+fi
 
 # PostgreSQL
 brew_ensure postgresql
