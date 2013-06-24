@@ -1,3 +1,4 @@
-export PATH="/usr/local/php5/bin:$HOME/.composer/bin:$PATH"
+export PATH="$HOME/.composer/bin:$PATH"
 
+# phpbrew
 source ~/.phpbrew/bashrc
