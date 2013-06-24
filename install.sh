@@ -153,4 +153,7 @@ brew_ensure grc htop-osx
 notify "Upgrading your brews"
 brew upgrade
 
+notify "Loading OSX defaults"
+$PWD/bin/osx-defaults
+
 notify "👌  Success!"
