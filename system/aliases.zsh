@@ -14,3 +14,15 @@ alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pa
 
 # Quick look stuff
 alias ql="qlmanage -p &>/dev/null"
+
+# Git
+alias gst='git status -sb'
+alias gl='git log --graph --all --format=format:"%C(bold blue)%h%C(reset) - %C(bold cyan)%cD%C(reset) %C(bold green)(%cr)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)— %cn%C(reset)" --abbrev-commit'
+alias gd='git diff'
+alias gc='git commit'
+alias gco='git checkout'
+alias gb='git branch'
+
+# Ruby
+alias be='bundle exec'
+alias bi='bundle install --path vendor'
