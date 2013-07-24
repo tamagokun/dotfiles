@@ -1,4 +1,5 @@
 set nocompatible
+set encoding=utf-8
 
 if has('win32') || has('win64')
 	set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
@@ -12,20 +13,27 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 " ----------------------------------------------------------------------------
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+set ttyfast
+
 Bundle 'gmarik/vundle'
 " Utilities & Add-Ons
 Bundle 'Lokaltog/powerline'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'takac/ultisnips'
 Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/syntastic'
-Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'kien/ctrlp.vim'
+Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'mileszs/ack.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'myusuf3/numbers.vim'
+Bundle 'airblade/vim-gitgutter'
 " Colors
 Bundle 'skwp/vim-colors-solarized'
 " html/css
@@ -46,7 +54,6 @@ Bundle 'slim-template/vim-slim'
 Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'StanAngeloff/php.vim'
-Bundle 'vim-scripts/aspnet.vim--Abshire'
 Bundle 'wavded/vim-stylus'
 
 " ----------------------------------------------------------------------------
@@ -58,6 +65,7 @@ colorscheme Tomorrow-Night
 
 filetype plugin on
 filetype indent on
+set omnifunc=syntaxcomplete#Complete
 
 " ----------------------------------------------------------------------------
 "  VIM Settings
@@ -65,7 +73,6 @@ filetype indent on
 
 set noswapfile
 set nobackup
-set encoding=utf-8
 set autowrite
 set autoread
 set laststatus=2
@@ -80,9 +87,9 @@ set clipboard=unnamed
 set notimeout
 set ttimeout
 set ttimeoutlen=10
-set ttyfast
 set mouse=a
 set ttymouse=xterm2
+set magic
 
 set fileformats=unix,dos,mac
 
@@ -125,6 +132,13 @@ set laststatus=2           " always show the status line
 set ignorecase             " ignore case when searching
 set smartcase
 set hlsearch               " highlight searches
+
+" Sexy cursors
+set guicursor=n-c:block-Cursor-blinkon0
+set guicursor+=v:block-vCursor-blinkon0
+set guicursor+=i:ci-ver20-iCursor
+highlight iCursor guifg=white guibg=white
+hi MatchParen guifg=lightblue guibg=darkblue
 
 " ----------------------------------------------------------------------------
 "  Remapping
@@ -201,9 +215,21 @@ inoremap ;; <C-o>A;<esc>
 " stolen from Steve Losh
 cmap w!! w !sudo tee % >/dev/null
 
+" Remove trailing whitespace and ^M
+nnoremap <leader>sn :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
 " ---------------------------------------------------------------------------
 "  Plugin settings
 " ---------------------------------------------------------------------------
+
+" Powerline
+let g:Powerline_theme='short'
+let g:Powerline_colorscheme='solarized256'
+
+" Rainbow Parens!
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadBraces
+au Syntax * RainbowParenthesesLoadRound
 
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
@@ -235,6 +261,10 @@ let g:NERDTreeWinSize = 30
 let g:nerdtree_tabs_open_on_gui_startup = 0
 " Focus in the main content window
 let g:nerdtree_tabs_focus_on_files = 1
+
+" Syntastic Config
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
 
 " ---------------------------------------------------------------------------
 "  Auto cmd stuff for file types
