@@ -53,6 +53,7 @@ if ! hash brew 2>/dev/null; then
 fi
 notify "Updating homebrew"
 brew update
+notify "Cleaning up..."
 brew cleanup
 
 # install brew-cask
@@ -114,27 +115,27 @@ brew_ensure mongodb
 brew_ensure redis
 
 # Ruby
-notify "Setting up Ruby"
 brew_ensure rbenv ruby-build
 if [[ -z $(rbenv versions | grep 1.9.3-p429) ]]; then
+	notify "Setting up Ruby"
 	rbenv install 1.9.3-p429
+	rbenv global 1.9.3-p429
+	gem install bundler capistrano-ext
 fi;
-rbenv global 1.9.3-p429
-gem install bundler capistrano-ext
 
 # PHP
-notify "Setting up PHP"
 if [[ ! -d $HOME/.phpbrew ]]; then
 	notify "Installing phpbrew"
 	$PWD/bin/phpbrew init
 fi
 source $HOME/.phpbrew/bashrc
 if [[ -z $(phpbrew list | grep php-5.4.16) ]]; then
+	notify "Setting up PHP"
 	phpbrew install php-5.4.16 +default +dbs
 	pecl install mongo
 	phpbrew ext enable mongo
+	phpbrew switch php-5.4.16
 fi
-phpbrew switch php-5.4.16
 
 # Node.js
 brew_ensure node
