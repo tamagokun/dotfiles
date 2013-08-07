@@ -25,7 +25,6 @@ Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'kien/ctrlp.vim'
-Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-fugitive'
@@ -133,13 +132,6 @@ set ignorecase             " ignore case when searching
 set smartcase
 set hlsearch               " highlight searches
 
-" Sexy cursors
-set guicursor=n-c:block-Cursor-blinkon0
-set guicursor+=v:block-vCursor-blinkon0
-set guicursor+=i:ci-ver20-iCursor
-highlight iCursor guifg=white guibg=white
-hi MatchParen guifg=lightblue guibg=darkblue
-
 " ----------------------------------------------------------------------------
 "  Remapping
 " ----------------------------------------------------------------------------
@@ -226,11 +218,6 @@ nnoremap <leader>sn :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+
 let g:Powerline_theme='short'
 let g:Powerline_colorscheme='solarized256'
 
-" Rainbow Parens!
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadBraces
-au Syntax * RainbowParenthesesLoadRound
-
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
@@ -266,6 +253,9 @@ let g:nerdtree_tabs_focus_on_files = 1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<c-tab>"
+
 " ---------------------------------------------------------------------------
 "  Auto cmd stuff for file types
 " ---------------------------------------------------------------------------
@@ -274,8 +264,6 @@ if has("autocmd")
 	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 	autocmd FileType mkd,txt setlocal wrap linebreak nolist
 endif
-
-au BufRead,BufNewFile *.aspx,*.asmx,*.ascx set filetype=aspnet
 
 augroup markdown
 	au!
