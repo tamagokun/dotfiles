@@ -155,6 +155,9 @@ brew_ensure go
 # Utils
 brew_ensure grc htop-osx
 
+# Heroku
+brew_ensure heroku-toolbelt
+
 notify "Upgrading your brews"
 brew upgrade
 
