@@ -6,7 +6,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # PHP
-export PATH="$HOME/.composer/bin:$PATH"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 source ~/.phpbrew/bashrc
 
 # Go
