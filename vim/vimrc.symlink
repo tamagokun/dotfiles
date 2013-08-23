@@ -54,6 +54,7 @@ Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'StanAngeloff/php.vim'
 Bundle 'wavded/vim-stylus'
+Bundle 'juvenn/mustache.vim'
 
 " ----------------------------------------------------------------------------
 "  Colors
