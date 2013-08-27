@@ -55,6 +55,7 @@ Bundle 'jnwhiteh/vim-golang'
 Bundle 'StanAngeloff/php.vim'
 Bundle 'wavded/vim-stylus'
 Bundle 'juvenn/mustache.vim'
+Bundle 'evidens/vim-twig'
 
 " ----------------------------------------------------------------------------
 "  Colors
