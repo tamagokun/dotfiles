@@ -31,7 +31,6 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
-Bundle 'myusuf3/numbers.vim'
 Bundle 'airblade/vim-gitgutter'
 " Colors
 Bundle 'skwp/vim-colors-solarized'
@@ -55,7 +54,7 @@ Bundle 'jnwhiteh/vim-golang'
 Bundle 'StanAngeloff/php.vim'
 Bundle 'wavded/vim-stylus'
 Bundle 'juvenn/mustache.vim'
-Bundle 'evidens/vim-twig'
+Bundle "lepture/vim-jinja"
 
 " ----------------------------------------------------------------------------
 "  Colors
@@ -266,6 +265,8 @@ if has("autocmd")
 	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 	autocmd FileType mkd,txt setlocal wrap linebreak nolist
 endif
+
+au BufNewFile,BufRead *.twig set ft=jinja
 
 augroup markdown
 	au!
