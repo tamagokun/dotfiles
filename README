@@ -4,7 +4,7 @@ Based around holman/dotfiles. Lots of vim stuff inspired by skwp/dotfiles.
 
 # Setting up a new Mac
 
-First, get the Xcode command line tools from [https://developer.apple.com/downloads/index.action#](https://developer.apple.com/downloads/index.action#), or just install Xcode and install it from there.
+First, get the Xcode command line tools from https://developer.apple.com/downloads/index.action#, or just install Xcode and install it from there.
 
 Next, install homebrew:
 
