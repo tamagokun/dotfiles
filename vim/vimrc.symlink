@@ -1,37 +1,35 @@
 set nocompatible
 set encoding=utf-8
 
+" For Windowz
 if has('win32') || has('win64')
 	set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
 
-" Powerline
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-
-" ----------------------------------------------------------------------------
-"  Vundle
-" ----------------------------------------------------------------------------
+" Vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 set ttyfast
 
 Bundle 'gmarik/vundle'
 " Utilities & Add-Ons
-Bundle 'Lokaltog/powerline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'takac/ultisnips'
-Bundle 'Raimondi/delimitMate'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'kien/ctrlp.vim'
-Bundle 'tomtom/tcomment_vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-commentary'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'mhinz/vim-startify'
+Bundle 'vim-scripts/kwbdi.vim'
+Bundle 'bling/vim-airline'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'majutsushi/tagbar'
 " Colors
 Bundle 'skwp/vim-colors-solarized'
 " html/css
@@ -46,6 +44,7 @@ Bundle 'othree/html5.vim'
 Bundle 'tpope/vim-haml'
 Bundle 'vim-scripts/JSON.vim'
 Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-scripts/jade.vim'
 Bundle 'slim-template/vim-slim'
@@ -54,7 +53,14 @@ Bundle 'jnwhiteh/vim-golang'
 Bundle 'StanAngeloff/php.vim'
 Bundle 'wavded/vim-stylus'
 Bundle 'juvenn/mustache.vim'
+Bundle 'nono/vim-handlebars'
 Bundle "lepture/vim-jinja"
+
+" Experimental
+" Bundle 'Raimondi/delimitMate'
+Bundle 'vim-scripts/Auto-Pairs'
+Bundle 'tpope/vim-endwise'
+Bundle 'austintaylor/vim-indentobject'
 
 " ----------------------------------------------------------------------------
 "  Colors
@@ -65,7 +71,6 @@ colorscheme Tomorrow-Night
 
 filetype plugin on
 filetype indent on
-set omnifunc=syntaxcomplete#Complete
 
 " ----------------------------------------------------------------------------
 "  VIM Settings
@@ -116,7 +121,7 @@ set noerrorbells                " No beeps
 set number                      " Show line numbers
 set backspace=indent,eol,start
 set showcmd
-set showmode
+set noshowmode
 set nolazyredraw           " turn off lazy redraw
 set wildmode=list:longest,full
 set wildignore+=*/.hg/*,*/.svn/*,*/vendor/cache/*,*/public/system/*,*/tmp/*,*/log/*,*/.git/*,*/.jhw-cache/*,*/solr/data/*,*/node_modules/*,*/.DS_Store
@@ -146,10 +151,6 @@ nnoremap ; :
 " exit to normal mode with 'jj'
 inoremap jj <ESC>
 
-" reflow paragraph with Q in normal and visual mode
-nnoremap Q gqap
-vnoremap Q gq
-
 " sane movement with wrap turned on
 nnoremap j gj
 nnoremap k gk
@@ -172,16 +173,13 @@ nnoremap <C-l> <C-w>l
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
-" Tab switching
-nnoremap <S-l> :tabnext<cr>
-nnoremap <S-h> :tabprev<cr>
-
 " Toggle NERDTree
-map <C-n> <plug>NERDTreeTabsToggle<CR>
+map <C-d> :NERDTreeToggle<CR>
+nmap <leader>f :NERDTreeFind<CR>
 
-" (un)comment lines with ,+/
-map <leader>/ :TComment<cr>
-imap <leader>/ <Esc>:TComment<cr>gv
+" goto buffer
+nmap <C-b> :CtrlPBuffer<cr>
+imap <C-b> <esc>:CtrlPBuffer<cr>
 
 " goto symbol
 nmap <C-r> :CtrlPBufTag<cr>
@@ -192,6 +190,15 @@ imap <C-R> <esc>:CtrlPBufTagAll<cr>
 " goto file
 nmap <C-t> :CtrlP<cr>
 imap <C-t> <esc>:CtrlP<cr>
+
+" project search
+nmap <leader>a :Ack
+
+" toggle tagbar
+nmap <leader>] :TagbarToggle<cr>
+
+" (c)lose buffer
+nmap <leader>c <Plug>Kwbd
 
 " Fixing search
 nnoremap / /\v
@@ -215,9 +222,10 @@ nnoremap <leader>sn :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+
 "  Plugin settings
 " ---------------------------------------------------------------------------
 
-" Powerline
-let g:Powerline_theme='short'
-let g:Powerline_colorscheme='solarized256'
+" Airline
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
@@ -229,6 +237,7 @@ let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_mruf_max = 250
+let g:ctrlp_match_window = 'order:ttb,max:20'
 
 let g:ctrlp_buftag_types = {
 \ 'go'         : '--language-force=go --golang-types=ftv',
@@ -245,6 +254,8 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
 
+let g:NERDSpaceDelims=1
+
 " Don't auto open nerd tree on startup
 let g:nerdtree_tabs_open_on_gui_startup = 0
 " Focus in the main content window
@@ -256,6 +267,36 @@ let g:syntastic_warning_symbol='⚠'
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<c-tab>"
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+	let g:ackprg = 'ag --nogroup --column'
+	" Use Ag over Grep
+	set grepprg=ag\ --nogroup\ --nocolor
+	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+
+let g:startify_custom_header = [
+						\ '   __      ___            ______ ____   ',
+						\ '   \ \    / (_)           |____  |___ \ ',
+						\ '    \ \  / / _ _ __ ___       / /  __) |',
+						\ '     \ \/ / | | ''_ ` _ \     / /  |__ <',
+						\ '      \  /  | | | | | | |   / /   ___) |',
+						\ '       \/   |_|_| |_| |_|  /_(_) |____/ ',
+						\ '',
+						\ '',
+						\ ]
+
+" Fix Cursor in TMUX
+if exists('$TMUX')
+	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+	let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 " ---------------------------------------------------------------------------
 "  Auto cmd stuff for file types

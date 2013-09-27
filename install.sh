@@ -96,7 +96,7 @@ fi
 brew_ensure tmux reattach-to-user-namespace
 
 # Vim
-brew_ensure macvim vim ctags
+brew_ensure macvim vim ctags the_silver_searcher
 
 # MariaDB
 if [[ -z $(brew list mariadb 2>/dev/null) ]]; then
