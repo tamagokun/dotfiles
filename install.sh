@@ -131,10 +131,10 @@ fi
 source $HOME/.phpbrew/bashrc
 if [[ -z $(phpbrew list | grep php-5.4.16) ]]; then
 	notify "Setting up PHP"
-	phpbrew install php-5.4.16 +default +dbs
+	phpbrew install php-5.4.20 +default +dbs
 	pecl install mongo
 	phpbrew ext enable mongo
-	phpbrew switch php-5.4.16
+	phpbrew switch php-5.4.20
 fi
 
 # Node.js
