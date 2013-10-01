@@ -153,7 +153,7 @@ brew_ensure go
 # brew_ensure android-sdk
 
 # Utils
-brew_ensure grc htop-osx
+brew_ensure grc htop-osx autoenv
 
 # Heroku
 brew_ensure heroku-toolbelt
