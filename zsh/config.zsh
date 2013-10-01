@@ -1,8 +1,4 @@
-if [[ -n $SSH_CONNECTION ]]; then
-  export PS1='%m:%3~$(git_info_for_prompt)%# '
-else
-  export PS1='%3~$(git_info_for_prompt)%# '
-fi
+autoload colors && colors
 
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
@@ -38,3 +34,23 @@ setopt complete_aliases
 zle -N newtab
 
 bindkey -v
+
+# vim mode indictator from oh-my-zsh
+MODE_INDICATOR="%B%F{red}%b❮%F{red}❮❮%f"
+function zle-keymap-select zle-line-init zle-line-finish {
+  # The terminal must be in application mode when ZLE is active for $terminfo
+  # values to be valid.
+  if (( ${+terminfo[smkx]} )); then
+    printf '%s' ${terminfo[smkx]}
+  fi
+  if (( ${+terminfo[rmkx]} )); then
+    printf '%s' ${terminfo[rmkx]}
+  fi
+
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-line-init
+zle -N zle-line-finish
+zle -N zle-keymap-select
