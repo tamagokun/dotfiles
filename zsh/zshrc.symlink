@@ -18,6 +18,10 @@ do
 	source $file
 done
 
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+antigen apply
+
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
 if [[ -a ~/.localrc ]]
