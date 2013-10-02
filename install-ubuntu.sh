@@ -16,7 +16,7 @@ function package_ensure {
 	for pkg in "$@"; do
 		if [[ -z $(dpkg -l | grep $pkg 2>/dev/null) ]]; then
 			notify "Installing $pkg"
-			sudo-apt get install $pkg
+			sudo aptitude install -y $pkg
 		fi
 	done
 }
@@ -48,6 +48,9 @@ vim +BundleInstall! +BundleClean! +qall
 # update package index
 sudo apt-get update
 
+# Aptitude
+package_ensure aptitude
+
 # Git
 package_ensure git ghi
 
@@ -61,7 +64,7 @@ sudo apt-get build-dep php5
 package_ensure tmux
 
 # Vim
-brew_ensure vim silversearcher-ag
+brew_ensure vim silversearcher-ag exuberant-ctags vim-gtk
 
 # MariaDB
 # if [[ -z $(brew list mariadb 2>/dev/null) ]]; then
@@ -128,7 +131,10 @@ package_ensure go
 package_ensure grc htop autoenv
 
 # Heroku
-package_ensure heroku-toolbelt
+if $(heroku &>/dev/null); then
+	notify "Installing Heroku Toolbelt"
+	wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+fi
 
 notify "Upgrading packages"
 sudo apt-get upgrade
