@@ -49,7 +49,9 @@ vim +BundleInstall! +BundleClean! +qall
 sudo apt-get update
 
 # Aptitude
-package_ensure aptitude
+if [[ -z $(dpkg -l | grep aptitude 2>/dev/null) ]]; then
+	sudo apt-get install -y aptitude
+fi
 
 # Git
 package_ensure git ghi
@@ -64,7 +66,7 @@ sudo apt-get build-dep php5
 package_ensure tmux
 
 # Vim
-brew_ensure vim silversearcher-ag exuberant-ctags vim-gtk
+package_ensure vim silversearcher-ag exuberant-ctags vim-gtk
 
 # MariaDB
 # if [[ -z $(brew list mariadb 2>/dev/null) ]]; then
