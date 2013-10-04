@@ -57,7 +57,7 @@ fi
 package_ensure git ghi
 
 # Deps
-package_ensure pidof build-essential
+package_ensure build-essential
 package_ensure autoconf automake curl build-essential libxslt1-dev re2c libxml2-dev php5-cli bison libbz2-dev
 
 sudo apt-get build-dep php5
