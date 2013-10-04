@@ -124,6 +124,7 @@ set noshowmode
 set nolazyredraw           " turn off lazy redraw
 set wildmode=list:longest,full
 set wildignore+=*/.hg/*,*/.svn/*,*/vendor/cache/*,*/public/system/*,*/tmp/*,*/log/*,*/.git/*,*/.jhw-cache/*,*/solr/data/*,*/node_modules/*,*/.DS_Store
+set cursorline cursorcolumn     " Highlight current line and column
 
 " ----------------------------------------------------------------------------
 " Visual Cues
