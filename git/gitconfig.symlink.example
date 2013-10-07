@@ -3,6 +3,7 @@
 [user]
 	name = AUTHORNAME
 	email = AUTHOREMAIL
+[credential]
 	helper = GIT_CREDENTIAL_HELPER
 [color]
 	diff = auto
@@ -19,5 +20,3 @@
 	prompt = false
 [help]
 	autocorrect = 1
-[push]
-	default = simple
