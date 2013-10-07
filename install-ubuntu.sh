@@ -1,3 +1,4 @@
+#!/bin/sh
 # cool intro
 echo '       /$$             /$$             '
 echo '      | $$            | $$             '
@@ -9,10 +10,10 @@ echo '|  $$$$$$$|  $$$$$$/  |  $$$$//$$$$$$$/'
 echo ' \_______/ \______/    \___/ |_______/ '
 
 # set up vars
-function notify { echo "-----> $1"; }
-function info   { echo "       $1"; }
+notify() { echo "-----> $1"; }
+info()   { echo "       $1"; }
 
-function package_ensure {
+package_ensure() {
 	for pkg in "$@"; do
 		if [[ -z $(dpkg -l | grep $pkg 2>/dev/null) ]]; then
 			notify "Installing $pkg"
@@ -21,11 +22,26 @@ function package_ensure {
 	done
 }
 
+# configure .gitconfig
+# from holman/dotfiles
+if ! [ -f git/gitconfig.symlink ]; then
+	notify "Configuring your .gitconfig"
+	git_credential='osxkeychain'
+
+	user ' - What is your github author name?'
+	read -e git_authorname
+	user ' - What is your github author email?'
+	read -e git_authoremail
+
+	sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.symlink.example > git/gitconfig.symlink
+fi
+
 # symlink dotfiles
 notify "Linking dotfiles"
 for file in $PWD/**/*.symlink; do
 	link=$(echo $file | awk -F/ '{print $NF}' | sed -e 's/\.symlink//')
-	rm $HOME/.$link
+	# screw backups
+	rm -f $HOME/.$link
 	ln -s $file $HOME/.$link
 done
 
@@ -66,7 +82,7 @@ sudo apt-get build-dep php5
 package_ensure tmux
 
 # Vim
-package_ensure vim silversearcher-ag exuberant-ctags vim-gtk
+package_ensure vim exuberant-ctags vim-gtk
 
 # MariaDB
 # if [[ -z $(brew list mariadb 2>/dev/null) ]]; then

@@ -1,3 +1,4 @@
+#!/bin/sh
 # cool intro
 echo '       /$$             /$$             '
 echo '      | $$            | $$             '
@@ -9,10 +10,10 @@ echo '|  $$$$$$$|  $$$$$$/  |  $$$$//$$$$$$$/'
 echo ' \_______/ \______/    \___/ |_______/ '
 
 # set up vars
-function notify { echo "-----> $1"; }
-function info   { echo "       $1"; }
+notify() { echo "-----> $1"; }
+info()   { echo "       $1"; }
 
-function brew_ensure {
+brew_ensure() {
 	for pkg in "$@"; do
 		if [[ -z $(brew list $pkg 2>/dev/null) ]]; then
 			notify "Installing $pkg"
@@ -21,7 +22,7 @@ function brew_ensure {
 	done
 }
 
-function cask_ensure {
+cask_ensure() {
 	for pkg in "$@"; do
 		if [[ ! $(brew cask list | grep $pkg) == "$pkg" ]]; then
 			notify "Installing $pkg"
@@ -30,11 +31,26 @@ function cask_ensure {
 	done
 }
 
+# configure .gitconfig
+# from holman/dotfiles
+if ! [ -f git/gitconfig.symlink ]; then
+	notify "Configuring your .gitconfig"
+	git_credential='osxkeychain'
+
+	user ' - What is your github author name?'
+	read -e git_authorname
+	user ' - What is your github author email?'
+	read -e git_authoremail
+
+	sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.symlink.example > git/gitconfig.symlink
+fi
+
 # symlink dotfiles
 notify "Linking dotfiles"
 for file in $PWD/**/*.symlink; do
 	link=$(echo $file | awk -F/ '{print $NF}' | sed -e 's/\.symlink//')
-	rm $HOME/.$link
+	# screw backups
+	rm -f $HOME/.$link
 	ln -s $file $HOME/.$link
 done
 

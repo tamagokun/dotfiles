@@ -3,7 +3,7 @@
 [user]
 	name = AUTHORNAME
 	email = AUTHOREMAIL
-	helper = osxkeychain
+	helper = GIT_CREDENTIAL_HELPER
 [color]
 	diff = auto
 	status = auto
