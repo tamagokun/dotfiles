@@ -14,7 +14,7 @@ set ttyfast
 Bundle 'gmarik/vundle'
 " Utilities & Add-Ons
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'takac/ultisnips'
+Bundle 'SirVer/ultisnips'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
@@ -25,7 +25,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-commentary'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'mhinz/vim-startify'
 Bundle 'vim-scripts/kwbdi.vim'
 Bundle 'vim-scripts/Auto-Pairs'
 Bundle 'bling/vim-airline'
@@ -68,15 +67,16 @@ syntax enable
 set background=dark
 colorscheme Tomorrow-Night
 
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 " ----------------------------------------------------------------------------
 "  VIM Settings
 " ----------------------------------------------------------------------------
-
+"
 set noswapfile
 set nobackup
+set splitright
+set splitbelow
 set autowrite
 set autoread
 set laststatus=2
@@ -86,6 +86,9 @@ endif
 if exists('+undofile')
 	set undofile
 endif
+
+set fileformats=unix,dos,mac
+
 set history=50
 set clipboard=unnamed
 set notimeout
@@ -93,19 +96,39 @@ set ttimeout
 set ttimeoutlen=10
 set mouse=a
 set ttymouse=xterm2
+set ttyfast
 set magic
+set hidden
 
-set fileformats=unix,dos,mac
+" ----------------------------------------------------------------------------
+"  Visual Settings
+" ----------------------------------------------------------------------------
 
-set smartindent
-set nowrap
-set linebreak
-set softtabstop=2          " yep, two
-set shiftwidth=2           " ..
+set noerrorbells
+set novisualbell
+set number
+set backspace=indent,eol,start
+set showcmd
+set showmode
+
+set showmatch
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+set autoindent
+set expandtab
+set smarttab
 set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set shiftround
+set linebreak
 set formatoptions+=n       " support for numbered/bullet lists
 set virtualedit=block      " allow virtual edit in visual block ..
 set nofoldenable           " dont fold by default
+set laststatus=2           " always show the status line
 
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·
@@ -114,29 +137,15 @@ set list listchars=tab:\ \ ,trail:·
 "  UI
 " ----------------------------------------------------------------------------
 
-set hidden
 set ruler
-set noerrorbells                " No beeps
-set number                      " Show line numbers
-set backspace=indent,eol,start
-set showcmd
-set noshowmode
 set nolazyredraw           " turn off lazy redraw
 set wildmode=list:longest,full
 set wildignore+=*/.hg/*,*/.svn/*,*/vendor/cache/*,*/public/system/*,*/tmp/*,*/log/*,*/.git/*,*/.jhw-cache/*,*/solr/data/*,*/node_modules/*,*/.DS_Store
 set cursorline cursorcolumn     " Highlight current line and column
-
-" ----------------------------------------------------------------------------
-" Visual Cues
-" ----------------------------------------------------------------------------
-
-set showmatch              " brackets/braces that is
-set mat=5                  " duration to show matching brace (1/10 sec)
-set incsearch              " do incremental searching
-set laststatus=2           " always show the status line
-set ignorecase             " ignore case when searching
-set smartcase
-set hlsearch               " highlight searches
+autocmd WinLeave * setlocal nocursorline
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorcolumn
+autocmd WinEnter * setlocal cursorcolumn
 
 " ----------------------------------------------------------------------------
 "  Remapping
@@ -144,12 +153,6 @@ set hlsearch               " highlight searches
 
 " lead with ,
 let mapleader = ","
-
-" shortcut for :
-nnoremap ; :
-
-" exit to normal mode with 'jj'
-inoremap jj <ESC>
 
 " sane movement with wrap turned on
 nnoremap j gj
@@ -266,7 +269,24 @@ let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 
 " Ultisnips
-let g:UltiSnipsExpandTrigger="<c-tab>"
+function! g:UltiSnips_Complete()
+	call UltiSnips_ExpandSnippet()
+	if g:ulti_expand_res == 0
+		if pumvisible()
+			return "\<C-n>"
+		else
+			call UltiSnips_JumpForwards()
+			if g:ulti_jump_forwards_res == 0
+			 return "\<TAB>"
+			endif
+		endif
+	endif
+	return ""
+endfunction
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -277,17 +297,6 @@ if executable('ag')
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-
-let g:startify_custom_header = [
-						\ '   __      ___            ______ ____   ',
-						\ '   \ \    / (_)           |____  |___ \ ',
-						\ '    \ \  / / _ _ __ ___       / /  __) |',
-						\ '     \ \/ / | | ''_ ` _ \     / /  |__ <',
-						\ '      \  /  | | | | | | |   / /   ___) |',
-						\ '       \/   |_|_| |_| |_|  /_(_) |____/ ',
-						\ '',
-						\ '',
-						\ ]
 
 " Fix Cursor in TMUX
 if exists('$TMUX')

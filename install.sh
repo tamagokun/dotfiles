@@ -98,10 +98,8 @@ cask_ensure sequel-pro
 cask_ensure transmission
 cask_ensure transmit
 cask_ensure virtualbox
-cask_ensure xtra-finder
 # Need Formulae
 # -------------------
-# iterm2 (beta)
 # google-chrome (beta)
 # mongohub
 # twitterific
@@ -153,7 +151,7 @@ if [[ ! -d $HOME/.phpbrew ]]; then
 	$PWD/bin/phpbrew init
 fi
 source $HOME/.phpbrew/bashrc
-if [[ -z $(phpbrew list | grep php-5.4.16) ]]; then
+if [[ -z $(phpbrew list | grep php-5.4.20) ]]; then
 	notify "Setting up PHP"
 	phpbrew install php-5.4.20 +default +dbs
 	pecl install mongo
