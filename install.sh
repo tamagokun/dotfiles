@@ -61,12 +61,12 @@ if [[ $SHELL != $(which zsh) ]]; then
 fi
 
 # update vundle
-if [[ ! -d "$PWD/vim/vim.symlink/bundle/vundle" ]]; then
+if [[ ! -d "$PWD/vim/vim.symlink/bundle/neobundle.vim" ]]; then
 	notify "Installing Vundle"
-	git clone https://github.com/gmarik/vundle.git $PWD/vim/vim.symlink/bundle/vundle
+	git clone https://github.com/Shougo/neobundle.vim $PWD/vim/vim.symlink/bundle/neobundle.vim
 fi
-notify "Updating vundle bundles"
-vim +BundleInstall! +BundleClean! +qall
+notify "Updating Neobundle"
+vim +NeoBundleInstall +qall
 
 # environment install
 
