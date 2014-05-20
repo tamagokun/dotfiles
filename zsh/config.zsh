@@ -34,6 +34,8 @@ setopt complete_aliases
 zle -N newtab
 
 bindkey -v
+bindkey '^?' backward-delete-char
+bindkey '^R' history-incremental-search-backward
 
 # vim mode indictator from oh-my-zsh
 MODE_INDICATOR="%B%F{red}%b❮%F{red}❮❮%f"
