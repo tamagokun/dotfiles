@@ -1,6 +1,6 @@
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/dotfiles
-export VAULT_PATH=$HOME/Dropbox/.vault
+export VAULT_PATH=/Volumes/Macintosh\ SSD/Users/Shared/Dropbox/.vault
 
 # all of our zsh files
 typeset -U config_files
@@ -19,6 +19,7 @@ do
 done
 
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle sindresorhus/pure
 
 antigen apply
 

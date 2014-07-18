@@ -19,9 +19,10 @@ NeoBundle 'tpope/vim-sensible'
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Raimondi/delimitMate'
+" NeoBundle 'AutoClose'
 
 " Core stuff
-NeoBundle 'matchit.zip'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-surround'
@@ -37,12 +38,13 @@ NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'mileszs/ack.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'vim-scripts/kwbdi.vim'
-NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'terryma/vim-multiple-cursors'
 " Colors
 NeoBundle 'skwp/vim-colors-solarized'
+NeoBundle 'reedes/vim-colors-pencil'
 " html/css
-NeoBundle 'Valloric/MatchTagAlways'
+NeoBundle 'gregsexton/MatchTag'
+NeoBundle 'othree/html5.vim'
 " php
 NeoBundle 'shawncplus/phpcomplete.vim'
 " ruby
@@ -51,25 +53,23 @@ NeoBundle 'vim-ruby/vim-ruby'
 " Web Development
 NeoBundleLazy 'groenewege/vim-less', {'autoload':{'filetypes':['less']}}
 NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload':{'filetypes':['scss','sass']}}
-NeoBundleLazy 'hail2u/vim-css3-syntax', {'autoload':{'filetypes':['css','scss','sass']}}
-NeoBundleLazy 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','styl']}}
-NeoBundleLazy 'othree/html5.vim', {'autoload':{'filetypes':['html']}}
-NeoBundleLazy 'wavded/vim-stylus', {'autoload':{'filetypes':['styl']}}
+NeoBundleLazy 'hail2u/vim-css3-syntax', {'autoload':{'filetypes':['css','scss','sass','stylus']}}
+NeoBundleLazy 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','stylus']}}
+NeoBundleLazy 'wavded/vim-stylus', {'autoload':{'filetypes':['styl','stylus']}}
 NeoBundleLazy 'digitaltoad/vim-jade', {'autoload':{'filetypes':['jade']}}
 NeoBundleLazy 'juvenn/mustache.vim', {'autoload':{'filetypes':['mustache']}}
-NeoBundleLazy 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
-NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
+NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript', 'html']}}
 NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload':{'filetypes':['coffee']}}
-NeoBundleLazy 'mmalecki/vim-node.js', {'autoload':{'filetypes':['javascript']}}
+NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
 NeoBundleLazy 'leshill/vim-json', {'autoload':{'filetypes':['javascript','json']}}
+NeoBundleLazy 'tpope/vim-haml', {'autoload':{'filetypes':['haml']}}
+NeoBundleLazy 'slim-template/vim-slim', {'autoload':{'filetypes':['slim']}}
 
 " Golang
 NeoBundleLazy 'jnwhiteh/vim-golang', {'autoload':{'filetypes':['go']}}
 NeoBundleLazy 'nsf/gocode', {'autoload': {'filetypes':['go']}, 'rtp': 'vim'}
 
 " Filetypes & Syntax Highlighting
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'slim-template/vim-slim'
 NeoBundle 'jtratner/vim-flavored-markdown'
 NeoBundle 'StanAngeloff/php.vim'
 NeoBundle 'nono/vim-handlebars'
@@ -85,8 +85,22 @@ NeoBundleCheck
 "  Colors
 " ----------------------------------------------------------------------------
 syntax enable
-set background=dark
-colorscheme Tomorrow-Night
+colorscheme pencil
+set background=light
+
+if has("gui_running")
+  set anti
+  set lines=999 columns=150
+  set guifont=Ubuntu\ Mono\ for\ Powerline:h18,Monaco:h17
+  set guioptions=egmrt
+
+  if has('win32') || has('win64')
+    set guifont=Ubuntu\ Mono\ for\ Powerline:h12,Consolas:h12
+  endif
+
+  " Show tab number (useful for Cmd-1, Cmd-2.. mapping)
+  autocmd VimEnter * set guitablabel=%N:\ %t\ %M
+endif
 
 " ----------------------------------------------------------------------------
 "  VIM Settings
@@ -126,7 +140,7 @@ set expandtab
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
-set shiftround
+set si                     " smart indent
 set linebreak
 set formatoptions+=n       " support for numbered/bullet lists
 set virtualedit=block      " allow virtual edit in visual block ..
@@ -230,6 +244,7 @@ nnoremap <leader>sn :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_theme = 'pencil'
 
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
@@ -295,6 +310,9 @@ if executable('ag')
 	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" expand matchpairs on return
+let delimitMate_expand_cr = 1
 
 
 " Fix Cursor in TMUX
