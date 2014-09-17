@@ -1,6 +1,9 @@
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/dotfiles
-export VAULT_PATH=/Volumes/Macintosh\ SSD/Users/Shared/Dropbox/.vault
+export VAULT_PATH=/Volumes/shadowfax/Dropbox/.vault
+
+# aliases
+alias reload!='. ~/.zshrc'
 
 # all of our zsh files
 typeset -U config_files
@@ -20,6 +23,7 @@ done
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle sindresorhus/pure
+antigen bundle sharat87/autoenv
 
 antigen apply
 
@@ -39,5 +43,11 @@ for file in ${(M)config_files:#*/completion.zsh}
 do
 	source $file
 done
+
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
 
 unset config_files

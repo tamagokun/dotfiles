@@ -40,6 +40,7 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'vim-scripts/kwbdi.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
 " Colors
+NeoBundle 'godlygeek/csapprox'
 NeoBundle 'skwp/vim-colors-solarized'
 NeoBundle 'reedes/vim-colors-pencil'
 " html/css
@@ -57,10 +58,8 @@ NeoBundleLazy 'hail2u/vim-css3-syntax', {'autoload':{'filetypes':['css','scss','
 NeoBundleLazy 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','stylus']}}
 NeoBundleLazy 'wavded/vim-stylus', {'autoload':{'filetypes':['styl','stylus']}}
 NeoBundleLazy 'digitaltoad/vim-jade', {'autoload':{'filetypes':['jade']}}
-NeoBundleLazy 'juvenn/mustache.vim', {'autoload':{'filetypes':['mustache']}}
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript', 'html']}}
 NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload':{'filetypes':['coffee']}}
-NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
 NeoBundleLazy 'leshill/vim-json', {'autoload':{'filetypes':['javascript','json']}}
 NeoBundleLazy 'tpope/vim-haml', {'autoload':{'filetypes':['haml']}}
 NeoBundleLazy 'slim-template/vim-slim', {'autoload':{'filetypes':['slim']}}
@@ -72,7 +71,7 @@ NeoBundleLazy 'nsf/gocode', {'autoload': {'filetypes':['go']}, 'rtp': 'vim'}
 " Filetypes & Syntax Highlighting
 NeoBundle 'jtratner/vim-flavored-markdown'
 NeoBundle 'StanAngeloff/php.vim'
-NeoBundle 'nono/vim-handlebars'
+NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle "lepture/vim-jinja"
 NeoBundle "ekalinin/Dockerfile.vim"
 
