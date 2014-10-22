@@ -4,11 +4,6 @@
 *.pyo
 *.bak
 *.so
-git/gitconfig.symlink
+gitconfig
 .netrwhist
-vim/vim.symlink/sessions
-vim/vim.symlink/undodir
-vim/vim.symlink/backups
-vim/vim.symlink/.VimballRecord
-vim/vim.symlink/bundle
-vim/vim.symlink/session
+vim

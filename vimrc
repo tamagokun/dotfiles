@@ -1,89 +1,44 @@
 set nocompatible
 
-" For Windowz
-if has('win32') || has('win64')
-	set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+let mapleader = ","
+
+set ttyfast
+set backspace=2
+set nobackup
+set nowritebackup
+set noswapfile
+set history=50
+set ruler
+set showcmd
+set incsearch
+set laststatus=2
+set autowrite
+if exists('+undodir')
+  set undodir=~/.backups
+endif
+if exists('+undofile')
+  set undofile
 endif
 
-" NeoBundle
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-call neobundle#rc(expand('~/.vim/bundle/'))
-set ttyfast
+set clipboard=unnamed
+set notimeout
+set mouse=a
+set ttymouse=xterm2
+set magic
+set hidden
 
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
+set splitright
+set splitbelow
 
-NeoBundle 'tpope/vim-sensible'
+syntax on
 
-" Auto Completion
-NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Raimondi/delimitMate'
-" NeoBundle 'AutoClose'
-
-" Core stuff
-NeoBundle 'bling/vim-airline'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'tpope/vim-endwise'
-
-" Utilities & Add-Ons
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'mileszs/ack.vim'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'vim-scripts/kwbdi.vim'
-NeoBundle 'terryma/vim-multiple-cursors'
-" Colors
-NeoBundle 'godlygeek/csapprox'
-NeoBundle 'skwp/vim-colors-solarized'
-NeoBundle 'reedes/vim-colors-pencil'
-" html/css
-NeoBundle 'gregsexton/MatchTag'
-NeoBundle 'othree/html5.vim'
-" php
-NeoBundle 'shawncplus/phpcomplete.vim'
-" ruby
-NeoBundle 'vim-ruby/vim-ruby'
-
-" Web Development
-NeoBundleLazy 'groenewege/vim-less', {'autoload':{'filetypes':['less']}}
-NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload':{'filetypes':['scss','sass']}}
-NeoBundleLazy 'hail2u/vim-css3-syntax', {'autoload':{'filetypes':['css','scss','sass','stylus']}}
-NeoBundleLazy 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','stylus']}}
-NeoBundleLazy 'wavded/vim-stylus', {'autoload':{'filetypes':['styl','stylus']}}
-NeoBundleLazy 'digitaltoad/vim-jade', {'autoload':{'filetypes':['jade']}}
-NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript', 'html']}}
-NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload':{'filetypes':['coffee']}}
-NeoBundleLazy 'leshill/vim-json', {'autoload':{'filetypes':['javascript','json']}}
-NeoBundleLazy 'tpope/vim-haml', {'autoload':{'filetypes':['haml']}}
-NeoBundleLazy 'slim-template/vim-slim', {'autoload':{'filetypes':['slim']}}
-
-" Golang
-NeoBundleLazy 'jnwhiteh/vim-golang', {'autoload':{'filetypes':['go']}}
-NeoBundleLazy 'nsf/gocode', {'autoload': {'filetypes':['go']}, 'rtp': 'vim'}
-
-" Filetypes & Syntax Highlighting
-NeoBundle 'jtratner/vim-flavored-markdown'
-NeoBundle 'StanAngeloff/php.vim'
-NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle "lepture/vim-jinja"
-NeoBundle "ekalinin/Dockerfile.vim"
-
-filetype plugin indent on
-
-" Installation check.
-NeoBundleCheck
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
 
 " ----------------------------------------------------------------------------
 "  Colors
 " ----------------------------------------------------------------------------
-syntax enable
 colorscheme pencil
 set background=light
 
@@ -100,29 +55,6 @@ if has("gui_running")
   " Show tab number (useful for Cmd-1, Cmd-2.. mapping)
   autocmd VimEnter * set guitablabel=%N:\ %t\ %M
 endif
-
-" ----------------------------------------------------------------------------
-"  VIM Settings
-" ----------------------------------------------------------------------------
-"
-set noswapfile
-set nobackup
-set splitright
-set splitbelow
-if exists('+undodir')
-  set undodir=~/.backups
-endif
-if exists('+undofile')
-  set undofile
-endif
-
-set history=50
-set clipboard=unnamed
-set notimeout
-set mouse=a
-set ttymouse=xterm2
-set magic
-set hidden
 
 " ----------------------------------------------------------------------------
 "  Visual Settings
@@ -155,18 +87,10 @@ set list listchars=tab:\ \ ,trail:·
 set nolazyredraw           " turn off lazy redraw
 set wildmode=list:longest,full
 set wildignore+=*/.hg/*,*/.svn/*,*/vendor/cache/*,*/public/system/*,*/tmp/*,*/log/*,*/.git/*,*/.jhw-cache/*,*/solr/data/*,*/node_modules/*,*/.DS_Store
-set cursorline cursorcolumn     " Highlight current line and column
-autocmd WinLeave * setlocal nocursorline
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorcolumn
-autocmd WinEnter * setlocal cursorcolumn
 
 " ----------------------------------------------------------------------------
 "  Remapping
 " ----------------------------------------------------------------------------
-
-" lead with ,
-let mapleader = ","
 
 " sane movement with wrap turned on
 nnoremap j gj
@@ -240,36 +164,15 @@ nnoremap <leader>sn :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+
 " ---------------------------------------------------------------------------
 
 " Airline
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_theme = 'pencil'
-
-let g:ctrlp_map = '<C-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_match_window_bottom = 0
-let g:ctrlp_max_height = 10
-let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_mruf_max = 250
-let g:ctrlp_match_window = 'order:ttb,max:20'
-
-let g:ctrlp_buftag_types = {
-\ 'go'         : '--language-force=go --golang-types=ftv',
-\ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
-\ 'markdown'   : '--language-force=markdown --markdown-types=hik',
-\ 'objc'       : '--language-force=objc --objc-types=mpci',
-\ 'rc'         : '--language-force=rust --rust-types=fTm'
-\ }
 
 " Make nerdtree look nice
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
-
 let g:NERDSpaceDelims=1
 
 " Don't auto open nerd tree on startup
@@ -313,7 +216,6 @@ endif
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
 
-
 " Fix Cursor in TMUX
 if exists('$TMUX')
 	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -338,3 +240,4 @@ augroup markdown
   au!
   au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
+

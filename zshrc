@@ -1,5 +1,5 @@
 # shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME/dotfiles
+export ZSH=$HOME/.dotfiles
 export VAULT_PATH=/Volumes/shadowfax/Dropbox/.vault
 
 # aliases

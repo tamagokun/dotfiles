@@ -26,7 +26,7 @@ cask_ensure() {
 
 # configure .gitconfig
 # from holman/dotfiles
-if ! [ -f git/gitconfig.symlink ]; then
+if ! [ -f gitconfig ]; then
 	notify "Configuring your .gitconfig"
 	git_credential='osxkeychain'
 
@@ -35,7 +35,7 @@ if ! [ -f git/gitconfig.symlink ]; then
 	info "What is your git author email?"
 	read -e git_authoremail
 
-	sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.symlink.example > git/gitconfig.symlink
+	sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" gitconfig.example > gitconfig
 fi
 
 # symlink dotfiles
@@ -55,11 +55,9 @@ fi
 
 # update vundle
 if [[ ! -d "$PWD/vim/vim.symlink/bundle/neobundle.vim" ]]; then
-	notify "Installing Vundle"
+	notify "Installing Neobundle"
 	git clone https://github.com/Shougo/neobundle.vim $PWD/vim/vim.symlink/bundle/neobundle.vim
 fi
-notify "Updating Neobundle"
-vim +NeoBundleInstall! +NeoBundleClean! +qall
 
 # environment install
 
