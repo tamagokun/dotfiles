@@ -38,15 +38,6 @@ if ! [ -f gitconfig ]; then
 	sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" gitconfig.example > gitconfig
 fi
 
-# symlink dotfiles
-notify "Linking dotfiles"
-for file in $PWD/**/*.symlink; do
-	link=$(echo $file | awk -F/ '{print $NF}' | sed -e 's/\.symlink//')
-	# screw backups
-	rm -f $HOME/.$link
-	ln -s $file $HOME/.$link
-done
-
 # load zsh
 if [[ $SHELL != $(which zsh) ]]; then
 	notify "Changing shell to zsh"
