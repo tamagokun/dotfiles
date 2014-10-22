@@ -98,9 +98,14 @@ if [[ -z $(brew list vim 2>/dev/null) ]]; then
 	brew install vim --with-lua --override-system-vi
 fi
 
+# MacVim
+if [[ -z $(brew list macvim 2>/dev/null) ]]; then
+	notify "Installing Mac Vim"
+	brew install macvim --with-lua
+fi
 
-# Vim
-brew_ensure macvim ctags the_silver_searcher
+# Vim Utilities
+brew_ensure the_silver_searcher
 
 # MariaDB
 if [[ -z $(brew list mariadb 2>/dev/null) ]]; then
@@ -157,7 +162,7 @@ brew_ensure go
 # brew_ensure android-sdk
 
 # Utils
-brew_ensure grc htop-osx autoenv
+brew_ensure grc htop-osx
 
 # Heroku
 brew_ensure heroku-toolbelt
