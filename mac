@@ -4,6 +4,10 @@
 notify() { echo "-----> $1"; }
 info()   { echo "       $1"; }
 
+trap 'ret=$?; test $ret -ne 0 && printf "failed\n\n" >&2; exit $ret' EXIT
+
+set -e
+
 notify "Doing stuff."
 
 brew_ensure() {
