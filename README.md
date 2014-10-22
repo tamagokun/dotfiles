@@ -8,4 +8,4 @@ Based around holman/dotfiles. Lots of vim stuff inspired by skwp/dotfiles.
 
 - Install Xcode from App Store
 - `git clone https://github.com/tamagokun/dotfiles.git`
-- `cd dotfiles && install.sh`
+- `cd dotfiles && mac`
