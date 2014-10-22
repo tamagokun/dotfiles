@@ -1,17 +1,10 @@
 #!/bin/sh
-# cool intro
-echo '       /$$             /$$             '
-echo '      | $$            | $$             '
-echo '  /$$$$$$$  /$$$$$$  /$$$$$$   /$$$$$$$'
-echo ' /$$__  $$ /$$__  $$|_  $$_/  /$$_____/'
-echo '| $$  | $$| $$  \ $$  | $$   |  $$$$$$ '
-echo '| $$  | $$| $$  | $$  | $$ /$$\____  $$'
-echo '|  $$$$$$$|  $$$$$$/  |  $$$$//$$$$$$$/'
-echo ' \_______/ \______/    \___/ |_______/ '
 
 # set up vars
 notify() { echo "-----> $1"; }
 info()   { echo "       $1"; }
+
+notify "Doing stuff."
 
 brew_ensure() {
 	for pkg in "$@"; do
@@ -57,7 +50,7 @@ done
 # load zsh
 if [[ $SHELL != $(which zsh) ]]; then
 	notify "Changing shell to zsh"
-	chsh `which zsh`
+	chsh -s $(which zsh)
 fi
 
 # update vundle
@@ -66,7 +59,7 @@ if [[ ! -d "$PWD/vim/vim.symlink/bundle/neobundle.vim" ]]; then
 	git clone https://github.com/Shougo/neobundle.vim $PWD/vim/vim.symlink/bundle/neobundle.vim
 fi
 notify "Updating Neobundle"
-vim +NeoBundleInstall +qall
+vim +NeoBundleInstall! +NeoBundleClean! +qall
 
 # environment install
 
@@ -75,34 +68,27 @@ if ! hash brew 2>/dev/null; then
 	notify "Installing homebrew"
 	ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 fi
-notify "Updating homebrew"
+notify "Updating homebrew forumlas"
 brew update
-notify "Cleaning up..."
-brew cleanup
 
 # install brew-cask
 if [[ -z $(brew list | grep brew-cask) ]]; then
 	notify "Installing homebrew cask"
-	brew tap phinze/homebrew-cask
-	brew install brew-cask
+	brew install caskroom/cask/brew-cask
+	brew tap caskroom/versions
 fi
 
-cask_ensure alfred
 cask_ensure anvil
 cask_ensure dropbox
 cask_ensure firefox
-cask_ensure google-chrome
+cask_ensure google-chrome-beta
 cask_ensure induction
 cask_ensure mou
 cask_ensure sequel-pro
 cask_ensure transmission
 cask_ensure transmit
 cask_ensure virtualbox
-# Need Formulae
-# -------------------
-# google-chrome (beta)
-# mongohub
-# twitterific
+cask_ensure mailbox
 
 # Git
 brew_ensure git ghi
@@ -180,8 +166,8 @@ brew_ensure grc htop-osx autoenv
 # Heroku
 brew_ensure heroku-toolbelt
 
-notify "Upgrading your brews"
-brew upgrade
+#notify "Upgrading your brews"
+#brew upgrade
 
 notify "Loading OSX defaults"
 $PWD/bin/osx-defaults
