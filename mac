@@ -167,6 +167,13 @@ brew_ensure heroku-toolbelt
 #notify "Upgrading your brews"
 #brew upgrade
 
+if ! command -v rcup >/dev/null; then
+  notify "Installing rcm, to manage your dotfiles"
+  brew tap thoughtbot/formulae
+fi
+
+brew_ensure 'rcm'
+
 notify "Loading OSX defaults"
 $PWD/bin/osx-defaults
 
