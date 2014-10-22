@@ -89,6 +89,10 @@ if ! hash /usr/local/bin/icuinfo 2>/dev/null; then
 	brew link icu4c
 fi
 
+# SSL
+brew_ensure openssl
+brew unlink openssl && brew link openssl --force
+
 # Tmux
 brew_ensure tmux reattach-to-user-namespace
 
