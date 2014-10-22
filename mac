@@ -125,10 +125,14 @@ brew_ensure redis
 
 # Ruby
 brew_ensure rbenv ruby-build
-if [[ -z $(rbenv versions | grep 1.9.3-p429) ]]; then
-	notify "Setting up Ruby"
-	rbenv install 1.9.3-p429
-	rbenv global 1.9.3-p429
+
+# Use thoughtbot's ruby version
+ruby_version="$(curl -sSL http://ruby.thoughtbot.com/latest)"
+if [[ -z $(rbenv versions | grep ruby_version) ]]; then
+	notify "Setting up Ruby $ruby_version"
+	rbenv install -s "$ruby_version"
+	rbenv global "$ruby_version"
+	rbenv rehash
 	gem install bundler capistrano-ext
 fi;
 
