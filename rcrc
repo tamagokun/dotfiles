@@ -1,2 +1,2 @@
-EXCLUDES="README.md LICENSE mac"
+EXCLUDES="README.md LICENSE mac gitconfig.example"
 DOTFILES_DIRS="$HOME/dotfiles-local $HOME/dotfiles"
