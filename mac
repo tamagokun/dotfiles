@@ -45,9 +45,9 @@ if [[ $SHELL != $(which zsh) ]]; then
 fi
 
 # update vundle
-if [[ ! -d "$PWD/vim/vim.symlink/bundle/neobundle.vim" ]]; then
+if [[ ! -d "$HOME/.vim/bundle/neobundle.vim" ]]; then
 	notify "Installing Neobundle"
-	git clone https://github.com/Shougo/neobundle.vim $PWD/vim/vim.symlink/bundle/neobundle.vim
+	git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
 fi
 
 # environment install
