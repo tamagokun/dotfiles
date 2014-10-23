@@ -88,6 +88,7 @@ cask_ensure transmission
 cask_ensure transmit
 cask_ensure virtualbox
 cask_ensure mailbox
+cask_ensure robomongo
 
 # Git
 brew_ensure git ghi
