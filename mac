@@ -11,70 +11,70 @@ set -e
 notify "Doing stuff."
 
 brew_ensure() {
-	for pkg in "$@"; do
-		if [[ -z $(brew list "$pkg" 2>/dev/null) ]]; then
-			notify "Installing $pkg"
-			brew install $pkg
+  for pkg in "$@"; do
+    if [[ -z $(brew list "$pkg" 2>/dev/null) ]]; then
+      notify "Installing $pkg"
+      brew install $pkg
     else
       if [[ -n $(brew outdated "$pkg" 2>/dev/null) ]]; then
         notify "Upgrading $pkg"
         brew upgrade $pkg
         brew cleanup $pkg
       fi
-		fi
-	done
+    fi
+  done
 }
 
 cask_ensure() {
-	for pkg in "$@"; do
-		if [[ ! $(brew cask list | grep $pkg) == "$pkg" ]]; then
-			notify "Installing $pkg"
-			brew cask install $pkg
-		fi
-	done
+  for pkg in "$@"; do
+    if [[ ! $(brew cask list | grep $pkg) == "$pkg" ]]; then
+      notify "Installing $pkg"
+      brew cask install $pkg
+    fi
+  done
 }
 
 # configure .gitconfig
 # from holman/dotfiles
 if ! [ -f gitconfig ]; then
-	notify "Configuring your .gitconfig"
-	git_credential='osxkeychain'
+  notify "Configuring your .gitconfig"
+  git_credential='osxkeychain'
 
-	info "What is your git author name?"
-	read -e git_authorname
-	info "What is your git author email?"
-	read -e git_authoremail
+  info "What is your git author name?"
+  read -e git_authorname
+  info "What is your git author email?"
+  read -e git_authoremail
 
-	sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" gitconfig.example > gitconfig
+  sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" gitconfig.example > gitconfig
 fi
 
 # load zsh
 if [[ $SHELL != $(which zsh) ]]; then
-	notify "Changing shell to zsh"
-	chsh -s $(which zsh)
+  notify "Changing shell to zsh"
+  chsh -s $(which zsh)
 fi
 
 # update vundle
 if [[ ! -d "$HOME/.vim/bundle/neobundle.vim" ]]; then
-	notify "Installing Neobundle"
-	git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
+  notify "Installing Neobundle"
+  git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
 fi
 
 # environment install
 
 # install brew
 if ! hash brew 2>/dev/null; then
-	notify "Installing homebrew"
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  notify "Installing homebrew"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 notify "Updating homebrew forumlas"
 brew update
 
 # install brew-cask
 if [[ -z $(brew list | grep brew-cask) ]]; then
-	notify "Installing homebrew cask"
-	brew install caskroom/cask/brew-cask
-	brew tap caskroom/versions
+  notify "Installing homebrew cask"
+  brew install caskroom/cask/brew-cask
+  brew tap caskroom/versions
 fi
 
 cask_ensure anvil
@@ -96,7 +96,7 @@ brew_ensure git ghi
 brew_ensure gnu-sed pidof
 brew_ensure automake autoconf curl pcre re2c mhash libtool icu4c gettext jpeg libxml2 mcrypt gmp libevent zlib
 if ! hash /usr/local/bin/icuinfo 2>/dev/null; then
-	brew link icu4c
+  brew link icu4c
 fi
 
 # Tmux
@@ -113,16 +113,16 @@ fi
 
 # Vim
 if [[ -z $(brew list vim 2>/dev/null) ]]; then
-	notify "Installing Vim"
-	brew install vim --with-lua --override-system-vi
+  notify "Installing Vim"
+  brew install vim --with-lua --override-system-vi
 else
   brew_ensure vim
 fi
 
 # MacVim
 if [[ -z $(brew list macvim 2>/dev/null) ]]; then
-	notify "Installing Mac Vim"
-	brew install macvim --with-lua
+  notify "Installing Mac Vim"
+  brew install macvim --with-lua
 else
   brew_ensure macvim
 fi
@@ -133,8 +133,8 @@ brew_ensure the_silver_searcher
 # MariaDB
 if [[ -z $(brew list mariadb 2>/dev/null) ]]; then
   brew_ensure mariadb
-	unset TMPDIR
-	mysql_install_db --user=`whoami` --basedir="$(brew --prefix mariadb)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
+  unset TMPDIR
+  mysql_install_db --user=`whoami` --basedir="$(brew --prefix mariadb)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
 else
   brew_ensure mariadb
 fi
@@ -154,12 +154,12 @@ brew_ensure rbenv ruby-build
 # Use thoughtbot's ruby version
 ruby_version="$(curl -sSL http://ruby.thoughtbot.com/latest)"
 if [[ -z $(rbenv versions | grep $ruby_version) ]]; then
-	notify "Setting up Ruby $ruby_version"
-	rbenv install -s "$ruby_version"
-	rbenv global "$ruby_version"
-	rbenv rehash
-	gem install bundler capistrano-ext
-fi;
+  notify "Setting up Ruby $ruby_version"
+  rbenv install -s "$ruby_version"
+  rbenv global "$ruby_version"
+  rbenv rehash
+  gem install bundler capistrano-ext
+fi
 
 # PHP
 if [[ -z $(brew list php55 2>/dev/null) ]]; then
@@ -168,7 +168,7 @@ if [[ -z $(brew list php55 2>/dev/null) ]]; then
   brew install php55 --with-homebrew-openssl --without-snmp
 else
   brew_ensure php55
-fi;
+fi
 
 brew_ensure php55-redis php55-mongo composer
 
