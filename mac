@@ -200,8 +200,10 @@ fi
 
 brew_ensure 'rcm'
 
-notify "Running rcup for your dotfiles"
-env RCRC=$HOME/dotfiles/rcrc rcup
+if [[ -d $HOME/dotfiles ]]; then
+  notify "Running rcup for your dotfiles"
+  env RCRC=$HOME/dotfiles/rcrc rcup
+fi
 
 notify "Loading OSX defaults"
 $PWD/bin/osx-defaults
