@@ -116,7 +116,9 @@ nnoremap <silent> ss <C-w>s
 
 " Toggle NERDTree
 map <C-d> :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
+
+" project search
+nmap <leader>f :Ag<space>
 
 " goto buffer
 nmap <C-b> :CtrlPBuffer<cr>
@@ -132,14 +134,11 @@ imap <C-R> <esc>:CtrlPBufTagAll<cr>
 nmap <C-t> :CtrlP<cr>
 imap <C-t> <esc>:CtrlP<cr>
 
-" project search
-nmap <leader>a :Ack
-
 " toggle tagbar
 nmap <leader>] :TagbarToggle<cr>
 
 " (c)lose buffer
-nmap <leader>c <Plug>Kwbd
+nmap <C-c> <Plug>Kwbd
 
 " Fixing search
 nnoremap / /\v
