@@ -9,6 +9,7 @@ There is a `mac` script which will set up your environment and keep things up to
 # Setting up a new Mac
 
 - Install Xcode from App Store
+- `xcode-select --install`
 - `git clone https://github.com/tamagokun/dotfiles.git`
 - `cd dotfiles && mac`
 

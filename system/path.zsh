@@ -1,4 +1,4 @@
-export PATH="./bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
+export PATH="./bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/git/man:$MANPATH"
 
 # Ruby
@@ -7,7 +7,6 @@ eval "$(rbenv init -)"
 
 # PHP
 export PATH="$HOME/.composer/vendor/bin:$PATH"
-source $HOME/.phpbrew/bashrc
 
 # Go
 export GOPATH="$HOME/.go"
