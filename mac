@@ -19,6 +19,7 @@ brew_ensure() {
       if [[ -n $(brew outdated "$pkg" 2>/dev/null) ]]; then
         notify "Upgrading $pkg"
         brew upgrade $pkg
+        brew cleanup $pkg
       fi
 		fi
 	done
@@ -191,9 +192,6 @@ brew_ensure grc htop-osx
 
 # Heroku
 brew_ensure heroku-toolbelt
-
-#notify "Upgrading your brews"
-#brew upgrade
 
 if ! command -v rcup >/dev/null; then
   notify "Installing rcm, to manage your dotfiles"
