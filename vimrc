@@ -69,7 +69,6 @@ set list listchars=tab:»·,trail:·
 
 set nolazyredraw           " turn off lazy redraw
 set wildmode=list:longest,full
-set wildignore+=*/.hg/*,*/.svn/*,*/vendor/cache/*,*/public/system/*,*/tmp/*,*/log/*,*/.git/*,*/.jhw-cache/*,*/solr/data/*,*/node_modules/*,*/.DS_Store
 
 " ----------------------------------------------------------------------------
 "  Remapping
@@ -135,21 +134,21 @@ nnoremap <leader>sn :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+
 " ---------------------------------------------------------------------------
 
 " Airline
-let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_theme = 'pencil'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.whitespace = 'Ξ'
 
 " Make nerdtree look nice
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let g:NERDTreeWinSize = 30
-let g:NERDSpaceDelims=1
-
-" Don't auto open nerd tree on startup
-let g:nerdtree_tabs_open_on_gui_startup = 0
-" Focus in the main content window
-let g:nerdtree_tabs_focus_on_files = 1
 
 " Syntastic Config
 let g:syntastic_error_symbol='✗'
