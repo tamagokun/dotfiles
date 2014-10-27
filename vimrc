@@ -1,6 +1,6 @@
 set nocompatible
 
-let mapleader = ","
+let mapleader = " "
 
 set ttyfast
 set backspace=2
@@ -10,6 +10,7 @@ set noswapfile
 set history=50
 set ruler
 set showcmd
+set hidden
 set incsearch
 set laststatus=2
 set autowrite
@@ -23,9 +24,6 @@ endif
 set clipboard=unnamed
 set notimeout
 set mouse=a
-set ttymouse=xterm2
-set magic
-set hidden
 
 set splitright
 set splitbelow
@@ -36,41 +34,30 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
-" ----------------------------------------------------------------------------
-"  Colors
-" ----------------------------------------------------------------------------
 colorscheme pencil
 set background=light
 
+" GUI Settings
 if has("gui_running")
   set anti
   set lines=999 columns=150
   set guifont=Ubuntu\ Mono\ for\ Powerline:h18,Monaco:h17
   set guioptions=egmrt
-
-  if has('win32') || has('win64')
-    set guifont=Ubuntu\ Mono\ for\ Powerline:h12,Consolas:h12
-  endif
-
-  " Show tab number (useful for Cmd-1, Cmd-2.. mapping)
-  autocmd VimEnter * set guitablabel=%N:\ %t\ %M
 endif
 
-" ----------------------------------------------------------------------------
-"  Visual Settings
-" ----------------------------------------------------------------------------
+set noerrorbells           " Keep your mouth shut
+set visualbell
+set number                 " Always show line numbers
+set textwidth=80
+set colorcolumn=+1         " Make it obvious where 80 characters is
 
-set noerrorbells
-set novisualbell
-set number
-
-set hlsearch
+set hlsearch               " Highlight all matching searches
 set ignorecase
 
-set expandtab
 set tabstop=2
-set softtabstop=2
 set shiftwidth=2
+set shiftround
+set expandtab
 set si                     " smart indent
 set linebreak
 set formatoptions+=n       " support for numbered/bullet lists
@@ -78,11 +65,7 @@ set virtualedit=block      " allow virtual edit in visual block ..
 set nofoldenable           " dont fold by default
 
 " Display tabs and trailing spaces visually
-set list listchars=tab:\ \ ,trail:·
-
-" ----------------------------------------------------------------------------
-"  UI
-" ----------------------------------------------------------------------------
+set list listchars=tab:»·,trail:·
 
 set nolazyredraw           " turn off lazy redraw
 set wildmode=list:longest,full
@@ -115,34 +98,23 @@ nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
 " Toggle NERDTree
-map <C-d> :NERDTreeToggle<CR>
+nmap <leader>d :NERDTreeToggle<CR>
 
 " project search
 nmap <leader>f :Ag<space>
 
-" goto buffer
-nmap <C-b> :CtrlPBuffer<cr>
-imap <C-b> <esc>:CtrlPBuffer<cr>
-
-" goto symbol
-nmap <C-r> :CtrlPBufTag<cr>
-imap <C-r> <esc>:CtrlPBufTag<cr>
-nmap <C-R> :CtrlPBufTagAll<cr>
-imap <C-R> <esc>:CtrlPBufTagAll<cr>
-
-" goto file
-nmap <C-t> :CtrlP<cr>
-imap <C-t> <esc>:CtrlP<cr>
+" goto anything
+nmap <leader>b :CtrlPBuffer<cr>
+nmap <leader>r :CtrlPBufTagAll<cr>
+nmap <leader>p :CtrlP<cr>
 
 " toggle tagbar
 nmap <leader>] :TagbarToggle<cr>
 
 " (c)lose buffer
-nmap <C-c> <Plug>Kwbd
+nmap <leader>c <Plug>Kwbd
 
-" Fixing search
-nnoremap / /\v
-vnoremap / /\v
+" // unhighlight search
 nmap <silent> // :nohlsearch<cr>
 
 "(v)im (r)eload
@@ -196,20 +168,13 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expan
 imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
 smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
-	let g:ackprg = 'ag --nogroup --column'
-	" Use Ag over Grep
-	set grepprg=ag\ --nogroup\ --nocolor
-	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ackprg = 'ag --nogroup --column'
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
 " expand matchpairs on return
@@ -217,11 +182,11 @@ let delimitMate_expand_cr = 1
 
 " Fix Cursor in TMUX
 if exists('$TMUX')
-	let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-	let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 else
-	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
 " ---------------------------------------------------------------------------
@@ -231,6 +196,13 @@ endif
 if has("autocmd")
   autocmd FileType mkd,txt setlocal wrap linebreak nolist
   autocmd FileType php setlocal ts=4 sts=4 sw=4
+
+  " Omni completion
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 endif
 
 au BufNewFile,BufRead *.twig set ft=jinja
