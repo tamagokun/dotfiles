@@ -4,6 +4,7 @@
 *.pyo
 *.bak
 *.so
+*.local
 gitconfig
 .netrwhist
 vim
