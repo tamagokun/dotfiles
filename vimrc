@@ -34,16 +34,8 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
-colorscheme pencil
-set background=light
-
-" GUI Settings
-if has("gui_running")
-  set anti
-  set lines=999 columns=150
-  set guifont=Ubuntu\ Mono\ for\ Powerline:h18,Monaco:h17
-  set guioptions=egmrt
-endif
+colorscheme base16-tomorrow
+set background=dark
 
 set noerrorbells           " Keep your mouth shut
 set visualbell
@@ -64,11 +56,22 @@ set formatoptions+=n       " support for numbered/bullet lists
 set virtualedit=block      " allow virtual edit in visual block ..
 set nofoldenable           " dont fold by default
 
-" Display tabs and trailing spaces visually
 set list listchars=tab:»·,trail:·
 
 set nolazyredraw           " turn off lazy redraw
 set wildmode=list:longest,full
+
+set diffopt+=vertical      " Always use vertical diffs
+
+" GUI Settings
+if has("gui_running")
+  set anti
+  set lines=999 columns=150
+  set guifont=Ubuntu\ Mono\ for\ Powerline:h18,Monaco:h17
+  set guioptions=egmrt
+  colorscheme pencil
+  set background=light
+endif
 
 " ----------------------------------------------------------------------------
 "  Remapping
@@ -151,6 +154,7 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 " Syntastic Config
+let g:syntastic_check_on_open=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 
@@ -167,6 +171,9 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expan
 imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
 smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
 
+" expand matchpairs on return
+let delimitMate_expand_cr = 1
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   let g:ackprg = 'ag --nogroup --column'
@@ -176,9 +183,6 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-" expand matchpairs on return
-let delimitMate_expand_cr = 1
-
 " Fix Cursor in TMUX
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -187,10 +191,6 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
-
-" ---------------------------------------------------------------------------
-"  Auto cmd stuff for file types
-" ---------------------------------------------------------------------------
 
 if has("autocmd")
   autocmd FileType mkd,txt setlocal wrap linebreak nolist

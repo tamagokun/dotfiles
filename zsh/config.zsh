@@ -1,31 +1,26 @@
-autoload colors && colors
-
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
 
+autoload -U colors && colors
+
 # fpath=($ZSH/zsh/functions $fpath)
 
+# history
+setopt append_history hist_ignore_all_dups inc_append_history share_history
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+# cd movements
+setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
+
 setopt NO_BG_NICE # don't nice background tasks
 setopt NO_HUP
 setopt NO_LIST_BEEP
-setopt LOCAL_OPTIONS # allow functions to have local options
-setopt LOCAL_TRAPS # allow functions to have local traps
-setopt HIST_VERIFY
-setopt SHARE_HISTORY # share history between sessions ???
-setopt EXTENDED_HISTORY # add timestamps to history
 setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
 setopt IGNORE_EOF
-
-setopt APPEND_HISTORY # adds history
-setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
-setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
-setopt HIST_REDUCE_BLANKS
 
 # don't expand aliases _before_ completion has finished
 #   like: git comm-[tab]
@@ -33,26 +28,23 @@ setopt complete_aliases
 
 zle -N newtab
 
-bindkey -v
+bindkey -v # vi mode
+
+# fix some things that vi mode breaks
+bindkey '^P' up-history
+bindkey '^N' down-history
 bindkey '^?' backward-delete-char
-bindkey '^R' history-incremental-search-backward
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
 
 # vim mode indictator from oh-my-zsh
-MODE_INDICATOR="%B%F{red}%b❮%F{red}❮❮%f"
-function zle-keymap-select zle-line-init zle-line-finish {
-  # The terminal must be in application mode when ZLE is active for $terminfo
-  # values to be valid.
-  if (( ${+terminfo[smkx]} )); then
-    printf '%s' ${terminfo[smkx]}
-  fi
-  if (( ${+terminfo[rmkx]} )); then
-    printf '%s' ${terminfo[rmkx]}
-  fi
-
+function zle-line-init zle-keymap-select {
+  MODE_INDICATOR="%B%F{red}%b❮%F{red}❮❮%f"
+  RPS1="${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
   zle reset-prompt
-  zle -R
 }
 
 zle -N zle-line-init
-zle -N zle-line-finish
 zle -N zle-keymap-select
+export KEYTIMEOUT=1 # reduce ESC delay when in vi mode
