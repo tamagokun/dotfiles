@@ -71,10 +71,7 @@ notify "Updating homebrew forumlas"
 brew update
 
 # install brew-cask
-if [[ -z $(brew list | grep brew-cask) ]]; then
-  notify "Installing homebrew cask"
-  brew install caskroom/cask/brew-cask
-fi
+brew_ensure caskroom/cask/brew-cask
 
 cask_ensure anvil
 cask_ensure dropbox
