@@ -27,7 +27,7 @@ brew_ensure() {
 
 cask_ensure() {
   for pkg in "$@"; do
-    if [[ ! $(brew cask list | grep $pkg) == "$pkg" ]]; then
+    if [[ -z $(brew cask list "$pkg" 2>/dev/null) ]]; then
       notify "Installing $pkg"
       brew cask install $pkg
     fi
@@ -74,13 +74,12 @@ brew update
 if [[ -z $(brew list | grep brew-cask) ]]; then
   notify "Installing homebrew cask"
   brew install caskroom/cask/brew-cask
-  brew tap caskroom/versions
 fi
 
 cask_ensure anvil
 cask_ensure dropbox
 cask_ensure firefox
-cask_ensure google-chrome-beta
+cask_ensure caskroom/versions/google-chrome-beta
 cask_ensure induction
 cask_ensure mou
 cask_ensure sequel-pro
@@ -96,7 +95,8 @@ brew_ensure git ghi
 
 # Deps
 brew_ensure gnu-sed pidof
-brew_ensure automake autoconf curl pcre re2c mhash libtool icu4c gettext jpeg libxml2 mcrypt gmp libevent zlib
+brew_ensure automake autoconf curl pcre re2c mhash libtool icu4c gettext jpeg libxml2 mcrypt gmp libevent
+brew_ensure homebrew/dupes/zlib
 if ! hash /usr/local/bin/icuinfo 2>/dev/null; then
   brew link icu4c
 fi
@@ -166,8 +166,7 @@ fi
 # PHP
 if [[ -z $(brew list php55 2>/dev/null) ]]; then
   notify "Setting up PHP 5.5"
-  brew tap homebrew/php
-  brew install php55 --with-homebrew-openssl --without-snmp
+  brew install homebrew/php/php55 --with-homebrew-openssl --without-snmp
 else
   brew_ensure php55
 fi
