@@ -1,0 +1,35 @@
+# Applications
+
+## Browsers
+cask_ensure caskroom/versions/google-chrome-beta
+cask_ensure firefox
+
+## Database Tools
+cask_ensure induction
+cask_ensure sequel-pro
+cask_ensure robomongo
+
+## Communication
+cask_ensure mailbox
+cask_ensure skype
+cask_ensure sococo
+
+## Development
+cask_ensure anvil
+cask_ensure transmit
+cask_ensure virtualbox
+
+## Sync
+cask_ensure dropbox
+cask_ensure transmission
+
+## Writing
+cask_ensure mou
+
+# SDKs
+## Flash
+# brew_ensure flex_sdk
+
+## Android
+# brew_ensure android-sdk
+

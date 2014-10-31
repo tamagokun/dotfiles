@@ -60,8 +60,6 @@ if [[ ! -d "$HOME/.vim/bundle/neobundle.vim" ]]; then
   git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
 fi
 
-# environment install
-
 # install brew
 if ! hash brew 2>/dev/null; then
   notify "Installing homebrew"
@@ -73,19 +71,20 @@ brew update
 # install brew-cask
 brew_ensure caskroom/cask/brew-cask
 
-cask_ensure anvil
-cask_ensure dropbox
-cask_ensure firefox
-cask_ensure caskroom/versions/google-chrome-beta
-cask_ensure induction
-cask_ensure mou
-cask_ensure sequel-pro
-cask_ensure transmission
-cask_ensure transmit
-cask_ensure virtualbox
-cask_ensure mailbox
-cask_ensure robomongo
-cask_ensure skype
+# install rcm
+brew_ensure thoughtbot/formulae/rcm
+
+if [[ -d $HOME/dotfiles ]]; then
+  notify "Running rcup for your dotfiles"
+  env RCRC=$HOME/dotfiles/rcrc rcup
+fi
+
+# applications and packages
+notify "Installing applications and packages"
+
+if [ -f $HOME/.brew.bundles ]; then
+  . $HOME/.brew.bundles
+fi
 
 # Git
 brew_ensure git ghi
@@ -179,29 +178,11 @@ brew_ensure go
 # Python
 # brew_ensure python
 
-# Flash
-# brew_ensure flex_sdk
-
-# Android
-# brew_ensure android-sdk
-
 # Utils
 brew_ensure grc htop-osx
 
 # Heroku
 brew_ensure heroku-toolbelt
-
-if ! command -v rcup >/dev/null; then
-  notify "Installing rcm, to manage your dotfiles"
-  brew tap thoughtbot/formulae
-fi
-
-brew_ensure 'rcm'
-
-if [[ -d $HOME/dotfiles ]]; then
-  notify "Running rcup for your dotfiles"
-  env RCRC=$HOME/dotfiles/rcrc rcup
-fi
 
 notify "Loading OSX defaults"
 $PWD/bin/osx-defaults
