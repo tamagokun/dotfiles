@@ -35,7 +35,8 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'vim-scripts/kwbdi.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
 " Colors
-NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'morhetz/gruvbox'
 NeoBundle 'reedes/vim-colors-pencil'
 " html/css
 NeoBundle 'gregsexton/MatchTag'

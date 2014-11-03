@@ -34,7 +34,9 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
-colorscheme base16-tomorrow
+set t_Co=256               " 256 colors
+
+colorscheme gruvbox
 set background=dark
 
 set noerrorbells           " Keep your mouth shut
@@ -69,7 +71,6 @@ if has("gui_running")
   set lines=999 columns=150
   set guifont=Ubuntu\ Mono\ for\ Powerline:h18,Monaco:h17
   set guioptions=egmrt
-  colorscheme pencil
   set background=light
 endif
 
