@@ -36,8 +36,8 @@ endif
 
 set t_Co=256               " 256 colors
 
-colorscheme gruvbox
-set background=dark
+colorscheme pencil
+set background=light
 
 set noerrorbells           " Keep your mouth shut
 set visualbell
@@ -71,7 +71,6 @@ if has("gui_running")
   set lines=999 columns=150
   set guifont=Ubuntu\ Mono\ for\ Powerline:h18,Monaco:h17
   set guioptions=egmrt
-  set background=light
 endif
 
 " ----------------------------------------------------------------------------
