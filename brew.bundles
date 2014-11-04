@@ -1,8 +1,9 @@
 # Applications
 
-## Browsers
+## Browsing Internet
 cask_ensure caskroom/versions/google-chrome-beta
 cask_ensure firefox
+cask_ensure flash
 
 ## Database Tools
 cask_ensure induction
