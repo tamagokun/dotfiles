@@ -28,7 +28,7 @@ cask_ensure transmission
 cask_ensure mou
 
 ## Games
-cask_ensure openemu
+cask_ensure caskroom/versions/openemu-experimental
 
 # SDKs
 ## Flash
