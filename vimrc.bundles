@@ -43,7 +43,6 @@ NeoBundle 'gregsexton/MatchTag'
 " Languages
 NeoBundle 'sheerun/vim-polyglot'
 NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload':{'filetypes':['scss','sass']}}
-NeoBundleLazy 'nsf/gocode', {'autoload': {'filetypes':['go']}, 'rtp': 'vim'}
 NeoBundle 'jtratner/vim-flavored-markdown'
 
 call neobundle#end()
