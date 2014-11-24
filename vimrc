@@ -42,7 +42,6 @@ set background=light
 set noerrorbells           " Keep your mouth shut
 set visualbell
 set number                 " Always show line numbers
-set textwidth=80
 set colorcolumn=+1         " Make it obvious where 80 characters is
 
 set hlsearch               " Highlight all matching searches
@@ -193,21 +192,11 @@ else
 endif
 
 if has("autocmd")
-  autocmd FileType mkd,txt setlocal wrap linebreak nolist
   autocmd FileType php setlocal ts=4 sts=4 sw=4
-
-  " Omni completion
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 endif
-
-au BufNewFile,BufRead *.twig set ft=jinja
 
 augroup markdown
   au!
-  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+  au BufNewFile,BufRead *.md setlocal filetype=ghmarkdown textwidth=80
 augroup END
 

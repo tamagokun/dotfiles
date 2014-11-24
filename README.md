@@ -2,9 +2,11 @@
 
 These are my dotfiles.
 
-I use [rcm](http://robots.thoughtbot.com/rcm-for-rc-files-in-dotfiles-repos) and you should too.
+I use [rcm](http://robots.thoughtbot.com/rcm-for-rc-files-in-dotfiles-repos) and
+you should too.
 
-There is a `mac` script which will set up your environment and keep things up to date.
+There is a `mac` script which will set up your environment and keep things up to
+date.
 
 # Setting up a new Mac
 
