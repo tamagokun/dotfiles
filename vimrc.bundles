@@ -10,10 +10,13 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'tpope/vim-sensible'
 
-" Auto Completion
-NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
+if has("lua")
+  " Auto Completion
+  NeoBundle 'Shougo/neocomplete'
+  NeoBundle 'Shougo/neosnippet'
+  NeoBundle 'Shougo/neosnippet-snippets'
+endif
+
 NeoBundle 'Raimondi/delimitMate'
 " NeoBundle 'AutoClose'
 

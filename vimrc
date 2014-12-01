@@ -3,16 +3,11 @@ set nocompatible
 let mapleader = " "
 
 set ttyfast
-set backspace=2
 set nobackup
 set nowritebackup
 set noswapfile
-set history=50
-set ruler
-set showcmd
 set hidden
 set incsearch
-set laststatus=2
 set autowrite
 if exists('+undodir')
   set undodir=~/.backups
@@ -164,11 +159,18 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 
-" Recommended key-mappings.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ? "\<C-n>" : "\<TAB>")
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
-smap <expr><S-TAB> pumvisible() ? "\<C-p>" : ""
+" <tab> completion
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" expand snippet
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+
+" snippet complete marker
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
