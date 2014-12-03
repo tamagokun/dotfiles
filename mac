@@ -126,7 +126,7 @@ else
 fi
 
 # Vim Utilities
-brew_ensure the_silver_searcher
+brew_ensure the_silver_searcher fzf
 
 # MariaDB
 if [[ -z $(brew list mariadb 2>/dev/null) ]]; then
@@ -156,7 +156,7 @@ if [[ -z $(rbenv versions | grep $ruby_version) ]]; then
   rbenv install -s "$ruby_version"
   rbenv global "$ruby_version"
   rbenv rehash
-  gem install bundler capistrano-ext
+  gem install bundler capistrano-ext curses
 fi
 
 # PHP
