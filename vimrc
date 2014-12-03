@@ -9,13 +9,6 @@ set noswapfile
 set hidden
 set incsearch
 set autowrite
-if exists('+undodir')
-  set undodir=~/.backups
-endif
-if exists('+undofile')
-  set undofile
-endif
-
 set clipboard=unnamed
 set notimeout
 set mouse=a
@@ -96,16 +89,12 @@ nnoremap <silent> ss <C-w>s
 " Toggle NERDTree
 nmap <leader>d :NERDTreeToggle<CR>
 
-" project search
-nmap <leader>f :Ag<space>
-
 " goto anything
-nmap <leader>b :CtrlPBuffer<cr>
-nmap <leader>r :CtrlPBufTagAll<cr>
-nmap <leader>p :CtrlP<cr>
+nmap <leader>b :Unite -toggle -auto-resize -quick-match buffer<cr>
+nmap <leader>p :Unite -toggle file_rec/async<cr>
 
-" toggle tagbar
-nmap <leader>] :TagbarToggle<cr>
+" project search
+nmap <leader>/ :Unite grep:.<cr>
 
 " (c)lose buffer
 nmap <leader>c <Plug>Kwbd
@@ -175,14 +164,29 @@ endif
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
 
+" unite.vim
+let g:unite_source_history_yank_enable = 1
+let g:unite_enable_start_insert = 1
+let g:unite_enable_short_source_names = 1
+let g:unite_cursor_line_highlight = 'CursorLine'
+let g:unite_update_time = 300
+let g:unite_source_file_mru_limit = 100
+let g:unite_source_file_mru_filename_format = ':~:.'
+let g:unite_source_file_mru_time_format = ''
+let g:unite_source_session_enable_auto_save = 1
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
-  let g:ackprg = 'ag --nogroup --column'
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " Use ag in unite.vim for listing files. Lightning fast and respects .gitignore
+  let g:unite_source_grep_command='ag'
+  let g:unite_source_grep_default_opts='--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt=''
 endif
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 
 " Fix Cursor in TMUX
 if exists('$TMUX')

@@ -5,9 +5,6 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" NeoBundle 'Shougo/unite.vim'
-" NeoBundle 'Shougo/vimproc.vim'
-
 NeoBundle 'tpope/vim-sensible'
 
 if has("lua")
@@ -22,18 +19,23 @@ NeoBundle 'Raimondi/delimitMate'
 
 " Core stuff
 NeoBundle 'bling/vim-airline'
-NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-endwise'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \   'mac'   : 'make -f make_mac.mak',
+      \   'unix'  : 'make -f make_unix.mak'
+      \   },
+      \ }
 
 " Utilities & Add-Ons
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'rking/ag.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'vim-scripts/kwbdi.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
