@@ -1,6 +1,7 @@
 set nocompatible
 
-let mapleader = " "
+let mapleader      = " "
+let maplocalleader = " "
 
 set ttyfast
 set nobackup
@@ -12,6 +13,7 @@ set autowrite
 set clipboard=unnamed
 set notimeout
 set mouse=a
+set undodir=/tmp//,.
 
 set splitright
 set splitbelow
@@ -86,12 +88,11 @@ nnoremap <C-l> <C-w>l
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
-" Toggle NERDTree
-nmap <leader>d :NERDTreeToggle<CR>
+" toggle vimfiler
+nmap <leader>d :VimFilerExplorer<cr>
 
 " goto anything
-nmap <leader>b :Unite -toggle -auto-resize -quick-match buffer<cr>
-nmap <leader>p :Unite -toggle file_rec/async<cr>
+nmap <leader><leader> :FZF -m<cr>
 
 " project search
 nmap <leader>/ :Unite grep:.<cr>
@@ -114,6 +115,25 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Remove trailing whitespace and ^M
 nnoremap <leader>sn :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
+" buffer switching
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <Leader><Enter> :call fzf#run({
+\   'source':      reverse(<sid>buflist()),
+\   'sink':        function('<sid>bufopen'),
+\   'options':     '+m',
+\   'tmux_height': '10%'
+\ })<CR>
 
 " ---------------------------------------------------------------------------
 "  Plugin settings
@@ -185,8 +205,17 @@ if executable('ag')
   let g:unite_source_grep_recursive_opt=''
 endif
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
+" vimfiler
+set fillchars=vert:│,fold:─
+let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_enable_clipboard = 0
+let g:vimfiler_tree_leaf_icon = "⋮"
+let g:vimfiler_tree_opened_icon = "▼"
+let g:vimfiler_tree_closed_icon = "▷"
+let g:vimfiler_readonly_file_icon = "⭤"
+autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_expand_or_edit)
+
 
 " Fix Cursor in TMUX
 if exists('$TMUX')
@@ -197,9 +226,8 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-if has("autocmd")
-  autocmd FileType php setlocal ts=4 sts=4 sw=4
-endif
+" 4 spaces for php
+autocmd FileType php setlocal ts=4 sts=4 sw=4
 
 augroup markdown
   au!

@@ -16,6 +16,7 @@ cask_ensure skype
 cask_ensure sococo
 
 ## Development
+cask_ensure caskroom/versions/iterm2-nightly
 cask_ensure anvil
 cask_ensure transmit
 cask_ensure virtualbox

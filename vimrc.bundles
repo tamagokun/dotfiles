@@ -24,6 +24,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-endwise'
+NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf' }
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'Shougo/vimproc.vim', {
@@ -35,7 +36,6 @@ NeoBundle 'Shougo/vimproc.vim', {
 
 " Utilities & Add-Ons
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'vim-scripts/kwbdi.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
@@ -47,8 +47,8 @@ NeoBundle 'gregsexton/MatchTag'
 
 " Languages
 NeoBundle 'sheerun/vim-polyglot'
-NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload':{'filetypes':['scss','sass']}}
 NeoBundle 'jtratner/vim-flavored-markdown'
+NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload':{'filetypes':['scss','sass']}}
 
 call neobundle#end()
 
