@@ -135,6 +135,9 @@ nnoremap <silent> <Leader><Enter> :call fzf#run({
 \   'tmux_height': '10%'
 \ })<CR>
 
+" <esc> return to previous buffer in netrw
+autocmd FileType netrw nmap <buffer> <esc> <C-^>
+
 " ---------------------------------------------------------------------------
 "  Plugin settings
 " ---------------------------------------------------------------------------
@@ -151,10 +154,6 @@ let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
-
-" Make nerdtree look nice
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
 
 " Syntastic Config
 let g:syntastic_check_on_open=1
@@ -204,18 +203,6 @@ if executable('ag')
   let g:unite_source_grep_default_opts='--nogroup --nocolor --column'
   let g:unite_source_grep_recursive_opt=''
 endif
-
-" vimfiler
-set fillchars=vert:│,fold:─
-let g:vimfiler_safe_mode_by_default = 0
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_enable_clipboard = 0
-let g:vimfiler_tree_leaf_icon = "⋮"
-let g:vimfiler_tree_opened_icon = "▼"
-let g:vimfiler_tree_closed_icon = "▷"
-let g:vimfiler_readonly_file_icon = "⭤"
-autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_expand_or_edit)
-
 
 " Fix Cursor in TMUX
 if exists('$TMUX')
