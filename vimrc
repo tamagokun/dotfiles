@@ -132,7 +132,7 @@ nnoremap <silent> <Leader><Enter> :call fzf#run({
 \   'source':      reverse(<sid>buflist()),
 \   'sink':        function('<sid>bufopen'),
 \   'options':     '+m',
-\   'tmux_height': '10%'
+\   'tmux_height': '20%'
 \ })<CR>
 
 " <esc> return to previous buffer in netrw
@@ -216,8 +216,5 @@ endif
 " 4 spaces for php
 autocmd FileType php setlocal ts=4 sts=4 sw=4
 
-augroup markdown
-  au!
-  au BufNewFile,BufRead *.md setlocal filetype=ghmarkdown textwidth=80
-augroup END
-
+" github-flavored markdown
+autocmd BufNewFile,BufReadPost *.md setlocal filetype=ghmarkdown textwidth=80
