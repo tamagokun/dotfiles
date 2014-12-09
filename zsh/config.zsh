@@ -36,7 +36,6 @@ bindkey '^N' down-history
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
-bindkey '^r' history-incremental-search-backward
 
 # vim mode indictator from oh-my-zsh
 function zle-line-init zle-keymap-select {
