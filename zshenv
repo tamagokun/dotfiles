@@ -24,4 +24,5 @@ export PATH="/usr/local/share/npm/bin:$PATH"
 # export PATH="$HOME/Sites/flash/AdobeAIRSDK/bin:$PATH"
 
 # load fzf
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
