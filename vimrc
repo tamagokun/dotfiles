@@ -58,7 +58,6 @@ set diffopt+=vertical      " Always use vertical diffs
 if has("gui_running")
   set anti
   set lines=999 columns=150
-  set guifont=Ubuntu\ Mono\ for\ Powerline:h18,Monaco:h17
   set guioptions=egmrt
 endif
 
@@ -88,9 +87,6 @@ nnoremap <C-l> <C-w>l
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
-" toggle vimfiler
-nmap <leader>d :VimFilerExplorer<cr>
-
 " goto anything
 nmap <leader><leader> :FZF -m<cr>
 
@@ -104,7 +100,7 @@ nmap <leader>c <Plug>Kwbd
 nmap <silent> // :nohlsearch<cr>
 
 "(v)im (r)eload
-nmap <silent> <leader>vr :so %<cr>
+nmap <silent> <leader>vr :so $MYVIMRC<cr>
 
 " Semicolon at end of line by typing ;;
 inoremap ;; <C-o>A;<esc>
