@@ -20,10 +20,10 @@ cask_ensure caskroom/versions/iterm2-nightly
 cask_ensure anvil
 cask_ensure transmit
 cask_ensure virtualbox
+cask_ensure xquartz
 
 ## Sync
 cask_ensure dropbox
-cask_ensure transmission
 
 ## Writing
 cask_ensure mou
