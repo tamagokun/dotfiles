@@ -6,7 +6,7 @@ cask_ensure caskroom/versions/firefoxdeveloperedition
 cask_ensure flash
 
 ## Database Tools
-cask_ensure induction
+cask_ensure psequel
 cask_ensure sequel-pro
 cask_ensure robomongo
 
