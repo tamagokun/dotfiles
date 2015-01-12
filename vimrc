@@ -139,7 +139,6 @@ autocmd FileType netrw nmap <buffer> <esc> <C-^>
 " ---------------------------------------------------------------------------
 
 " Airline
-let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
