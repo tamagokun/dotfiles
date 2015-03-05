@@ -90,9 +90,6 @@ nnoremap <silent> ss <C-w>s
 " goto anything
 nmap <leader><leader> :FZF -m<cr>
 
-" project search
-nmap <leader>/ :Unite grep:.<cr>
-
 " (c)lose buffer
 nmap <leader>c <Plug>Kwbd
 
@@ -124,10 +121,25 @@ function! s:bufopen(e)
   execute 'buffer' matchstr(a:e, '^[ 0-9]*')
 endfunction
 
+" <leader>enter search for buffer
 nnoremap <silent> <Leader><Enter> :call fzf#run({
 \   'source':      reverse(<sid>buflist()),
 \   'sink':        function('<sid>bufopen'),
 \   'options':     '+m',
+\   'tmux_height': '20%'
+\ })<CR>
+
+" project search
+function! s:agopen(e)
+  let keys = split(a:e, ':')
+  execute 'e +' . keys[1] . ' ' . escape(keys[0], ' ')
+endfunction
+
+" <leader>/ search for file contents
+nnoremap <silent> <Leader>/ :call fzf#run({
+\   'source':     'ag --vimgrep ./',
+\   'sink':       function('<sid>agopen'),
+\   'options':    '-m',
 \   'tmux_height': '20%'
 \ })<CR>
 
@@ -178,27 +190,6 @@ endif
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
 
-" unite.vim
-let g:unite_source_history_yank_enable = 1
-let g:unite_enable_start_insert = 1
-let g:unite_enable_short_source_names = 1
-let g:unite_cursor_line_highlight = 'CursorLine'
-let g:unite_update_time = 300
-let g:unite_source_file_mru_limit = 100
-let g:unite_source_file_mru_filename_format = ':~:.'
-let g:unite_source_file_mru_time_format = ''
-let g:unite_source_session_enable_auto_save = 1
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in unite.vim for listing files. Lightning fast and respects .gitignore
-  let g:unite_source_grep_command='ag'
-  let g:unite_source_grep_default_opts='--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt=''
-endif
-
 " Fix Cursor in TMUX
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -212,4 +203,4 @@ endif
 autocmd FileType php setlocal ts=4 sts=4 sw=4
 
 " github-flavored markdown
-autocmd BufNewFile,BufReadPost *.md setlocal filetype=ghmarkdown textwidth=80
+autocmd BufNewFile,BufReadPost *.md setlocal filetype=ghmarkdown
