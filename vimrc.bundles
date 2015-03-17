@@ -32,6 +32,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'vim-scripts/kwbdi.vim'
 NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'terryma/vim-expand-region'
 " Colors
 NeoBundle 'tamagokun/vim-colors-pencil'
 NeoBundle 'morhetz/gruvbox'
