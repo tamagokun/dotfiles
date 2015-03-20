@@ -139,7 +139,7 @@ endfunction
 nnoremap <silent> <Leader>/ :call fzf#run({
 \   'source':     'ag --vimgrep ./',
 \   'sink':       function('<sid>agopen'),
-\   'options':    '-me',
+\   'options':    '-e -m',
 \   'tmux_height': '20%'
 \ })<CR>
 
