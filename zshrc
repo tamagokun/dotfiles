@@ -26,5 +26,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 
+# fzf helpers
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # SUPER SECRET CRAP
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
