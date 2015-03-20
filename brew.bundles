@@ -21,6 +21,7 @@ cask_ensure anvil
 cask_ensure transmit
 cask_ensure virtualbox
 cask_ensure xquartz
+cask_ensure boot2docker
 
 ## Sync
 cask_ensure dropbox
