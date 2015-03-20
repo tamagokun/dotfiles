@@ -137,7 +137,7 @@ endfunction
 
 " <leader>/ search for file contents
 nnoremap <silent> <Leader>/ :call fzf#run({
-\   'source':     'ag --vimgrep ./',
+\   'source':     'grep --line-buffered --color=never -r -n "" *',
 \   'sink':       function('<sid>agopen'),
 \   'options':    '-e -m',
 \   'tmux_height': '20%'
