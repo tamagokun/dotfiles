@@ -143,9 +143,6 @@ nnoremap <silent> <Leader>/ :call fzf#run({
 \   'tmux_height': '20%'
 \ })<CR>
 
-" <esc> return to previous buffer in netrw
-autocmd FileType netrw nmap <buffer> <esc> <C-^>
-
 " ---------------------------------------------------------------------------
 "  Plugin settings
 " ---------------------------------------------------------------------------
