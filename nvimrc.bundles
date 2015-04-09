@@ -1,0 +1,42 @@
+call plug#begin('~/.nvim/plugged')
+
+Plug 'tpope/vim-sensible'
+
+if has("lua")
+  " Auto Completion
+  Plug 'Shougo/neocomplete'
+  Plug 'Shougo/neosnippet'
+  Plug 'Shougo/neosnippet-snippets'
+endif
+
+Plug 'Raimondi/delimitMate'
+" NeoBundle 'AutoClose'
+
+" Core stuff
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'jeetsukumaran/vim-filebeagle'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+" Plug 'tmux-plugins/vim-tmux-focus-events'
+
+" Utilities & Add-Ons
+Plug 'scrooloose/syntastic'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/kwbdi.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-expand-region'
+" Colors
+Plug 'tamagokun/vim-colors-pencil'
+" html/css
+Plug 'gregsexton/MatchTag'
+
+" Languages
+Plug 'sheerun/vim-polyglot'
+Plug 'jtratner/vim-flavored-markdown'
+Plug 'cakebaker/scss-syntax.vim', {'for': ['scss','sass']}
+
+call plug#end()
+
+filetype plugin indent on
