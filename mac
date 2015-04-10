@@ -117,6 +117,14 @@ else
   brew_ensure vim
 fi
 
+# Neovim
+if [[ -z $(brew list nvim 2>/dev/null) ]]; then
+  notify "Installing Neovim"
+  brew install neovim
+else
+  brew_ensure neovim
+fi
+
 # MacVim
 if [[ -z $(brew list macvim 2>/dev/null) ]]; then
   notify "Installing Mac Vim"

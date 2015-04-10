@@ -17,8 +17,8 @@ set splitbelow
 
 syntax on
 
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
+if filereadable(expand("~/.nvimrc.bundles"))
+  source ~/.nvimrc.bundles
 endif
 
 set t_Co=256               " 256 colors
