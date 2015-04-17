@@ -4,6 +4,9 @@ export EDITOR=$VISUAL
 export PATH="./bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/git/man:$MANPATH"
 
+# Waiting for when tmux supports True Color
+# export NVIM_TUI_ENABLE_TRUE_COLOR=1
+
 # Ruby
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
