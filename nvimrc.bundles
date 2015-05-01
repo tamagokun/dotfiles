@@ -8,13 +8,7 @@ call plug#begin('~/.nvim/plugged')
 
 Plug 'tpope/vim-sensible'
 
-if has("lua")
-  " Auto Completion
-  Plug 'Shougo/neocomplete'
-  Plug 'Shougo/neosnippet'
-  Plug 'Shougo/neosnippet-snippets'
-endif
-
+" Auto Completion
 Plug 'Raimondi/delimitMate'
 " NeoBundle 'AutoClose'
 
