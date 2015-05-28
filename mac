@@ -98,7 +98,9 @@ if ! hash /usr/local/bin/icuinfo 2>/dev/null; then
 fi
 
 # Tmux
-brew_ensure tmux reattach-to-user-namespace
+brew_ensure choppsv1/term24/tmux # tmux patched with true color
+# brew_ensure tmux
+brew_ensure reattach-to-user-namespace
 
 # SSL
 if [[ -z $(brew list openssl 2>/dev/null) ]]; then
