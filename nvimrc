@@ -152,15 +152,6 @@ let g:syntastic_warning_symbol='⚠'
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
 
-" Fix Cursor in TMUX
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
 " 4 spaces for php
 autocmd FileType php setlocal ts=4 sts=4 sw=4
 
