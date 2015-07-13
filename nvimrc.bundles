@@ -10,6 +10,7 @@ Plug 'tpope/vim-sensible'
 
 " Auto Completion
 Plug 'Raimondi/delimitMate'
+Plug 'Shougo/deoplete.nvim'
 " NeoBundle 'AutoClose'
 
 " Core stuff
