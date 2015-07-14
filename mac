@@ -186,7 +186,7 @@ brew_ensure node
 brew_ensure go
 
 # Python
-# brew_ensure python
+brew_ensure python python3
 
 # Utils
 brew_ensure grc htop-osx
