@@ -16,7 +16,7 @@ done
 # antigen
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle sindresorhus/pure
-antigen bundle sharat87/autoenv
+antigen bundle Tarrasch/zsh-autoenv
 
 antigen apply
 
