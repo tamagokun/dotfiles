@@ -15,6 +15,7 @@ done
 
 # antigen
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
 antigen bundle Tarrasch/zsh-autoenv
 

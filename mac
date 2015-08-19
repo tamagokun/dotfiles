@@ -54,10 +54,10 @@ if [[ $SHELL != $(which zsh) ]]; then
   chsh -s $(which zsh)
 fi
 
-# update vundle
-if [[ ! -d "$HOME/.vim/bundle/neobundle.vim" ]]; then
-  notify "Installing Neobundle"
-  git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
+# install vim-plug
+if [[ ! -f "$HOME/.nvim/autoload/plug.vim" ]]; then
+  notify "Installing Plug"
+  curl -fLo "$HOME/.nvim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 # install brew
@@ -100,7 +100,8 @@ fi
 # Tmux
 brew_ensure choppsv1/term24/tmux # tmux patched with true color
 # brew_ensure tmux
-brew_ensure reattach-to-user-namespace
+# No longer need in Yosemite
+# brew_ensure reattach-to-user-namespace
 
 # SSL
 if [[ -z $(brew list openssl 2>/dev/null) ]]; then
@@ -120,11 +121,11 @@ else
 fi
 
 # Neovim
-if [[ -z $(brew list nvim 2>/dev/null) ]]; then
+if [[ -z $(brew list neovim 2>/dev/null) ]]; then
   notify "Installing Neovim"
-  brew install neovim
+  brew install --HEAD neovim/neovim/neovim
 else
-  brew_ensure neovim
+  brew_ensure neovim/neovim/neovim
 fi
 
 # MacVim

@@ -21,7 +21,7 @@ if filereadable(expand("~/.nvimrc.bundles"))
   source ~/.nvimrc.bundles
 endif
 
-set t_Co=256               " 256 colors
+"set t_Co=256               " 256 colors
 
 colorscheme pencil
 set background=light
