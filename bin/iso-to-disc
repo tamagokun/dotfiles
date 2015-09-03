@@ -1,7 +1,25 @@
 #!/bin/bash
-dir=$1
-disk=$2
+#
+# Quickly write a disk image to another (USB) on Mac OSX
+# without remembering so many commands.
+#
+# Usage:
+# iso-to-disc /path/to/disc/image.iso
+#
+# Mike Kruk (9/3/2015)
+file=$1
 
-hdiutil convert -format UDRW -o "$dir.img" "$dir.iso"
-diskutil unmountDisk /dev/disk$disk
-sudo dd if="$dir.img.dmg" of=/dev/rdisk$disk bs=1m
+echo '-----> creating disk image'
+if [ -f "$file.img.dmg" ]
+then
+  echo '       file already exists. skipping..'
+else
+  hdiutil convert -format UDRW -o "$file.img" "$file" 2>&1 | sed 's/^/       /'
+fi
+echo '-----> listing all disks'
+diskutil list 2>&1 | sed 's/^/       /'
+read -p 'Enter a disk number: ' disk
+echo $disk
+echo '-----> writing to disk'
+diskutil unmountDisk /dev/disk$disk 2>&1 | sed 's/^/       /'
+sudo dd if="$file.img.dmg" of=/dev/rdisk$disk bs=1m 2>&1 | sed 's/^/       /'
