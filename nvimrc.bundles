@@ -33,6 +33,8 @@ Plug 'terryma/vim-expand-region'
 Plug 'tamagokun/vim-colors-pencil'
 " html/css
 Plug 'gregsexton/MatchTag'
+" writing
+Plug 'junegunn/goyo.vim'
 
 " Languages
 Plug 'sheerun/vim-polyglot'
