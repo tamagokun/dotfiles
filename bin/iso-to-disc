@@ -19,7 +19,7 @@ fi
 echo '-----> listing all disks'
 diskutil list 2>&1 | sed 's/^/       /'
 read -p 'Enter a disk number: ' disk
-echo $disk
-echo '-----> writing to disk'
+echo '-----> preparing disk for writing'
 diskutil unmountDisk /dev/disk$disk 2>&1 | sed 's/^/       /'
+echo '-----> writing to disk'
 sudo dd if="$file.img.dmg" of=/dev/rdisk$disk bs=1m 2>&1 | sed 's/^/       /'
