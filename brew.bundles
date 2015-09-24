@@ -17,6 +17,7 @@ cask_ensure skype
 cask_ensure caskroom/versions/iterm2-beta
 cask_ensure transmit
 cask_ensure virtualbox
+cask_ensure cocoarestclient
 
 ## Sync
 cask_ensure dropbox
