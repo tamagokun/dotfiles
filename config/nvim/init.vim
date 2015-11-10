@@ -17,11 +17,9 @@ set splitbelow
 
 syntax on
 
-if filereadable(expand("~/.nvimrc.bundles"))
-  source ~/.nvimrc.bundles
+if filereadable(expand("~/.config/nvim/nvimrc.bundles"))
+  source ~/.config/nvim/nvimrc.bundles
 endif
-
-"set t_Co=256               " 256 colors
 
 colorscheme pencil
 set background=light
@@ -143,6 +141,10 @@ nnoremap <silent> <Leader>/ :call fzf#run({
 " ---------------------------------------------------------------------------
 "  Plugin settings
 " ---------------------------------------------------------------------------
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+
 
 " Syntastic Config
 let g:syntastic_check_on_open=1

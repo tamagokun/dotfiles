@@ -20,14 +20,7 @@ set splitbelow
 
 syntax on
 
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
-
 set t_Co=256               " 256 colors
-
-colorscheme pencil
-set background=light
 
 set noerrorbells           " Keep your mouth shut
 set visualbell
@@ -108,96 +101,3 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Remove trailing whitespace and ^M
 nnoremap <leader>sn :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-
-" buffer switching
-function! s:buflist()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
-endfunction
-
-function! s:bufopen(e)
-  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-endfunction
-
-" <leader>enter search for buffer
-nnoremap <silent> <Leader><Enter> :call fzf#run({
-\   'source':      reverse(<sid>buflist()),
-\   'sink':        function('<sid>bufopen'),
-\   'options':     '+m',
-\   'tmux_height': '20%'
-\ })<CR>
-
-" project search
-function! s:agopen(e)
-  let keys = split(a:e, ':')
-  execute 'e +' . keys[1] . ' ' . escape(keys[0], ' ')
-endfunction
-
-" <leader>/ search for file contents
-nnoremap <silent> <Leader>/ :call fzf#run({
-\   'source':     'grep --line-buffered --color=never -r -n "" *',
-\   'sink':       function('<sid>agopen'),
-\   'options':    '-e -m',
-\   'tmux_height': '20%'
-\ })<CR>
-
-" ---------------------------------------------------------------------------
-"  Plugin settings
-" ---------------------------------------------------------------------------
-
-" Airline
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-" unicode symbols
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" Syntastic Config
-let g:syntastic_check_on_open=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-
-" NeoComplete & NeoSnippets
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-
-" <tab> completion
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" expand snippet
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-
-" snippet complete marker
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-" expand matchpairs on return
-let delimitMate_expand_cr = 1
-
-" Fix Cursor in TMUX
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-" 4 spaces for php
-autocmd FileType php setlocal ts=4 sts=4 sw=4
-
-" github-flavored markdown
-autocmd BufNewFile,BufReadPost *.md setlocal filetype=ghmarkdown

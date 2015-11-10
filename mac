@@ -57,7 +57,7 @@ fi
 # install vim-plug
 if [[ ! -f "$HOME/.nvim/autoload/plug.vim" ]]; then
   notify "Installing Plug"
-  curl -fLo "$HOME/.nvim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  curl -fLo "$HOME/.config/nvim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 # install brew
@@ -123,7 +123,7 @@ fi
 # Neovim
 if [[ -z $(brew list neovim 2>/dev/null) ]]; then
   notify "Installing Neovim"
-  brew install --HEAD neovim/neovim/neovim
+  brew install neovim/neovim/neovim
 else
   brew_ensure neovim/neovim/neovim
 fi
@@ -188,6 +188,7 @@ brew_ensure go
 
 # Python
 brew_ensure python python3
+pip3 install --user neovim
 
 # Utils
 brew_ensure grc htop-osx
