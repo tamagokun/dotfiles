@@ -3,6 +3,7 @@ export ZSH=$HOME/dotfiles
 
 # aliases
 alias reload!='. ~/.zshrc'
+alias npmsucks='rm -rf ./node_modules && npm install'
 
 # completion
 autoload -U compinit
