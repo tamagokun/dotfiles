@@ -148,11 +148,15 @@ nnoremap <silent> <Leader>/ :call fzf#run({
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
-
-" Syntastic Config
-let g:syntastic_check_on_open=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
+" Neomake
+autocmd! BufWritePost,BufEnter * Neomake
+let g:neomake_open_list = 2
+let g:neomake_javascript_jscs_maker = {
+    \ 'exe': 'jscs',
+    \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
+    \ 'errorformat': '%f: line %l\, col %c\, %m',
+    \ }
+let g:neomake_javascript_enabled_makers = ['jscs']
 
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
@@ -162,3 +166,27 @@ autocmd FileType php setlocal ts=4 sts=4 sw=4
 
 " github-flavored markdown
 autocmd BufNewFile,BufReadPost *.md setlocal filetype=ghmarkdown
+
+" Neovim Terminal colors schema
+"
+" This is Tomorrow Night 80s
+" https://github.com/chriskempson/tomorrow-theme
+let g:terminal_color_0 = "#000000"
+let g:terminal_color_1 = "#f78d8c"
+let g:terminal_color_2 = "#a8d4a9"
+let g:terminal_color_3 = "#a8d4a9"
+let g:terminal_color_4 = "#ffd479"
+let g:terminal_color_5 = "#78aad6"
+let g:terminal_color_6 = "#d7acd6"
+let g:terminal_color_7 = "#76d4d6"
+let g:terminal_color_8 = "#ffffff"
+let g:terminal_color_9 = "#000000"
+let g:terminal_color_10 = "#f78d8c"
+let g:terminal_color_11 = "#a8d4a9"
+let g:terminal_color_12 = "#ffd479"
+let g:terminal_color_13 = "#78aad6"
+let g:terminal_color_14 = "#d7acd6"
+let g:terminal_color_15 = "#76d4d6"
+let g:terminal_color_16 = "#ffffff"
+let g:terminal_color_background="#2d2d2d"
+let g:terminal_color_foreground="#cccccc"
