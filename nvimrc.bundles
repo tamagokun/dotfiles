@@ -39,6 +39,7 @@ Plug 'junegunn/goyo.vim'
 
 " Languages
 Plug 'sheerun/vim-polyglot'
+Plug 'mxw/vim-jsx'
 Plug 'jtratner/vim-flavored-markdown'
 Plug 'cakebaker/scss-syntax.vim', {'for': ['scss','sass']}
 

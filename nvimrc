@@ -160,6 +160,9 @@ let g:neomake_javascript_enabled_makers = ['xo']
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
 
+" react in .js
+let g:jsx_ext_required = 0
+
 " 4 spaces for php
 autocmd FileType php setlocal ts=4 sts=4 sw=4
 
