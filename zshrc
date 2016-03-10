@@ -14,6 +14,9 @@ for file in $ZSH/**/*.zsh; do
   source $file
 done
 
+# load zsh env
+source $ZSH/zshenv
+
 # antigen
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle mafredri/zsh-async
