@@ -135,7 +135,7 @@ endfunction
 
 " <leader>/ search for file contents
 nnoremap <silent> <Leader>/ :call fzf#run({
-\   'source':     'grep --line-buffered --color=never -r -n "" *',
+\   'source':     'ag --nobreak --nonumbers --noheading .',
 \   'sink':       function('<sid>agopen'),
 \   'options':    '-e -m',
 \   'tmux_height': '20%'
@@ -149,13 +149,8 @@ nnoremap <silent> <Leader>/ :call fzf#run({
 let g:deoplete#enable_at_startup = 1
 
 " Neomake
-" autocmd! BufWritePost,BufEnter * Neomake
-let g:neomake_javascript_xo_maker = {
-    \ 'exe': 'xo',
-    \ 'args': ['--esnext', '--space', '--no-semicolon', '--compact', '--plugin', 'react'],
-    \ 'errorformat': '%f: line %l\, col %c\, %m',
-    \ }
-let g:neomake_javascript_enabled_makers = ['xo']
+autocmd! BufWritePost,BufEnter * Neomake
+"let g:neomake_javascript_enabled_makers = ['standard']
 
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
