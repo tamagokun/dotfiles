@@ -69,7 +69,7 @@ notify "Updating homebrew forumlas"
 brew update
 
 # install brew-cask
-brew_ensure caskroom/cask/brew-cask
+brew tap caskroom/cask
 
 # install rcm
 brew_ensure thoughtbot/formulae/rcm
@@ -96,12 +96,6 @@ brew_ensure homebrew/dupes/zlib
 if ! hash /usr/local/bin/icuinfo 2>/dev/null; then
   brew link icu4c
 fi
-
-# Tmux
-brew_ensure choppsv1/term24/tmux # tmux patched with true color
-# brew_ensure tmux
-# No longer need in Yosemite
-# brew_ensure reattach-to-user-namespace
 
 # SSL
 if [[ -z $(brew list openssl 2>/dev/null) ]]; then
@@ -195,6 +189,10 @@ brew_ensure grc htop-osx
 
 # Heroku
 brew_ensure heroku-toolbelt
+
+# Pin certain brews that we don't want to upgrade
+if [[ -z $(brew info mariadb | grep pinned 2>/dev/null) ]]; then brew pin mariadb; fi
+if [[ -z $(brew info postgresql | grep pinned 2>/dev/null) ]]; then brew pin postgresql; fi
 
 notify "Loading OSX defaults"
 $PWD/bin/osx-defaults
