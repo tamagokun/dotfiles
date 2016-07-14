@@ -10,17 +10,11 @@ cask_ensure psequel
 cask_ensure sequel-pro
 cask_ensure robomongo
 
-## Communication
-cask_ensure skype
-
 ## Development
 cask_ensure caskroom/versions/iterm2-beta
 cask_ensure transmit
 cask_ensure virtualbox
 cask_ensure cocoarestclient
-
-## Sync
-cask_ensure dropbox
 
 ## Writing
 cask_ensure mou
