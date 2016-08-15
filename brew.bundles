@@ -19,9 +19,6 @@ cask_ensure cocoarestclient
 ## Writing
 cask_ensure mou
 
-## Games
-cask_ensure caskroom/versions/openemu-experimental
-
 # SDKs
 ## Flash
 # brew_ensure flex_sdk

@@ -1,25 +1,20 @@
 module.exports = {
   config: {
     // default font size for all tabs
-    fontSize: '18px',
+    fontSize: 18,
 
     // font family with optional fallbacks
     fontFamily: 'OperatorMono-Book, Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
 
     // terminal cursor background color
-    cursorColor: '#F81CE5',
+    cursorColor: 'rgba(32,187,252,0.7)',
 
     // terminal background color
     backgroundColor: '#000',
 
     padding: '0 0',
 
-    termCSS: `
-     x-screen {
-      -webkit-font-smoothing: subpixel-antialiased !important;
-      text-rendering: optimizeLegibility;
-     }
-    `,
+    windowSize: [1200, 800],
 
     // some color overrides. see http://bit.ly/29k1iU2 for
     // the full list
@@ -44,8 +39,8 @@ module.exports = {
     ]
   },
 
-  rows: 65,
-  cols: 240,
-
-  plugins: []
+  plugins: [
+    'hyperpower',
+    'hyperlinks'
+  ]
 }
