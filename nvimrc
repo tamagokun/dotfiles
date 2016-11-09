@@ -23,6 +23,7 @@ endif
 
 colorscheme pencil
 set background=light
+set termguicolors
 
 set noerrorbells           " Keep your mouth shut
 set visualbell
@@ -146,11 +147,16 @@ nnoremap <silent> <Leader>/ :call fzf#run({
 " ---------------------------------------------------------------------------
 
 " Use deoplete.
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " Neomake
 autocmd! BufWritePost,BufEnter * Neomake
-"let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_javascript_standard_maker = {
+  \ 'args': ['--parser', 'babel-eslint'],
+  \ 'errorformat': '  %f:%l:%c: %m'
+  \ }
+let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_jsx_enabled_makers = ['standard']
 
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
@@ -163,3 +169,60 @@ autocmd FileType php setlocal ts=4 sts=4 sw=4
 
 " github-flavored markdown
 autocmd BufNewFile,BufReadPost *.md setlocal filetype=ghmarkdown
+
+" ---------------------------------------------------------------------------
+"  Status line
+" ---------------------------------------------------------------------------
+
+let g:currentmode={
+    \ 'n'  : 'N ',
+    \ 'no' : 'N·Operator Pending ',
+    \ 'v'  : 'V ',
+    \ 'V'  : 'V·Line ',
+    \ '^V' : 'V·Block ',
+    \ 's'  : 'Select ',
+    \ 'S'  : 'S·Line ',
+    \ '^S' : 'S·Block ',
+    \ 'i'  : 'I ',
+    \ 'R'  : 'R ',
+    \ 'Rv' : 'V·Replace ',
+    \ 'c'  : 'Command ',
+    \ 'cv' : 'Vim Ex ',
+    \ 'ce' : 'Ex ',
+    \ 'r'  : 'Prompt ',
+    \ 'rm' : 'More ',
+    \ 'r?' : 'Confirm ',
+    \ '!'  : 'Shell ',
+    \ 't'  : 'Terminal '
+    \}
+
+function! ReadOnly()
+  if &readonly || !&modifiable
+    return ''
+  else
+    return ''
+endfunction
+
+set statusline=
+set statusline +=%1*\ %*%2*\ %*%3*\ %* " pattern (in)
+set statusline +=%4*\ %{g:currentmode[mode()]}%*    " current mode
+set statusline +=%5*\ %n\ %*           " buffer number
+set statusline +=%3*\ %*               " separator
+set statusline +=%6*\ %<%F\ %{ReadOnly()}\ %m\ %w\ %*         " file
+set statusline +=%3*\ %*               " separator
+set statusline +=%=                    " right-side
+set statusline +=%3*\ %*               " separator
+set statusline +=%4*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ %* " file encoding
+set statusline +=%3*\ %*%0*\ %*        " separator
+set statusline +=%4*\ %y\ %*           " file-type
+set statusline +=%3*\ %*%0*\ %*        " separator
+set statusline +=%5*\ %3p%%\ \ %l:\ %3c\ %*           " buffer number
+set statusline +=%3*\ %*%2*\ %*%1*\ %* " pattern (out)
+
+hi StatusLine guibg=#3a3a3a
+hi User1 guibg=#5faf87
+hi User2 guibg=#3a3a3a
+hi User3 guibg=#303030
+hi User4 guibg=#262626 guifg=#dfdf5f
+hi User5 guibg=#444444 guifg=#ffaf5f
+hi User6 guibg=#262626 guifg=#87af5f

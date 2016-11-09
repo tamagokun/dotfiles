@@ -6,11 +6,12 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'tpope/vim-sensible'
-
 " Auto Completion
 Plug 'Raimondi/delimitMate'
-Plug 'Shougo/deoplete.nvim'
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " NeoBundle 'AutoClose'
 
 " Core stuff
@@ -21,8 +22,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'jeetsukumaran/vim-filebeagle'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
-Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " Utilities & Add-Ons
@@ -39,7 +39,6 @@ Plug 'junegunn/goyo.vim'
 
 " Languages
 Plug 'sheerun/vim-polyglot'
-Plug 'mxw/vim-jsx'
 Plug 'jtratner/vim-flavored-markdown'
 Plug 'cakebaker/scss-syntax.vim', {'for': ['scss','sass']}
 
