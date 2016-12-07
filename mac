@@ -175,7 +175,7 @@ fi
 brew_ensure php55-redis php55-mongo composer
 
 # Node.js
-brew_ensure node
+brew_ensure node yarn
 
 # Go-lang
 brew_ensure go
