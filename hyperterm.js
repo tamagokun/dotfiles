@@ -10,7 +10,7 @@ module.exports = {
     cursorColor: 'rgba(32,187,252,0.7)',
 
     // terminal background color
-    backgroundColor: 'rgba(0,0,0,.9)',
+    backgroundColor: 'rgba(4, 9, 15, 0.8)',
 
     padding: '0 0',
 
@@ -40,6 +40,7 @@ module.exports = {
   },
 
   plugins: [
+    'hyper-simple-vibrancy',
     'hyperlinks'
   ]
 }

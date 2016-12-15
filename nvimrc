@@ -152,7 +152,7 @@ nnoremap <silent> <Leader>/ :call fzf#run({
 " Neomake
 autocmd! BufWritePost,BufEnter * Neomake
 let g:neomake_javascript_standard_maker = {
-  \ 'args': ['--parser', 'babel-eslint'],
+  \ 'args': ['--parser', 'babel-eslint', '--plugins', 'flowtype'],
   \ 'errorformat': '  %f:%l:%c: %m'
   \ }
 let g:neomake_javascript_enabled_makers = ['standard']
