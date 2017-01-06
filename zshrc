@@ -19,9 +19,11 @@ source $ZSH/zshenv
 
 # antigen
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
-antigen bundle Tarrasch/zsh-autoenv
+antigen bundle horosgrisa/autoenv
+antigen bundle theunraveler/zsh-fancy_ctrl_z
 
 antigen apply
 
