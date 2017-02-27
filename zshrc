@@ -17,15 +17,9 @@ done
 # load zsh env
 source $ZSH/zshenv
 
-# antigen
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle mafredri/zsh-async
-antigen bundle sindresorhus/pure
-antigen bundle horosgrisa/autoenv
-antigen bundle theunraveler/zsh-fancy_ctrl_z
-
-antigen apply
+# antibody
+antibody bundle < $ZSH/zsh/plugins.bundle > ~/.bundles.txt
+source ~/.bundles.txt
 
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
