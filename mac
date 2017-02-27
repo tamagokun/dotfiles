@@ -79,6 +79,9 @@ if [[ -d $HOME/dotfiles ]]; then
   env RCRC=$HOME/dotfiles/rcrc rcup
 fi
 
+# Install antobody for zsh plugins
+brew_ensure getantibody/tap/antibody
+
 # applications and packages
 notify "Installing applications and packages"
 
