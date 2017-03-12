@@ -18,7 +18,7 @@ export GOPATH="$HOME/.go"
 
 # Node
 export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
-export PATH="/usr/local/share/npm/bin:$PATH"
+export PATH="`yarn global bin`:/usr/local/share/npm/bin:$PATH"
 
 # Flash/Flex
 # export PATH="/usr/local/Cellar/flex_sdk/4.6.0.23201/libexec/bin:$PATH"
