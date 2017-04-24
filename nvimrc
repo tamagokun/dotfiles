@@ -151,7 +151,12 @@ let g:deoplete#enable_at_startup = 1
 
 " Neomake
 autocmd! BufWritePost,BufEnter * Neomake
-let g:neomake_javascript_standard_args = ['--parser', 'babel-eslint', '--plugins', 'flowtype']
+
+hi NeomakeError gui=undercurl
+let g:neomake_standard_maker = {
+  \ 'args': ['--parser', 'babel-eslint', '--plugins', 'flowtype'],
+  \ 'errorformat': '  %f:%l:%c: %m'
+  \ }
 let g:neomake_javascript_flow_args = ['--from', 'vim']
 let g:neomake_javascript_flow_errorformat = '%EFile "%f"\, line %l\, characters %c-%.%#,%Z%m,'
 let g:neomake_javascript_flow_mapexpr = 'substitute(v:val, "\\n", " ", "g")'
@@ -159,8 +164,6 @@ let g:neomake_javascript_enabled_makers = ['standard', 'flow']
 let g:neomake_jsx_enabled_makers = ['standard', 'flow']
 let g:neomake_warning_sign = { 'text': '✹', 'texthl': 'WarningMsg' }
 let g:neomake_error_sign = { 'text': '✖', 'texthl': 'ErrorMsg' }
-
-hi NeomakeError gui=undercurl
 
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
