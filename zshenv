@@ -20,6 +20,11 @@ export GOPATH="$HOME/.go"
 export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
 export PATH="/usr/local/share/npm/bin:$PATH"
 
+# Android
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools1
+
 # Flash/Flex
 # export PATH="/usr/local/Cellar/flex_sdk/4.6.0.23201/libexec/bin:$PATH"
 # export FLEX_HOME="/usr/local/Cellar/flex_sdk/4.6.0.23201/libexec"

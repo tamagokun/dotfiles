@@ -41,6 +41,7 @@ module.exports = {
 
   plugins: [
     'hyper-simple-vibrancy',
+    'hyper-statusline',
     'hyperlinks'
   ]
 }

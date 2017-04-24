@@ -11,7 +11,7 @@ Plug 'Raimondi/delimitMate'
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " NeoBundle 'AutoClose'
 
 " Core stuff
@@ -41,5 +41,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'jtratner/vim-flavored-markdown'
 Plug 'cakebaker/scss-syntax.vim', {'for': ['scss','sass']}
+Plug 'flowtype/vim-flow', {'for': ['javascript']}
 
 call plug#end()
