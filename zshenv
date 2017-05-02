@@ -4,8 +4,6 @@ export EDITOR=$VISUAL
 export PATH="./bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/git/man:$MANPATH"
 
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
 # Ruby
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
