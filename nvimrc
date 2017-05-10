@@ -21,9 +21,10 @@ if filereadable(expand("~/.nvimrc.bundles"))
   source ~/.nvimrc.bundles
 endif
 
-colorscheme pencil
-set background=light
+let g:one_allow_italics = 1 " use italics with `one` theme
+set background=dark
 set termguicolors
+colorscheme one
 
 set noerrorbells           " Keep your mouth shut
 set visualbell
@@ -146,11 +147,10 @@ nnoremap <silent> <Leader>/ :call fzf#run({
 "  Plugin settings
 " ---------------------------------------------------------------------------
 
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
 
-" Neomake
-autocmd! BufWritePost,BufEnter * Neomake
+let g:deoplete#enable_at_startup = 1 " enable deoplete
+
+autocmd! BufWritePost,BufEnter * Neomake " run neomake on load and save
 
 hi NeomakeError gui=undercurl
 let g:neomake_standard_maker = {

@@ -32,6 +32,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-expand-region'
 " Colors
 Plug 'tamagokun/vim-colors-pencil'
+Plug 'rakr/vim-one'
 " html/css
 Plug 'gregsexton/MatchTag'
 " writing
