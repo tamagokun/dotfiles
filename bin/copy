@@ -1,0 +1,13 @@
+#!/bin/bash
+
+case "${OSTYPE}" in
+  linux*)
+    xsel --input --clipboard
+    ;;
+  darwin*)
+    pbcopy
+    ;;
+  *)
+    echo "No clipboard utility" >&2
+    ;;
+esac
