@@ -174,6 +174,10 @@ let g:jsx_ext_required = 0
 " Flow is used through neomake, but vim-flow provides omnifunc completion
 let g:flow#enable = 0
 
+" support closetags in jsx
+let g:closetag_filenames = '*.html,*.js'
+let g:closetag_xhtml_filenames = '*.html,*.js'
+
 " 4 spaces for php
 autocmd FileType php setlocal ts=4 sts=4 sw=4
 

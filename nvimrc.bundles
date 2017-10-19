@@ -23,6 +23,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'equalsraf/neovim-gui-shim'
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " Utilities & Add-Ons
@@ -35,6 +36,7 @@ Plug 'tamagokun/vim-colors-pencil'
 Plug 'rakr/vim-one'
 " html/css
 Plug 'gregsexton/MatchTag'
+Plug 'alvan/vim-closetag'
 " writing
 Plug 'junegunn/goyo.vim'
 
