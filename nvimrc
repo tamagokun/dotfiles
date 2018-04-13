@@ -43,6 +43,7 @@ set linebreak
 set formatoptions+=n       " support for numbered/bullet lists
 set virtualedit=block      " allow virtual edit in visual block ..
 set nofoldenable           " dont fold by default
+set inccommand=nosplit     " show substitutions live
 
 set list listchars=tab:»·,trail:·
 
@@ -109,46 +110,27 @@ cmap w!! w !sudo tee % >/dev/null
 " Remove trailing whitespace and ^M
 nnoremap <leader>sn :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
-" buffer switching
-function! s:buflist()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
-endfunction
-
-function! s:bufopen(e)
-  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-endfunction
-
 " <leader>enter search for buffer
-nnoremap <silent> <Leader><Enter> :call fzf#run({
-\   'source':      reverse(<sid>buflist()),
-\   'sink':        function('<sid>bufopen'),
-\   'options':     '+m',
-\   'tmux_height': '20%'
-\ })<CR>
-
-" project search
-function! s:agopen(e)
-  let keys = split(a:e, ':')
-  execute 'e +' . keys[1] . ' ' . escape(keys[0], ' ')
-endfunction
+nnoremap <silent> <Leader><Enter> :Buffer<cr>
 
 " <leader>/ search for file contents
-nnoremap <silent> <Leader>/ :call fzf#run({
-\   'source':     'ag --nobreak --nonumbers --noheading .',
-\   'sink':       function('<sid>agopen'),
-\   'options':    '-e -m',
-\   'tmux_height': '20%'
-\ })<CR>
+nnoremap <silent> <Leader>/ :Ag<cr>
 
 " ---------------------------------------------------------------------------
 "  Plugin settings
 " ---------------------------------------------------------------------------
 
 
-let g:deoplete#enable_at_startup = 1 " enable deoplete
+" LSP
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+  \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'javascript.jsx': ['javascript-typescript-stdio'],
+  \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" let g:deoplete#enable_at_startup = 1 " enable deoplete
 
 autocmd! BufWritePost,BufEnter * Neomake " run neomake on load and save
 

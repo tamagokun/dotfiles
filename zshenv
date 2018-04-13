@@ -18,6 +18,7 @@ export PATH="$GOPATH/bin:$PATH"
 # Node
 export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
 export PATH="$(yarn global bin):/usr/local/share/npm/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
 
 # Android
 export ANDROID_HOME=~/Library/Android/sdk
