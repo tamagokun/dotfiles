@@ -114,7 +114,15 @@ nnoremap <leader>sn :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+
 nnoremap <silent> <Leader><Enter> :Buffer<cr>
 
 " <leader>/ search for file contents
-nnoremap <silent> <Leader>/ :Ag<cr>
+nnoremap <silent> <Leader>/ :Rg<cr>
+
+" :Rg to search in project
+command! -bang -nargs=* Rg
+\ call fzf#vim#grep(
+\   'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+\   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+\           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+\   <bang>0)
 
 " ---------------------------------------------------------------------------
 "  Plugin settings
@@ -132,20 +140,12 @@ nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 " let g:deoplete#enable_at_startup = 1 " enable deoplete
 
-autocmd! BufWritePost,BufEnter * Neomake " run neomake on load and save
-
-hi NeomakeError gui=undercurl
-let g:neomake_standard_maker = {
-  \ 'args': ['--parser', 'babel-eslint', '--plugins', 'flowtype'],
-  \ 'errorformat': '  %f:%l:%c: %m'
+let g:ale_fixers = {
+  \ 'javascript': ['eslint']
   \ }
-let g:neomake_javascript_flow_args = ['--from', 'vim']
-let g:neomake_javascript_flow_errorformat = '%EFile "%f"\, line %l\, characters %c-%.%#,%Z%m,'
-let g:neomake_javascript_flow_mapexpr = 'substitute(v:val, "\\n", " ", "g")'
-let g:neomake_javascript_enabled_makers = ['standard', 'flow']
-let g:neomake_jsx_enabled_makers = ['standard', 'flow']
-let g:neomake_warning_sign = { 'text': '✹', 'texthl': 'WarningMsg' }
-let g:neomake_error_sign = { 'text': '✖', 'texthl': 'ErrorMsg' }
+
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
 
 " expand matchpairs on return
 let delimitMate_expand_cr = 1

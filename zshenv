@@ -16,7 +16,7 @@ export GOPATH="$HOME/.go"
 export PATH="$GOPATH/bin:$PATH"
 
 # Node
-export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
+export NODE_PATH="$(yarn global dir)/node_modules:/usr/local/lib/node_modules:$NODE_PATH"
 export PATH="$(yarn global bin):/usr/local/share/npm/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 
@@ -29,6 +29,9 @@ export PATH="/usr/local/Cellar/flex_sdk/4.6/bin":$PATH
 # export FLEX_HOME="/usr/local/Cellar/flex_sdk/4.6.0.23201/libexec"
 # export PATH="$HOME/Sites/flash/AdobeAIRSDK/bin:$PATH"
 
+# Linuxbrew
+export PATH="/home/linuxbrew/.linuxbrew/bin":$PATH
+
 # load fzf
-export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
