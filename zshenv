@@ -29,6 +29,13 @@ export PATH="/usr/local/Cellar/flex_sdk/4.6/bin":$PATH
 # export FLEX_HOME="/usr/local/Cellar/flex_sdk/4.6.0.23201/libexec"
 # export PATH="$HOME/Sites/flash/AdobeAIRSDK/bin:$PATH"
 
+# Python
+export PYTHON_USER_PATH=$(python -m site --user-base)
+export PATH=$PATH:$PYTHON_USER_PATH/bin
+
+# Arcanist
+export PATH="$PATH:$HOME/.arc/arcanist/bin/"
+
 # load fzf
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

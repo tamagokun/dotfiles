@@ -9,6 +9,7 @@ cask_ensure caskroom/versions/firefoxdeveloperedition
 cask_ensure psequel
 cask_ensure sequel-pro
 cask_ensure robomongo
+brew_ensure xo/xo/usql
 
 ## Development
 cask_ensure caskroom/versions/iterm2-beta
