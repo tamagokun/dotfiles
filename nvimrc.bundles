@@ -7,23 +7,21 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Auto Completion
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 Plug 'Raimondi/delimitMate'
 Plug 'roxma/nvim-completion-manager'
 " NeoBundle 'AutoClose'
 
 " Core stuff
-Plug 'benekastah/neomake'
+Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
 Plug 'jeetsukumaran/vim-filebeagle'
-Plug '/usr/local/opt/fzf'
+Plug '/usr/local/opt/fzf' " macOS
+Plug '/home/linuxbrew/.linuxbrew/opt/fzf' " linux
 Plug 'junegunn/fzf.vim'
 Plug 'equalsraf/neovim-gui-shim'
 " Plug 'tmux-plugins/vim-tmux-focus-events'

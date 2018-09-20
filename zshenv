@@ -16,7 +16,7 @@ export GOPATH="$HOME/.go"
 export PATH="$GOPATH/bin:$PATH"
 
 # Node
-export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
+export NODE_PATH="$(yarn global dir)/node_modules:/usr/local/lib/node_modules:$NODE_PATH"
 export PATH="$(yarn global bin):/usr/local/share/npm/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 
@@ -36,6 +36,9 @@ export PATH=$PATH:$PYTHON_USER_PATH/bin
 # Arcanist
 export PATH="$PATH:$HOME/.arc/arcanist/bin/"
 
+# Linuxbrew
+[ -d /home/linuxbrew ] && export PATH="/home/linuxbrew/.linuxbrew/bin":$PATH
+
 # load fzf
-export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
