@@ -17,7 +17,7 @@ export PATH="$GOPATH/bin:$PATH"
 
 # Node
 export NODE_PATH="$(yarn global dir)/node_modules:/usr/local/lib/node_modules:$NODE_PATH"
-export PATH="$(yarn global bin):/usr/local/share/npm/bin:$PATH"
+export PATH="./node_modules/.bin:$(yarn global bin):/usr/local/share/npm/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 
 # Android

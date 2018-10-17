@@ -24,7 +24,7 @@ endif
 let g:one_allow_italics = 1 " use italics with `one` theme
 set background=dark
 set termguicolors
-colorscheme one
+colorscheme night-owl
 
 set noerrorbells           " Keep your mouth shut
 set visualbell
@@ -128,33 +128,21 @@ command! -bang -nargs=* Rg
 "  Plugin settings
 " ---------------------------------------------------------------------------
 
-
-" LSP
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-  \ 'javascript': ['javascript-typescript-stdio'],
-  \ 'javascript.jsx': ['javascript-typescript-stdio'],
-  \ }
-
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-" let g:deoplete#enable_at_startup = 1 " enable deoplete
+let g:deoplete#enable_at_startup = 1 " enable deoplete
 
 let g:ale_fixers = {
-  \ 'javascript': ['eslint']
+  \ 'javascript': ['eslint'],
+  \ 'javascript.jsx': ['eslint']
   \ }
 
 let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
 
 " expand matchpairs on return
 let delimitMate_expand_cr = 1
 
 " react in .js
 let g:jsx_ext_required = 0
-
-" Flow is used through neomake, but vim-flow provides omnifunc completion
-let g:flow#enable = 0
+let g:javascript_plugin_flow = 1
 
 " support closetags in jsx
 let g:closetag_filenames = '*.html,*.js'
