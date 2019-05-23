@@ -129,10 +129,16 @@ command! -bang -nargs=* Rg
 " ---------------------------------------------------------------------------
 
 let g:deoplete#enable_at_startup = 1 " enable deoplete
+let g:deoplete#sources = {'_': ['ale']}
+
+let g:ale_linters = {
+  \ 'javascript': ['eslint', 'flow'],
+  \ 'jsx': ['eslint', 'flow']
+  \ }
 
 let g:ale_fixers = {
-  \ 'javascript': ['eslint'],
-  \ 'javascript.jsx': ['eslint']
+  \ 'javascript': ['prettier', 'eslint'],
+  \ 'jsx': ['prettier', 'eslint']
   \ }
 
 let g:ale_fix_on_save = 1

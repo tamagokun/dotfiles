@@ -8,11 +8,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Auto Completion
 Plug 'Raimondi/delimitMate'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " NeoBundle 'AutoClose'
 
 " Core stuff
-Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
@@ -24,8 +22,6 @@ Plug '/usr/local/opt/fzf' " macOS
 set rtp+=/usr/local/opt/fzf
 Plug '/home/linuxbrew/.linuxbrew/opt/fzf' " linux
 Plug 'junegunn/fzf.vim'
-Plug 'equalsraf/neovim-gui-shim'
-" Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " Utilities & Add-Ons
 Plug 'airblade/vim-gitgutter'
@@ -34,7 +30,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-expand-region'
 " Colors
 Plug 'tamagokun/vim-colors-pencil'
-Plug 'rakr/vim-one'
 Plug 'haishanh/night-owl.vim'
 " html/css
 Plug 'gregsexton/MatchTag'
@@ -47,5 +42,21 @@ Plug 'sheerun/vim-polyglot'
 Plug 'jtratner/vim-flavored-markdown'
 Plug 'cakebaker/scss-syntax.vim', {'for': ['scss','sass']}
 Plug 'jxnblk/vim-mdx-js'
+
+if exists('veonim')
+  let g:vscode_extensions = [
+  \'vscode.typescript-language-features',
+  \'vscode.css-language-features',
+  \'vscode.html-language-features',
+  \'esbenp.prettier-vscode',
+  \'dbaeumer.vscode-eslint',
+  \'flowtype.flow-for-vscode',
+  \]
+
+  let g:vscode_config = {
+  \'editor.formatOnSave': 'true',
+  \}
+
+endif
 
 call plug#end()

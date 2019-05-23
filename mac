@@ -95,19 +95,19 @@ brew_ensure git ghi
 # Deps
 brew_ensure gnu-sed pidof
 brew_ensure automake autoconf curl pcre re2c mhash libtool icu4c gettext jpeg libxml2 mcrypt gmp libevent
-brew_ensure homebrew/dupes/zlib
+# brew_ensure homebrew/dupes/zlib
 if ! hash /usr/local/bin/icuinfo 2>/dev/null; then
   brew link icu4c
 fi
 
 # SSL
-if [[ -z $(brew list openssl 2>/dev/null) ]]; then
-  notify "Installing openssl"
-  brew install openssl
-  brew unlink openssl && brew link openssl --force
-else
-  brew_ensure openssl
-fi
+#if [[ -z $(brew list openssl 2>/dev/null) ]]; then
+#  notify "Installing openssl"
+#  brew install openssl
+#  brew unlink openssl && brew link openssl --force
+#else
+#  brew_ensure openssl
+#fi
 
 # Vim
 if [[ -z $(brew list vim 2>/dev/null) ]]; then
@@ -125,16 +125,11 @@ else
   brew_ensure neovim/neovim/neovim
 fi
 
-# MacVim
-if [[ -z $(brew list macvim 2>/dev/null) ]]; then
-  notify "Installing Mac Vim"
-  brew install macvim --with-lua
-else
-  brew_ensure macvim
-fi
-
 # Vim Utilities
-brew_ensure the_silver_searcher fzf
+brew_ensure ripgrep fzf
+
+# Tmux
+brew_ensure tmux reattach-to-user-namespace
 
 # MariaDB
 if [[ -z $(brew list mariadb 2>/dev/null) ]]; then
@@ -149,36 +144,36 @@ fi
 brew_ensure postgresql
 
 # MongoDB
-brew_ensure mongodb
+# brew_ensure mongodb
 
 # Redis
-brew_ensure redis
+# brew_ensure redis
 
 # Ruby
 brew_ensure rbenv ruby-build
 
 # Use thoughtbot's ruby version
-ruby_version="$(curl -sSL http://ruby.thoughtbot.com/latest)"
-if [[ -z $(rbenv versions | grep $ruby_version) ]]; then
-  notify "Setting up Ruby $ruby_version"
-  rbenv install -s "$ruby_version"
-  rbenv global "$ruby_version"
-  rbenv rehash
-  gem install bundler capistrano-ext curses
-fi
+# ruby_version="$(curl -sSL http://ruby.thoughtbot.com/latest)"
+# if [[ -z $(rbenv versions | grep $ruby_version) ]]; then
+#   notify "Setting up Ruby $ruby_version"
+#   rbenv install -s "$ruby_version"
+#   rbenv global "$ruby_version"
+#   rbenv rehash
+#   gem install bundler capistrano-ext curses
+# fi
 
 # PHP
-if [[ -z $(brew list php55 2>/dev/null) ]]; then
-  notify "Setting up PHP 5.5"
-  brew install homebrew/php/php55 --with-homebrew-openssl --without-snmp
-else
-  brew_ensure php55
-fi
+# if [[ -z $(brew list php55 2>/dev/null) ]]; then
+#   notify "Setting up PHP 5.5"
+#   brew install homebrew/php/php55 --with-homebrew-openssl --without-snmp
+# else
+#   brew_ensure php55
+# fi
 
-brew_ensure php55-redis php55-mongo composer
+# brew_ensure php55-redis php55-mongo composer
 
 # Node.js
-brew_ensure node yarn
+brew_ensure yarn
 
 # Go-lang
 brew_ensure go
@@ -190,8 +185,11 @@ pip3 install --user neovim
 # Utils
 brew_ensure grc htop-osx
 
+# AWS
+brew_ensure awscli
+
 # Heroku
-brew_ensure heroku-toolbelt
+# brew_ensure heroku-toolbelt
 
 # Pin certain brews that we don't want to upgrade
 if [[ -z $(brew info mariadb | grep pinned 2>/dev/null) ]]; then brew pin mariadb; fi
