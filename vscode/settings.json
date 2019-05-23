@@ -1,0 +1,26 @@
+{
+  "workbench.colorTheme": "Night Owl",
+  "flow.useNPMPackagedFlow": true,
+  "flow.useLSP": false,
+  "editor.fontFamily": "Dank Mono, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 17,
+  "workbench.iconTheme": null,
+  "explorer.enableDragAndDrop": false,
+  "workbench.statusBar.feedback.visible": false,
+  "eslint.autoFixOnSave": true,
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "workbench.startupEditor": "none",
+  "workbench.colorCustomizations": {
+    "[Night Owl]": {
+      "activityBar.background": "#000C1D",
+      "activityBar.border": "#102a44",
+      "sideBar.background": "#001122",
+      "sideBar.border": "#102a44",
+      "sideBar.foreground": "#8BADC1"
+    }
+  },
+  "javascript.validate.enable": false,
+  "go.useLanguageServer": true
+}
+
